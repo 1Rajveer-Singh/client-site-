@@ -91,25 +91,64 @@ const jetbrainsMono = JetBrains_Mono({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://itprogrammersolution.com"),
-  title: "IT PROGRAMMER SOLUTION | Enterprise Web, Cloud Servers & AI Automation",
+  title: {
+    default: "IT PROGRAMMER SOLUTION | Enterprise Web, Cloud Servers & AI Automation",
+    template: "%s | IT PROGRAMMER SOLUTION",
+  },
   description:
-    "IT PROGRAMMER SOLUTION: High-performance enterprise server architecture, Next.js web systems, autonomous AI agents, SEO dominance, and mobile engineering.",
+    "Architecting high-availability cloud servers, Next.js 16 web applications, autonomous AI agents, SEO dominance, and sub-300ms global latency systems with 99.999% SLA integrity.",
+  applicationName: "IT PROGRAMMER SOLUTION",
+  keywords: [
+    "IT PROGRAMMER SOLUTION",
+    "Cloud Server Architecture",
+    "Next.js 16 Web Engineering",
+    "Autonomous AI Agent Swarms",
+    "High-Availability Infrastructure",
+    "Algorithmic SEO Optimization",
+    "Power BI Dashboards",
+    "Mobile App Development",
+  ],
+  authors: [{ name: "IT PROGRAMMER SOLUTION", url: "https://itprogrammersolution.com" }],
+  creator: "IT PROGRAMMER SOLUTION",
   icons: {
     icon: "/logo.png",
     shortcut: "/logo.png",
     apple: "/logo.png",
   },
   openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://itprogrammersolution.com",
+    siteName: "IT PROGRAMMER SOLUTION",
     title: "IT PROGRAMMER SOLUTION | Enterprise Web, Cloud Servers & AI Automation",
     description:
-      "Enterprise server architecture, Next.js web systems, autonomous AI agents, and custom software development.",
-    images: [{ url: "/logo.png", width: 800, height: 800, alt: "IT PROGRAMMER SOLUTION" }],
+      "Architecting high-availability cloud servers, Next.js 16 web applications, autonomous AI agents, and sub-300ms systems with 99.999% SLA integrity.",
+    images: [
+      {
+        url: "/logo.png",
+        width: 800,
+        height: 800,
+        alt: "IT PROGRAMMER SOLUTION - Enterprise Cloud & Web Architecture",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "IT PROGRAMMER SOLUTION",
-    description: "Enterprise Web Development, Cloud Infrastructure & AI Automation",
+    title: "IT PROGRAMMER SOLUTION | Enterprise Web, Cloud Servers & AI Automation",
+    description:
+      "Architecting high-availability cloud servers, Next.js 16 web applications, autonomous AI agents, and sub-300ms systems with 99.999% SLA integrity.",
     images: ["/logo.png"],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
   },
 };
 

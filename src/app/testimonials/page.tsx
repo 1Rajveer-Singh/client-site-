@@ -8,6 +8,7 @@ import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import { Star, Sparkles, CheckCircle2, ArrowRight } from "lucide-react";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal";
 import { KineticText } from "@/registry/magicui/kinetic-text";
+import { PixelImage } from "@/registry/magicui/pixel-image";
 
 export default function TestimonialsPage() {
   useEffect(() => {
@@ -21,16 +22,19 @@ export default function TestimonialsPage() {
       <SmoothCursor />
       <Navbar />
 
-      {/* Testimonials Hero Header with Atmospheric Unsplash Leadership Background - Complete Image Visibility */}
+      {/* Testimonials Hero Header with Animated Grid Pixel Reveal Leadership Background */}
       <section className="relative py-24 bg-[#060913] text-white overflow-hidden border-b-2 border-yellow-500/20">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-95 contrast-105 saturate-110 pointer-events-none transition-opacity duration-700"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=90&w=2000&auto=format&fit=crop')`,
-            backgroundPosition: "center 30%",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#060913]/40 via-[#060913]/25 to-[#060913]/85 pointer-events-none" />
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <PixelImage
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=90&w=2000&auto=format&fit=crop"
+            customGrid={{ rows: 4, cols: 6 }}
+            grayscaleAnimation
+            className="w-full h-full opacity-95 contrast-105 saturate-110"
+            imageClassName="object-cover object-center w-full h-full"
+            alt="Testimonials Hero Background"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#060913]/40 via-[#060913]/25 to-[#060913]/85 pointer-events-none" />
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black font-heading tracking-tight text-white leading-tight">

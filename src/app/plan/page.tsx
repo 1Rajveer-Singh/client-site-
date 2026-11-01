@@ -8,6 +8,7 @@ import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import { Sparkles, CheckCircle2, Shield, ArrowRight } from "lucide-react";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal";
 import { KineticText } from "@/registry/magicui/kinetic-text";
+import { PixelImage } from "@/registry/magicui/pixel-image";
 
 export default function PlanPage() {
   useEffect(() => {
@@ -21,15 +22,19 @@ export default function PlanPage() {
       <SmoothCursor />
       <Navbar />
 
-      {/* Plan Hero Header with Atmospheric Unsplash Blueprint Background */}
+      {/* Plan Hero Header with Animated Grid Pixel Reveal Blueprint Background */}
       <section className="relative py-24 bg-[#060913] text-white overflow-hidden border-b-2 border-purple-500/20">
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-85 contrast-105 saturate-110 pointer-events-none transition-opacity duration-700"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=90&w=2000&auto=format&fit=crop')`,
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#060913]/55 via-[#060913]/35 to-[#060913]/90 pointer-events-none" />
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <PixelImage
+            src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=90&w=2000&auto=format&fit=crop"
+            customGrid={{ rows: 4, cols: 6 }}
+            grayscaleAnimation
+            className="w-full h-full opacity-85 contrast-105 saturate-110"
+            imageClassName="object-cover object-center w-full h-full"
+            alt="Plan Hero Background"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#060913]/55 via-[#060913]/35 to-[#060913]/90 pointer-events-none" />
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black font-heading tracking-tight text-white leading-tight">

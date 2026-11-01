@@ -22,6 +22,7 @@ import {
 import { LiquidMetalButton } from "@/components/ui/liquid-metal";
 import { SparklesText } from "@/components/ui/sparkles-text";
 import { KineticText } from "@/registry/magicui/kinetic-text";
+import { PixelImage } from "@/registry/magicui/pixel-image";
 
 export default function ServicesPage() {
   useEffect(() => {
@@ -119,15 +120,18 @@ export default function ServicesPage() {
       {/* Services Hero Header with Atmospheric Unsplash Business & Tech Consulting Team Background */}
       {/* Services Hero Header with Atmospheric Unsplash Infrastructure Background */}
       <section className="relative py-16 sm:py-20 lg:py-24 bg-[#060913] text-white overflow-hidden border-b-2 border-cyan-500/20">
-        {/* Unsplash Background Image - Complete Image Show with High Clarity */}
-        <div
-          className="absolute inset-0 bg-cover bg-center opacity-90 contrast-105 saturate-110 pointer-events-none transition-opacity duration-700"
-          style={{
-            backgroundImage: `url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=90&w=2000&auto=format&fit=crop')`,
-            backgroundPosition: "center 30%",
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#060913]/60 via-[#060913]/40 to-[#060913]/90 pointer-events-none" />
+        {/* Animated Grid Pixel Reveal Background */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+          <PixelImage
+            src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=90&w=2000&auto=format&fit=crop"
+            customGrid={{ rows: 4, cols: 6 }}
+            grayscaleAnimation
+            className="w-full h-full opacity-90 contrast-105 saturate-110"
+            imageClassName="object-cover object-center w-full h-full"
+            alt="Services Background"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#060913]/60 via-[#060913]/40 to-[#060913]/90 pointer-events-none" />
+        </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <div className="flex flex-col items-center max-w-full">

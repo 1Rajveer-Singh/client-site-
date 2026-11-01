@@ -11,6 +11,7 @@ import { SparklesText } from "./ui/sparkles-text";
 import { LiquidMetalButton } from "./ui/liquid-metal";
 import { Iphone } from "@/registry/magicui/iphone";
 import { KineticText } from "@/registry/magicui/kinetic-text";
+import { PixelImage } from "@/registry/magicui/pixel-image";
 
 interface HeroSectionProps {
   onReplayIntro?: () => void;
@@ -20,14 +21,18 @@ interface HeroSectionProps {
 export default function HeroSection({ onReplayIntro }: HeroSectionProps = {}) {
   return (
     <section className="relative py-20 lg:py-24 bg-[#060913] text-white overflow-hidden border-b-2 border-cyan-500/20 select-none">
-      {/* Curated Atmospheric Unsplash Background Image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center opacity-85 contrast-105 saturate-110 pointer-events-none transition-opacity duration-700"
-        style={{
-          backgroundImage: `url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=90&w=2000&auto=format&fit=crop')`,
-        }}
-      />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#060913]/60 via-[#060913]/40 to-[#060913]/90 pointer-events-none" />
+      {/* Curated Atmospheric Unsplash Background with Animated Grid Pixel Reveal */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <PixelImage
+          src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=90&w=2000&auto=format&fit=crop"
+          customGrid={{ rows: 4, cols: 6 }}
+          grayscaleAnimation
+          className="w-full h-full opacity-85 contrast-105 saturate-110"
+          imageClassName="object-cover object-center w-full h-full"
+          alt="Home Hero Background"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#060913]/60 via-[#060913]/40 to-[#060913]/90 pointer-events-none" />
+      </div>
 
       {/* Main Hero Container: Left Content + Right-Hand Side iPhone */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
