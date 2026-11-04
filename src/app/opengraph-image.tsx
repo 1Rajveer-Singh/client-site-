@@ -1,6 +1,6 @@
 import { ImageResponse } from "next/og";
 
-export const alt = "IT PROGRAMMER SOLUTION | Enterprise Web, Cloud Servers & AI Automation";
+export const alt = "Rajveer Singh | Developer - Full Stack, Cloud Servers & AI Automation";
 export const size = {
   width: 1200,
   height: 630,
@@ -62,7 +62,7 @@ export default async function Image() {
                 letterSpacing: "0.05em",
               }}
             >
-              IT PROGRAMMER SOLUTION
+              Rajveer Singh | Developer
             </span>
             <span
               style={{

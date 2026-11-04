@@ -18,12 +18,12 @@ export default function PlanPage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-white text-slate-900 overflow-x-hidden">
+    <main className="relative min-h-screen bg-white text-slate-900 overflow-x-clip">
       <SmoothCursor />
       <Navbar />
 
       {/* Plan Hero Header with Animated Grid Pixel Reveal Blueprint Background */}
-      <section className="relative py-24 bg-[#060913] text-white overflow-hidden border-b-2 border-purple-500/20">
+      <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-16 lg:pb-20 bg-[#060913] text-white overflow-hidden border-b-2 border-purple-500/20">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <PixelImage
             src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=90&w=2000&auto=format&fit=crop"
@@ -38,7 +38,7 @@ export default function PlanPage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black font-heading tracking-tight text-white leading-tight">
-            <KineticText text="THE 9-STAGE" as="span" className="inline-block" /> <br />
+            <KineticText text="THE 6-STAGE" as="span" className="inline-block" /> <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-purple-300 to-cyan-400">
               PLAN OF WORK
             </span>

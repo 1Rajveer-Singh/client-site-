@@ -3,14 +3,11 @@
 import React from "react";
 import {
   Compass,
-  FileText,
   Palette,
   Code2,
   ShieldCheck,
-  UserCheck,
   Rocket,
   Search,
-  Activity,
   CheckCircle2,
   Sparkles,
 } from "lucide-react";
@@ -23,6 +20,7 @@ interface StepItem {
   category: string;
   desc: string;
   deliverable: string;
+  image: string;
   icon: React.ComponentType<{ className?: string; strokeWidth?: number }>;
   themeColor: string;
   tagBg: string;
@@ -34,10 +32,11 @@ export default function PlanOfWork() {
     {
       step: "01",
       stageBadge: "STAGE 01",
-      title: "Blueprint & Discovery",
+      title: "Strategic Discovery & Blueprint",
       category: "COMMERCIAL FEASIBILITY & ROADMAP",
       desc: "Deconstruct business objectives, define deterministic milestone contracts, map full-stack architecture, and establish fixed-scope commercial delivery.",
       deliverable: "Tech Blueprint • Milestone Contract • Risk Matrix",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop",
       icon: Compass,
       themeColor: "#8B5CF6",
       tagBg: "bg-purple-600 text-white border-purple-500",
@@ -46,98 +45,67 @@ export default function PlanOfWork() {
     {
       step: "02",
       stageBadge: "STAGE 02",
-      title: "Developer to Client Report for Research Plan",
-      category: "TECHNICAL DUE DILIGENCE & SPECS",
-      desc: "In-depth research report delivered to stakeholders: competitive teardown, server capacity models, API schemas, and measurable ROI benchmarks.",
-      deliverable: "Research Report • Schema Specs • Server Sizing",
-      icon: FileText,
-      themeColor: "#3B82F6",
-      tagBg: "bg-blue-600 text-white border-blue-500",
-      gradientBg: "from-blue-950 via-slate-900 to-slate-950",
-    },
-    {
-      step: "03",
-      stageBadge: "STAGE 03",
-      title: "Design Selection",
-      category: "HIGH-CONVERSION UI/UX SYSTEM",
+      title: "High-Conversion UI/UX Design",
+      category: "DESIGN SYSTEM & FIGMA PROTOTYPES",
       desc: "Interactive wireframes and sleek design prototypes engineered for psychological conversion triggers, brand authority, and frictionless user flows.",
-      deliverable: "Figma Prototypes • Design System • UX Validation",
+      deliverable: "Figma Prototypes • Design System • Responsive Mockups",
+      image: "https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?q=80&w=800&auto=format&fit=crop",
       icon: Palette,
       themeColor: "#EC4899",
       tagBg: "bg-pink-600 text-white border-pink-500",
       gradientBg: "from-pink-950 via-slate-900 to-slate-950",
     },
     {
-      step: "04",
-      stageBadge: "STAGE 04",
-      title: "Development Phase",
-      category: "MISSION-CRITICAL FULL-STACK",
+      step: "03",
+      stageBadge: "STAGE 03",
+      title: "Full-Stack Development & AI",
+      category: "MISSION-CRITICAL NEXT.JS 16 & AI",
       desc: "Iterative agile sprints delivering Next.js 16 frontend, high-concurrency cloud servers, database isolation, and autonomous AI automation pipelines.",
-      deliverable: "Clean Git Commits • Next.js 16 • Cloud APIs",
+      deliverable: "Clean Git Code • Next.js 16 • Vector AI RAG Sprints",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
       icon: Code2,
       themeColor: "#06B6D4",
       tagBg: "bg-cyan-600 text-white border-cyan-500",
       gradientBg: "from-cyan-950 via-slate-900 to-slate-950",
     },
     {
-      step: "05",
-      stageBadge: "STAGE 05",
-      title: "Testing Phase (Performance & Load)",
+      step: "04",
+      stageBadge: "STAGE 04",
+      title: "Testing, QA & Security Audit",
       category: "ENTERPRISE RIGOR & LOAD AUDIT",
       desc: "Stress-testing under 100k+ concurrent requests, latency benchmarking, zero hydration error audits, and automated end-to-end security penetration.",
       deliverable: "100k Stress Test • CWV 100 • Zero Security Flags",
+      image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?q=80&w=800&auto=format&fit=crop",
       icon: ShieldCheck,
       themeColor: "#F59E0B",
       tagBg: "bg-amber-600 text-white border-amber-500",
       gradientBg: "from-amber-950 via-slate-900 to-slate-950",
     },
     {
-      step: "06",
-      stageBadge: "STAGE 06",
-      title: "Client Review",
-      category: "STAKEHOLDER VALIDATION",
-      desc: "Transparent staging walkthrough, collaborative feedback alignment, feature sign-offs, and final go-to-market optimization before public launch.",
-      deliverable: "Staging Preview • Stakeholder Sign-Off • Final Polish",
-      icon: UserCheck,
-      themeColor: "#6366F1",
-      tagBg: "bg-indigo-600 text-white border-indigo-500",
-      gradientBg: "from-indigo-950 via-slate-900 to-slate-950",
-    },
-    {
-      step: "07",
-      stageBadge: "STAGE 07",
-      title: "Deployment",
+      step: "05",
+      stageBadge: "STAGE 05",
+      title: "Deployment & Global Edge CDN",
       category: "ZERO-DOWNTIME ORCHESTRATION",
       desc: "Automated blue/green zero-downtime deployment across global edge CDN clusters, SSL hardening, reverse proxy setup, and instant DNS rollout.",
-      deliverable: "Edge Rollout • SSL Hardened • Sub-350ms FCP",
+      deliverable: "Edge Rollout • SSL Hardened • Sub-300ms Global Speed",
+      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=800&auto=format&fit=crop",
       icon: Rocket,
       themeColor: "#10B981",
       tagBg: "bg-emerald-600 text-white border-emerald-500",
       gradientBg: "from-emerald-950 via-slate-900 to-slate-950",
     },
     {
-      step: "08",
-      stageBadge: "STAGE 08",
-      title: "SEO Initial and Optimize",
-      category: "ORGANIC REVENUE ACCELERATION",
-      desc: "Semantic JSON-LD schema integration, XML sitemaps, Core Web Vitals perfection, and automated indexation for dominant Google search rankings.",
-      deliverable: "JSON-LD Schema • Google Indexation • Page 1 Targets",
+      step: "06",
+      stageBadge: "STAGE 06",
+      title: "SEO Dominance & 24/7 Telemetry",
+      category: "GROWTH, TELEMETRY & SLA SUPPORT",
+      desc: "Semantic JSON-LD schema integration, Google Search Page 1 optimization, real-time APM telemetry monitoring, and contractual 99.999% SLA uptime.",
+      deliverable: "Top Google Ranking • 99.999% SLA • 24/7 Active HUD",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop",
       icon: Search,
       themeColor: "#E11D48",
       tagBg: "bg-rose-600 text-white border-rose-500",
       gradientBg: "from-rose-950 via-slate-900 to-slate-950",
-    },
-    {
-      step: "09",
-      stageBadge: "STAGE 09",
-      title: "Monitoring",
-      category: "24/7 AUTOPILOT & TELEMETRY",
-      desc: "Real-time server telemetry, automated error alerting, APM latency tracking, and continuous proactive infrastructure maintenance under strict SLAs.",
-      deliverable: "99.999% SLA • Real-time HUD • Telemetry Alerts",
-      icon: Activity,
-      themeColor: "#14B8A6",
-      tagBg: "bg-teal-600 text-white border-teal-500",
-      gradientBg: "from-teal-950 via-slate-900 to-slate-950",
     },
   ];
 
@@ -164,12 +132,12 @@ export default function PlanOfWork() {
           </div>
 
           <p className="mt-3 text-sm sm:text-base font-sans leading-relaxed max-w-2xl text-slate-600 font-normal">
-            An industrial-grade, 9-stage engineering pipeline built with entrepreneurial precision to minimize commercial risk and maximize global scalability.
+            A battle-tested, 6-stage engineering roadmap designed with mathematical precision to eliminate technical debt and guarantee 99.999% production reliability.
           </p>
         </div>
 
-        {/* 9 Cards in a Clean Responsive Grid (3 Columns) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+        {/* 6 Stage Cards in a Clean Responsive 3-Column Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 items-stretch">
           {steps.map((item) => {
             const Icon = item.icon;
 
@@ -179,24 +147,27 @@ export default function PlanOfWork() {
                 className="rounded-2xl border-2 border-slate-200 bg-white shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group hover:-translate-y-1.5"
               >
                 <div>
-                  {/* Top Visual Banner */}
-                  <div
-                    className={`relative w-full h-40 bg-gradient-to-br ${item.gradientBg} overflow-hidden flex items-center justify-center`}
-                  >
-                    {/* Background Subtle Gradient Overlay */}
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
+                  {/* Top Visual Image Banner with Gradient & Stage Badges */}
+                  <div className="relative w-full h-48 overflow-hidden bg-slate-900">
+                    <img
+                      src={item.image}
+                      alt={item.title}
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 filter brightness-90"
+                    />
+                    {/* Dark gradient overlay for text legibility */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
 
                     {/* Stage Number Watermark */}
-                    <span className="absolute -bottom-3 -right-2 text-7xl font-black font-heading text-white/10 select-none pointer-events-none group-hover:text-white/20 transition-colors">
+                    <span className="absolute bottom-2 right-3 text-6xl font-black font-heading text-white/20 select-none pointer-events-none group-hover:text-white/35 transition-colors">
                       {item.step}
                     </span>
 
                     {/* Stage Hero Icon */}
                     <div
-                      className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl border-2 border-white/20 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+                      className="absolute bottom-3 left-4 z-10 w-12 h-12 rounded-xl flex items-center justify-center shadow-xl border border-white/20 transition-transform duration-300 group-hover:scale-110"
                       style={{ backgroundColor: item.themeColor }}
                     >
-                      <Icon className="w-8 h-8 text-white" strokeWidth={2.5} />
+                      <Icon className="w-6 h-6 text-white" strokeWidth={2.5} />
                     </div>
 
                     {/* Stage Badge */}
@@ -211,19 +182,16 @@ export default function PlanOfWork() {
                     {/* Verified Step Tag */}
                     <div className="absolute top-3 right-3 pointer-events-none z-10">
                       <span
-                        className="px-2.5 py-1 rounded-full text-[10px] w1 font-bold border shadow-xs flex items-center gap-1.5 bg-[#090d16] text-yellow-400 border-yellow-500/60"
+                        className="px-2.5 py-1 rounded-full text-[10px] w1 font-bold border shadow-xs flex items-center gap-1.5 bg-[#090d16]/90 backdrop-blur-xs text-yellow-400 border-yellow-500/60"
                       >
                         <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                         PHASE {item.step}
                       </span>
                     </div>
-
-                    {/* Bottom Vignette */}
-                    <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
                   </div>
 
                   {/* Card Content with Refined Modern Typography */}
-                  <div className="p-5 flex flex-col text-slate-800">
+                  <div className="p-6 flex flex-col text-slate-800">
                     {/* Category */}
                     <span
                       className="text-[11px] w2 font-bold uppercase tracking-wider block mb-1.5"
@@ -237,13 +205,13 @@ export default function PlanOfWork() {
                       {item.title}
                     </h3>
 
-                    {/* Description with Clean Sans Typography */}
-                    <p className="mt-2.5 text-sm font-sans leading-relaxed line-clamp-3 min-h-[56px] text-slate-600 font-normal">
+                    {/* Description */}
+                    <p className="mt-2.5 text-sm font-sans leading-relaxed line-clamp-3 min-h-[60px] text-slate-600 font-normal">
                       {item.desc}
                     </p>
 
-                    {/* Deliverable Pill with Modern Font */}
-                    <div className="mt-4 py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-center w2 text-xs text-slate-700 truncate shadow-xs">
+                    {/* Deliverable Pill */}
+                    <div className="mt-4 py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-center w2 text-xs text-slate-700 truncate shadow-2xs">
                       {item.deliverable}
                     </div>
                   </div>

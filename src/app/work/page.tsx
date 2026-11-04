@@ -68,12 +68,12 @@ export default function WorkPage() {
   ];
 
   return (
-    <main className="relative min-h-screen bg-white text-slate-900 overflow-x-hidden">
+    <main className="relative min-h-screen bg-white text-slate-900 overflow-x-clip">
       <SmoothCursor />
       <Navbar />
 
       {/* Work Hero Header with Animated Grid Pixel Reveal Cyber Matrix Background */}
-      <section className="relative py-24 bg-[#060913] text-white overflow-hidden border-b-2 border-emerald-500/20">
+      <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-16 lg:pb-20 bg-[#060913] text-white overflow-hidden border-b-2 border-emerald-500/20">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <PixelImage
             src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=90&w=2000&auto=format&fit=crop"

@@ -82,6 +82,7 @@ export interface IphoneProps extends HTMLAttributes<HTMLDivElement> {
   src?: string;
   videoSrc?: string;
   frameColor?: IphoneColor;
+  children?: React.ReactNode;
 }
 
 export function Iphone({
@@ -90,6 +91,7 @@ export function Iphone({
   frameColor = "white",
   className = "",
   style,
+  children,
   ...props
 }: IphoneProps) {
   const reactId = useId();
@@ -130,9 +132,9 @@ export function Iphone({
         </div>
       )}
 
-      {!hasVideo && src && (
+      {!hasVideo && (children || src) && (
         <div
-          className="pointer-events-none absolute z-0 overflow-hidden bg-[#0a0f1d] flex items-center justify-center"
+          className="pointer-events-none absolute z-0 overflow-hidden bg-[#0a0f1d] flex flex-col items-center justify-start w-full h-full select-none"
           style={{
             left: `${LEFT_PCT}%`,
             top: `${TOP_PCT}%`,
@@ -141,14 +143,18 @@ export function Iphone({
             borderRadius: `${RADIUS_H}% / ${RADIUS_V}%`,
           }}
         >
-          <PixelImage
-            src={src}
-            customGrid={{ rows: 4, cols: 6 }}
-            grayscaleAnimation
-            className="w-full h-full"
-            imageClassName="object-cover object-center"
-            alt="Mobile Screen View"
-          />
+          {children ? (
+            children
+          ) : (
+            <PixelImage
+              src={src!}
+              customGrid={{ rows: 4, cols: 6 }}
+              grayscaleAnimation
+              className="w-full h-full"
+              imageClassName="object-cover object-center"
+              alt="Mobile Screen View"
+            />
+          )}
         </div>
       )}
 

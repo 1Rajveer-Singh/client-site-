@@ -12,6 +12,7 @@ import {
   Special_Elite,
   Handlee,
 } from "next/font/google";
+import CookieConsent from "@/components/CookieConsent";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -92,14 +93,16 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://itprogrammersolution.com"),
   title: {
-    default: "IT PROGRAMMER SOLUTION | Enterprise Web, Cloud Servers & AI Automation",
-    template: "%s | IT PROGRAMMER SOLUTION",
+    default: "Rajveer Singh | Developer - Full Stack, Cloud Servers & AI Automation",
+    template: "%s | Rajveer Singh | Developer",
   },
   description:
     "Architecting high-availability cloud servers, Next.js 16 web applications, autonomous AI agents, SEO dominance, and sub-300ms global latency systems with 99.999% SLA integrity.",
-  applicationName: "IT PROGRAMMER SOLUTION",
+  applicationName: "Rajveer Singh | Developer",
   keywords: [
-    "IT PROGRAMMER SOLUTION",
+    "Rajveer Singh",
+    "Rajveer Singh Developer",
+    "Full Stack Developer",
     "Cloud Server Architecture",
     "Next.js 16 Web Engineering",
     "Autonomous AI Agent Swarms",
@@ -108,8 +111,8 @@ export const metadata: Metadata = {
     "Power BI Dashboards",
     "Mobile App Development",
   ],
-  authors: [{ name: "IT PROGRAMMER SOLUTION", url: "https://itprogrammersolution.com" }],
-  creator: "IT PROGRAMMER SOLUTION",
+  authors: [{ name: "Rajveer Singh", url: "https://itprogrammersolution.com" }],
+  creator: "Rajveer Singh",
   icons: {
     icon: "/logo.png",
     shortcut: "/logo.png",
@@ -119,8 +122,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://itprogrammersolution.com",
-    siteName: "IT PROGRAMMER SOLUTION",
-    title: "IT PROGRAMMER SOLUTION | Enterprise Web, Cloud Servers & AI Automation",
+    siteName: "Rajveer Singh | Developer",
+    title: "Rajveer Singh | Developer - Full Stack, Cloud Servers & AI Automation",
     description:
       "Architecting high-availability cloud servers, Next.js 16 web applications, autonomous AI agents, and sub-300ms systems with 99.999% SLA integrity.",
     images: [
@@ -128,13 +131,13 @@ export const metadata: Metadata = {
         url: "/logo.png",
         width: 800,
         height: 800,
-        alt: "IT PROGRAMMER SOLUTION - Enterprise Cloud & Web Architecture",
+        alt: "Rajveer Singh | Developer",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "IT PROGRAMMER SOLUTION | Enterprise Web, Cloud Servers & AI Automation",
+    title: "Rajveer Singh | Developer - Full Stack, Cloud Servers & AI Automation",
     description:
       "Architecting high-availability cloud servers, Next.js 16 web applications, autonomous AI agents, and sub-300ms systems with 99.999% SLA integrity.",
     images: ["/logo.png"],
@@ -182,6 +185,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased selection:bg-cyan-500/30 selection:text-cyan-900">
         {children}
+        <CookieConsent />
       </body>
     </html>
   );

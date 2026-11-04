@@ -20,7 +20,7 @@ export default function ClientTestimonials() {
       initials: "ER",
       rating: 5,
       quote:
-        "IT PROGRAMMER SOLUTION completely re-engineered our core customer checkout portal using Next.js 16 and high-concurrency cloud servers. Our first contentful paint dropped from 3.8s down to 320ms, and we experienced zero downtime during peak seasonal traffic. They are technical masters.",
+        "Rajveer Singh completely re-engineered our core customer checkout portal using Next.js 16 and high-concurrency cloud servers. Our first contentful paint dropped from 3.8s down to 320ms, and we experienced zero downtime during peak seasonal traffic. He is a technical master.",
       metric: "FCP: 320ms // +340% Sales",
     },
     {
@@ -109,7 +109,7 @@ export default function ClientTestimonials() {
           </div>
 
           <p className="mt-4 text-sm sm:text-base font-sans text-slate-600 leading-relaxed max-w-2xl mb-6 font-normal">
-            Real testimonials from engineering leaders, founders, and marketing directors who scaled their businesses with IT PROGRAMMER SOLUTION.
+            Real testimonials from engineering leaders, founders, and marketing directors who scaled their businesses with Rajveer Singh.
           </p>
 
           {/* Aceternity Animated Tooltip Avatars */}

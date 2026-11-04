@@ -113,13 +113,12 @@ export default function ServicesPage() {
   ];
 
   return (
-    <main className="relative min-h-screen bg-white text-slate-900 overflow-x-hidden">
+    <main className="relative min-h-screen bg-white text-slate-900 overflow-x-clip">
       <SmoothCursor />
       <Navbar />
 
-      {/* Services Hero Header with Atmospheric Unsplash Business & Tech Consulting Team Background */}
       {/* Services Hero Header with Atmospheric Unsplash Infrastructure Background */}
-      <section className="relative py-16 sm:py-20 lg:py-24 bg-[#060913] text-white overflow-hidden border-b-2 border-cyan-500/20">
+      <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-20 lg:pb-24 bg-[#060913] text-white overflow-hidden border-b-2 border-cyan-500/20">
         {/* Animated Grid Pixel Reveal Background */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <PixelImage

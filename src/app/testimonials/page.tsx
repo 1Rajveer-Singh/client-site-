@@ -18,12 +18,12 @@ export default function TestimonialsPage() {
   }, []);
 
   return (
-    <main className="relative min-h-screen bg-white text-slate-900 overflow-x-hidden">
+    <main className="relative min-h-screen bg-white text-slate-900 overflow-x-clip">
       <SmoothCursor />
       <Navbar />
 
       {/* Testimonials Hero Header with Animated Grid Pixel Reveal Leadership Background */}
-      <section className="relative py-24 bg-[#060913] text-white overflow-hidden border-b-2 border-yellow-500/20">
+      <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-16 lg:pb-20 bg-[#060913] text-white overflow-hidden border-b-2 border-yellow-500/20">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <PixelImage
             src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=90&w=2000&auto=format&fit=crop"
@@ -45,7 +45,7 @@ export default function TestimonialsPage() {
           </h1>
 
           <p className="mt-5 max-w-3xl mx-auto text-sm sm:text-base font-sans text-slate-200 leading-relaxed font-normal">
-            Read direct feedback from CTOs, product directors, and founders who partnered with IT PROGRAMMER SOLUTION to eliminate technical debt and deploy scalable digital systems.
+            Read direct feedback from CTOs, product directors, and founders who partnered with Rajveer Singh | Developer to eliminate technical debt and deploy scalable digital systems.
           </p>
 
           <div className="mt-8 flex justify-center gap-4">
