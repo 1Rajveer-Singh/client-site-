@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import TechnologyMarquee from "@/components/TechnologyMarquee";
 import ClientWork from "@/components/ClientWork";
 import ClientTestimonials from "@/components/ClientTestimonials";
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
@@ -33,6 +32,7 @@ import {
 import { LiquidMetalButton } from "@/components/ui/liquid-metal";
 import { KineticText } from "@/registry/magicui/kinetic-text";
 import { SparklesText } from "@/components/ui/sparkles-text";
+import NeonBorder from "@/components/ui/neon-border";
 import { PixelImage } from "@/registry/magicui/pixel-image";
 
 export default function AboutPage() {
@@ -248,49 +248,37 @@ export default function AboutPage() {
 
       {/* Hero Section: Everything Your Business Needs to Succeed Digitally */}
       <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-16 lg:pb-24 bg-[#0a1026] text-white overflow-hidden border-b-2 border-indigo-500/20 select-none">
-        {/* Dynamic Technological Grid Background with Pixel Reveal */}
+        {/* Dynamic Technological Grid Background with Pixel Reveal - Subdued Visibility */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <PixelImage
-            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=90&w=2560&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=90&w=2000&auto=format&fit=crop"
             customGrid={{ rows: 4, cols: 6 }}
             grayscaleAnimation
-            className="w-full h-full opacity-60 contrast-110 saturate-120"
+            className="w-full h-full opacity-35 contrast-100 saturate-90"
             imageClassName="object-cover object-center w-full h-full"
             alt="About Rajveer Singh Developer"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1026]/85 via-[#0a1026]/60 to-[#0a1026]/95 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0a1026]/75 via-[#0a1026]/50 to-[#0a1026]/90 pointer-events-none" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          {/* Eyebrow */}
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-950/80 border border-indigo-500/40 text-indigo-300 text-xs font-heading font-bold uppercase tracking-wider mb-6 backdrop-blur-md">
-            <span className="w-2 h-2 rounded-full bg-indigo-400 animate-pulse" />
-            <span>ABOUT RAJVEER SINGH | DEVELOPER • ENGINEERING EXCELLENCE</span>
-          </div>
-
-          {/* Main Headline */}
-          <div className="flex flex-col items-center">
-            <KineticText
-              text="EVERYTHING YOUR BUSINESS NEEDS"
-              as="h1"
-              className="text-3xl sm:text-5xl lg:text-6xl font-black font-heading tracking-tight text-white leading-tight cursor-default"
-            />
-            <SparklesText
-              className="text-3xl sm:text-5xl lg:text-6xl font-black font-heading tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-indigo-300 to-cyan-400 inline-block mt-2"
-              sparklesCount={8}
-              colors={{ first: "#818cf8", second: "#38bdf8" }}
-            >
+          {/* Main Headline - Divided into Two Rows (Both Mobile & Desktop) */}
+          <h1 className="flex flex-col items-center justify-center text-center">
+            <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight text-white leading-tight block">
+              EVERYTHING YOUR BUSINESS NEEDS
+            </span>
+            <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-indigo-300 to-cyan-400 block mt-1 sm:mt-2">
               TO SUCCEED DIGITALLY.
-            </SparklesText>
-          </div>
+            </span>
+          </h1>
 
           {/* Description */}
-          <p className="mt-6 max-w-3xl mx-auto text-sm sm:text-base md:text-lg font-sans text-slate-200 leading-relaxed font-normal">
+          <p className="mt-4 sm:mt-6 max-w-3xl mx-auto text-sm sm:text-base md:text-lg font-sans text-slate-300 leading-relaxed font-normal">
             We bridge the gap between ambitious business vision and bulletproof engineering. From high-conversion websites and high-availability cloud servers to autonomous AI swarms and intuitive mobile experiences, we build systems that drive real revenue.
           </p>
 
-          {/* CTA Buttons: Get Started & Explore Our Services */}
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
+          {/* CTA Buttons: Get Started & Explore Our Services - Strictly in One Row */}
+          <div className="mt-6 sm:mt-7 flex flex-row items-center justify-center gap-2.5 sm:gap-4 flex-nowrap w-full">
             <LiquidMetalButton
               href="/contact"
               size="md"
@@ -301,7 +289,7 @@ export default function AboutPage() {
                 speed: 0.5,
                 distortion: 0.16,
               }}
-              innerClassName="bg-slate-900 text-white font-sans text-xs sm:text-sm font-bold tracking-wide"
+              innerClassName="bg-slate-900 text-white font-sans text-xs sm:text-sm font-bold tracking-wide !px-3.5 sm:!px-6 !py-2 sm:!py-2.5 whitespace-nowrap"
               rightIcon={<ArrowRight className="w-4 h-4 text-indigo-400" />}
             >
               Get Started
@@ -317,27 +305,11 @@ export default function AboutPage() {
                 speed: 0.5,
                 distortion: 0.16,
               }}
-              innerClassName="bg-slate-900 text-white font-sans text-xs sm:text-sm font-bold tracking-wide"
+              innerClassName="bg-slate-900 text-white font-sans text-xs sm:text-sm font-bold tracking-wide !px-3.5 sm:!px-6 !py-2 sm:!py-2.5 whitespace-nowrap"
               rightIcon={<ChevronDown className="w-4 h-4 text-emerald-400" />}
             >
               Explore Our Services
             </LiquidMetalButton>
-          </div>
-
-          {/* Trust Metrics Pill */}
-          <div className="mt-12 pt-8 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-4xl mx-auto text-left">
-            {[
-              { val: "50+", label: "Projects Delivered", desc: "Zero failure rate" },
-              { val: "100+", label: "Happy Clients", desc: "Worldwide partners" },
-              { val: "99.999%", label: "Server SLA", desc: "Contractual uptime" },
-              { val: "100%", label: "Code Ownership", desc: "Zero vendor lock-in" },
-            ].map((stat, i) => (
-              <div key={i} className="p-4 rounded-xl bg-slate-900/60 border border-slate-800/80 backdrop-blur-md">
-                <div className="text-xl sm:text-2xl font-black font-heading text-white">{stat.val}</div>
-                <div className="text-xs font-bold font-heading text-indigo-300 mt-0.5">{stat.label}</div>
-                <div className="text-[11px] text-slate-400 font-sans mt-0.5">{stat.desc}</div>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -348,10 +320,6 @@ export default function AboutPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
             
             <div className="lg:col-span-6 text-left">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold font-heading uppercase tracking-wider mb-4">
-                <span className="w-2 h-2 rounded-full bg-indigo-600" />
-                <span>OUR STORY & PHILOSOPHY</span>
-              </div>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading tracking-tight text-slate-950 leading-tight">
                 Architecting Digital Solutions That Power Modern Businesses.
               </h2>
@@ -381,20 +349,31 @@ export default function AboutPage() {
             </div>
 
             <div className="lg:col-span-6">
-              <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-100">
-                <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=90&w=1200&auto=format&fit=crop"
-                  alt="Engineering Team Collaboration"
-                  className="w-full h-[400px] object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 sm:p-8 text-white text-left">
-                  <span className="text-xs font-mono font-bold text-cyan-300 uppercase tracking-widest">[LEADERSHIP STATEMENT]</span>
-                  <p className="font-heading font-extrabold text-base sm:text-lg mt-1 text-slate-100">
-                    "We don't just ship websites; we build scalable digital assets that generate revenue while you sleep."
-                  </p>
-                  <span className="text-xs text-slate-300 font-sans mt-2">— Rajveer Singh, Lead Engineer & Founder</span>
+              <NeonBorder
+                borderRadius={24}
+                color="#00e5ff"
+                secondaryColor="#6366f1"
+                trackColor="rgba(255, 255, 255, 0.12)"
+                borderWidth={2}
+                duration={5}
+                glow={1.3}
+                containerClassName="w-full"
+              >
+                <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-100">
+                  <img
+                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=90&w=1200&auto=format&fit=crop"
+                    alt="Engineering Team Collaboration"
+                    className="w-full h-[400px] object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 sm:p-8 text-white text-left">
+                    <span className="text-xs font-mono font-bold text-cyan-300 uppercase tracking-widest">[LEADERSHIP STATEMENT]</span>
+                    <p className="font-heading font-extrabold text-base sm:text-lg mt-1 text-slate-100">
+                      "We don't just ship websites; we build scalable digital assets that generate revenue while you sleep."
+                    </p>
+                    <span className="text-xs text-slate-300 font-sans mt-2">— Rajveer Singh, Lead Engineer & Founder</span>
+                  </div>
                 </div>
-              </div>
+              </NeonBorder>
             </div>
 
           </div>
@@ -406,10 +385,6 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-bold font-heading uppercase tracking-wider mb-4 shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-blue-600" />
-              <span>COMPREHENSIVE DIGITAL CAPABILITIES</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading tracking-tight text-slate-950">
               Our Six Core Digital Services
             </h2>
@@ -483,10 +458,6 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold font-heading uppercase tracking-wider mb-4">
-              <span className="w-2 h-2 rounded-full bg-purple-600" />
-              <span>THE 7-STAGE EXECUTION ENGINE</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading tracking-tight text-slate-950">
               A Smarter Process. Better Results.
             </h2>
@@ -524,10 +495,6 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-bold font-heading uppercase tracking-wider mb-4 shadow-xs">
-              <span className="w-2 h-2 rounded-full bg-emerald-600" />
-              <span>WHY BUSINESSES PARTNER WITH US</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading tracking-tight text-slate-950">
               Your Vision. Our Expertise. One Powerful Partnership.
             </h2>
@@ -561,9 +528,6 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Technologies We Use (Infinite Marquee) */}
-      <TechnologyMarquee />
-
       {/* Featured Projects / Our Work */}
       <ClientWork />
 
@@ -575,10 +539,6 @@ export default function AboutPage() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-slate-700 text-xs font-bold font-heading uppercase tracking-wider mb-4 shadow-xs">
-              <HelpCircle className="w-3.5 h-3.5 text-indigo-600" />
-              <span>FREQUENTLY ASKED QUESTIONS</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading tracking-tight text-slate-950">
               Frequently Asked Questions.
             </h2>
@@ -628,11 +588,6 @@ export default function AboutPage() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(99,102,241,0.15),transparent_100%)] pointer-events-none" />
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-indigo-950 border border-indigo-500/40 text-indigo-300 text-xs font-heading font-bold uppercase tracking-wider mb-6">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>ACCEPTING NEW CLIENT ENGAGEMENTS FOR 2026</span>
-          </div>
-
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading tracking-tight text-white leading-tight">
             Ready to Take Your Business to the Next Level?
           </h2>
@@ -640,7 +595,7 @@ export default function AboutPage() {
             Let's build something extraordinary together. Schedule a discovery consultation with Rajveer Singh to discuss your technical blueprint, budget, and deterministic roadmap.
           </p>
 
-          <div className="mt-8 flex justify-center gap-4 flex-wrap">
+          <div className="mt-8 flex flex-row items-center justify-center gap-2.5 sm:gap-4 flex-nowrap w-full">
             <LiquidMetalButton
               href="/contact"
               size="md"
@@ -651,7 +606,7 @@ export default function AboutPage() {
                 speed: 0.5,
                 distortion: 0.16,
               }}
-              innerClassName="bg-slate-900 text-white font-sans text-xs sm:text-sm font-bold tracking-wide"
+              innerClassName="bg-slate-900 text-white font-sans text-xs sm:text-sm font-bold tracking-wide !px-3.5 sm:!px-6 !py-2 sm:!py-2.5 whitespace-nowrap"
               rightIcon={<ArrowRight className="w-4 h-4 text-emerald-400" />}
             >
               Get Started
@@ -667,7 +622,7 @@ export default function AboutPage() {
                 speed: 0.5,
                 distortion: 0.16,
               }}
-              innerClassName="bg-slate-900 text-white font-sans text-xs sm:text-sm font-bold tracking-wide"
+              innerClassName="bg-slate-900 text-white font-sans text-xs sm:text-sm font-bold tracking-wide !px-3.5 sm:!px-6 !py-2 sm:!py-2.5 whitespace-nowrap"
             >
               Explore Our Services
             </LiquidMetalButton>

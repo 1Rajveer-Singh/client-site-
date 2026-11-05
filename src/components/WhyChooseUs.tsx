@@ -66,11 +66,6 @@ export default function WhyChooseUs() {
         
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-100 border border-slate-200 text-slate-700 text-xs font-bold font-heading uppercase tracking-wider mb-4">
-            <span className="w-2 h-2 rounded-full bg-emerald-500" />
-            <span>UNCOMPROMISING ENGINEERING STANDARDS</span>
-          </div>
-
           <div className="flex items-center justify-center gap-2 flex-wrap">
             <KineticText
               text="WHY CHOOSE"

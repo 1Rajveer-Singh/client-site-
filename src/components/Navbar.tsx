@@ -227,19 +227,9 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
                   href: "/services",
                 },
                 {
-                  title: "Plan of Work",
-                  icon: <Compass className="w-5 h-5 text-slate-300" />,
-                  href: "/plan",
-                },
-                {
                   title: "Our Work",
                   icon: <Trophy className="w-5 h-5 text-slate-300" />,
                   href: "/work",
-                },
-                {
-                  title: "Testimonials",
-                  icon: <Sparkles className="w-5 h-5 text-slate-300" />,
-                  href: "/testimonials",
                 },
                 {
                   title: "Contact",
@@ -266,11 +256,6 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
         {/* Mobile Drawer */}
         {mobileMenuOpen && (
           <div className="lg:hidden relative z-50 bg-slate-900/98 backdrop-blur-2xl border-t border-slate-800 px-5 py-5 flex flex-col gap-2 font-heading text-xs shadow-2xl touch-manipulation text-slate-200">
-            <div className="flex items-center justify-between border-b border-slate-800 pb-2 text-[11px] text-slate-400 font-bold uppercase tracking-wider">
-              <span>Navigation</span>
-              <span className="text-emerald-400 font-mono text-[10px]">Online</span>
-            </div>
-
             {/* [Home] */}
             <a
               href="/"
@@ -301,16 +286,6 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
               <span className="font-semibold text-sm">Services & Infrastructure</span>
             </a>
 
-            {/* [Plan of Work] */}
-            <a
-              href="/plan"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-colors"
-            >
-              <Compass className="w-4 h-4 text-slate-400" />
-              <span className="font-semibold text-sm">Plan of Work (6 Stages)</span>
-            </a>
-
             {/* [Work] */}
             <a
               href="/work"
@@ -319,16 +294,6 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
             >
               <Trophy className="w-4 h-4 text-slate-400" />
               <span className="font-semibold text-sm">Featured Projects</span>
-            </a>
-
-            {/* [Testimonials] */}
-            <a
-              href="/testimonials"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-colors"
-            >
-              <Sparkles className="w-4 h-4 text-slate-400" />
-              <span className="font-semibold text-sm">Client Testimonials</span>
             </a>
 
             {/* [Contact] */}

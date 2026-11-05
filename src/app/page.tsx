@@ -26,6 +26,9 @@ export default function Home() {
       {/* Hero Section with CTAs: Get Started & Explore Our Services */}
       <HeroSection />
 
+      {/* Technologies We Use (Infinite Marquee) — Shifted just below Hero Section */}
+      <TechnologyMarquee />
+
       {/* Company Introduction */}
       <CompanyIntro />
 
@@ -34,9 +37,6 @@ export default function Home() {
 
       {/* Why Choose Us */}
       <WhyChooseUs />
-
-      {/* Technologies We Use (Infinite Marquee) */}
-      <TechnologyMarquee />
 
       {/* 6-Stage Plan of Work with Images */}
       <PlanOfWork />

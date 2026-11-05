@@ -24,7 +24,6 @@ export default function ContactPage() {
     email: "",
     phone: "",
     service: "Full-Stack Web Development",
-    budget: "$5,000 - $15,000",
     message: "",
   });
 
@@ -34,9 +33,51 @@ export default function ContactPage() {
     }
   }, []);
 
+  const getEmailContent = () => {
+    const recipient = "rakshitsingcse@gmail.com";
+    const subject = `Project Inquiry: ${formData.service} — ${formData.name}`;
+    const body = `Hello Rajveer,
+
+I am reaching out via your portfolio website regarding a new project:
+
+• Client Name: ${formData.name}
+• Email: ${formData.email}
+• Phone: ${formData.phone.trim() || "Not provided"}
+• Service Needed: ${formData.service}
+
+Project Details & Requirements:
+--------------------------------------------------
+${formData.message}
+--------------------------------------------------
+
+Best regards,
+${formData.name}
+${formData.email}`;
+
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+      recipient
+    )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+    const mailtoUrl = `mailto:${recipient}?subject=${encodeURIComponent(
+      subject
+    )}&body=${encodeURIComponent(body)}`;
+
+    return { gmailUrl, mailtoUrl };
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
+
+    const { gmailUrl, mailtoUrl } = getEmailContent();
+    try {
+      const opened = window.open(gmailUrl, "_blank", "noopener,noreferrer");
+      if (!opened) {
+        window.location.href = mailtoUrl;
+      }
+    } catch {
+      window.location.href = mailtoUrl;
+    }
   };
 
   return (
@@ -167,22 +208,57 @@ export default function ContactPage() {
             <div className="lg:col-span-7">
               <div className="p-6 sm:p-10 rounded-2xl border border-slate-200 bg-white shadow-xs">
                 {submitted ? (
-                  <div className="text-center py-12 flex flex-col items-center">
-                    <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 border border-emerald-200">
+                  <div className="text-center py-10 flex flex-col items-center">
+                    <div className="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4 border border-emerald-200 shadow-xs">
                       <CheckCircle2 className="w-10 h-10" />
                     </div>
                     <h3 className="text-2xl font-bold font-heading text-slate-900 mb-2">
-                      Message Sent Successfully!
+                      Opening Gmail Compose Box...
                     </h3>
                     <p className="text-sm font-sans text-slate-600 max-w-md leading-relaxed mb-6">
-                      Thank you for reaching out. Rajveer Singh has received your message and will get back to you shortly.
+                      Your project inquiry has been formatted and pre-filled directly into your Gmail composer addressed to <strong>rakshitsingcse@gmail.com</strong>.
                     </p>
+
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const { gmailUrl } = getEmailContent();
+                          window.open(gmailUrl, "_blank", "noopener,noreferrer");
+                        }}
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-blue-600 text-white font-sans text-sm font-semibold hover:bg-blue-700 transition-colors shadow-sm cursor-pointer"
+                      >
+                        <Mail className="w-4 h-4" />
+                        <span>Re-open Gmail Composer</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const { mailtoUrl } = getEmailContent();
+                          window.location.href = mailtoUrl;
+                        }}
+                        className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-slate-100 text-slate-800 font-sans text-sm font-semibold hover:bg-slate-200 border border-slate-300 transition-colors cursor-pointer"
+                      >
+                        <span>Open Default Mail App</span>
+                      </button>
+                    </div>
+
                     <button
                       type="button"
-                      onClick={() => setSubmitted(false)}
-                      className="px-6 py-2.5 rounded-xl bg-slate-900 text-white font-sans text-sm font-semibold hover:bg-blue-600 transition-colors"
+                      onClick={() => {
+                        setSubmitted(false);
+                        setFormData({
+                          name: "",
+                          email: "",
+                          phone: "",
+                          service: "Full-Stack Web Development",
+                          message: "",
+                        });
+                      }}
+                      className="mt-6 text-xs text-slate-500 hover:text-slate-800 underline font-sans cursor-pointer"
                     >
-                      Send Another Message
+                      Reset Form & Compose Another
                     </button>
                   </div>
                 ) : (
@@ -192,7 +268,7 @@ export default function ContactPage() {
                         Send a Message
                       </h3>
                       <p className="mt-1 text-sm text-slate-600 font-sans">
-                        Fill out the form below and I will get back to you within 24 hours.
+                        Fill out your project details below. Clicking send will open your Gmail composer with everything pre-filled.
                       </p>
                     </div>
 
@@ -262,31 +338,14 @@ export default function ContactPage() {
 
                     <div>
                       <label className="block text-sm font-semibold text-slate-700 mb-1.5 font-sans">
-                        Project Budget (Optional)
-                      </label>
-                      <select
-                        value={formData.budget}
-                        onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                        className="w-full px-4 py-3 rounded-xl border border-slate-300 text-slate-900 font-sans text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white cursor-pointer transition-all"
-                      >
-                        <option>$1,000 - $3,000</option>
-                        <option>$3,000 - $5,000</option>
-                        <option>$5,000 - $15,000</option>
-                        <option>$15,000+</option>
-                        <option>Not sure yet</option>
-                      </select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-slate-700 mb-1.5 font-sans">
-                        Your Message <span className="text-red-500">*</span>
+                        Your Message & Goals <span className="text-red-500">*</span>
                       </label>
                       <textarea
                         required
                         rows={5}
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Tell me about your project, timeline, and goals..."
+                        placeholder="Tell me about your project, timeline, deliverables, and goals..."
                         className="w-full px-4 py-3 rounded-xl border border-slate-300 text-slate-900 font-sans text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white placeholder:text-slate-400 leading-relaxed transition-all"
                       />
                     </div>
@@ -296,7 +355,7 @@ export default function ContactPage() {
                       className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-heading text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-[0.99] transition-all shadow-md cursor-pointer"
                     >
                       <Send className="w-4 h-4" />
-                      <span>Send Message</span>
+                      <span>Send to Gmail Composer</span>
                     </button>
                   </form>
                 )}

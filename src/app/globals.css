@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @layer base {
@@ -23,7 +24,7 @@ html {
   color: #0f172a;
 }
 
-/* User Typography Rules & Responsive Pro Styling */
+/* User Typography Rules & Responsive Pro Styling (Preserved for entire site) */
 .w1 {
   font-family: var(--font-indie-flower), 'Indie Flower', cursive, sans-serif !important;
   font-weight: 400 !important;
@@ -103,6 +104,39 @@ button svg *,
 [role="button"] svg,
 [role="button"] svg * {
   font-family: initial !important;
+}
+
+/* ==========================================================================
+   Hero Section Custom Modern Typography (Home page first section only)
+   ========================================================================== */
+#hero h1,
+#hero h1 *,
+#hero h2,
+#hero h2 *,
+#hero .hero-headline {
+  font-family: 'Space Grotesk', var(--font-outfit), system-ui, sans-serif !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.03em !important;
+}
+
+#hero p,
+#hero .hero-desc {
+  font-family: 'Plus Jakarta Sans', var(--font-jakarta), system-ui, sans-serif !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.7 !important;
+}
+
+#hero button,
+#hero button *,
+#hero [role="button"],
+#hero [role="button"] *,
+#hero .btn,
+#hero .liquid-metal-btn,
+#hero div[class*="LiquidMetal"] + div span {
+  font-family: 'Space Grotesk', 'Plus Jakarta Sans', system-ui, sans-serif !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em !important;
 }
 
 /* Card Data Typography Rules */

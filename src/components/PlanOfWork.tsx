@@ -12,6 +12,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { KineticText } from "@/registry/magicui/kinetic-text";
+import NeonBorder from "@/components/ui/neon-border";
 
 interface StepItem {
   step: string;
@@ -142,81 +143,92 @@ export default function PlanOfWork() {
             const Icon = item.icon;
 
             return (
-              <div
+              <NeonBorder
                 key={item.step}
-                className="rounded-2xl border-2 border-slate-200 bg-white shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group hover:-translate-y-1.5"
+                borderRadius={16}
+                color={item.themeColor}
+                secondaryColor="#38bdf8"
+                trackColor="rgba(0, 0, 0, 0.08)"
+                borderWidth={2}
+                duration={6}
+                glow={1.1}
+                containerClassName="w-full h-full"
               >
-                <div>
-                  {/* Top Visual Image Banner with Gradient & Stage Badges */}
-                  <div className="relative w-full h-48 overflow-hidden bg-slate-900">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 filter brightness-90"
-                    />
-                    {/* Dark gradient overlay for text legibility */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
+                <div
+                  className="rounded-2xl border border-slate-200 bg-white shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group hover:-translate-y-1.5 h-full"
+                >
+                  <div>
+                    {/* Top Visual Image Banner with Gradient & Stage Badges */}
+                    <div className="relative w-full h-48 overflow-hidden bg-slate-900">
+                      <img
+                        src={item.image}
+                        alt={item.title}
+                        className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 filter brightness-90"
+                      />
+                      {/* Dark gradient overlay for text legibility */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-transparent" />
 
-                    {/* Stage Number Watermark */}
-                    <span className="absolute bottom-2 right-3 text-6xl font-black font-heading text-white/20 select-none pointer-events-none group-hover:text-white/35 transition-colors">
-                      {item.step}
-                    </span>
-
-                    {/* Stage Hero Icon */}
-                    <div
-                      className="absolute bottom-3 left-4 z-10 w-12 h-12 rounded-xl flex items-center justify-center shadow-xl border border-white/20 transition-transform duration-300 group-hover:scale-110"
-                      style={{ backgroundColor: item.themeColor }}
-                    >
-                      <Icon className="w-6 h-6 text-white" strokeWidth={2.5} />
-                    </div>
-
-                    {/* Stage Badge */}
-                    <div className="absolute top-3 left-3 pointer-events-none z-10">
-                      <span
-                        className={`px-3 py-1 rounded-full text-[10px] w2 font-bold uppercase tracking-wider border shadow-xs ${item.tagBg}`}
-                      >
-                        {item.stageBadge}
+                      {/* Stage Number Watermark */}
+                      <span className="absolute bottom-2 right-3 text-6xl font-black font-heading text-white/20 select-none pointer-events-none group-hover:text-white/35 transition-colors">
+                        {item.step}
                       </span>
-                    </div>
 
-                    {/* Verified Step Tag */}
-                    <div className="absolute top-3 right-3 pointer-events-none z-10">
-                      <span
-                        className="px-2.5 py-1 rounded-full text-[10px] w1 font-bold border shadow-xs flex items-center gap-1.5 bg-[#090d16]/90 backdrop-blur-xs text-yellow-400 border-yellow-500/60"
+                      {/* Stage Hero Icon */}
+                      <div
+                        className="absolute bottom-3 left-4 z-10 w-12 h-12 rounded-xl flex items-center justify-center shadow-xl border border-white/20 transition-transform duration-300 group-hover:scale-110"
+                        style={{ backgroundColor: item.themeColor }}
                       >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                        PHASE {item.step}
-                      </span>
+                        <Icon className="w-6 h-6 text-white" strokeWidth={2.5} />
+                      </div>
+
+                      {/* Stage Badge */}
+                      <div className="absolute top-3 left-3 pointer-events-none z-10">
+                        <span
+                          className={`px-3 py-1 rounded-full text-[10px] w2 font-bold uppercase tracking-wider border shadow-xs ${item.tagBg}`}
+                        >
+                          {item.stageBadge}
+                        </span>
+                      </div>
+
+                      {/* Verified Step Tag */}
+                      <div className="absolute top-3 right-3 pointer-events-none z-10">
+                        <span
+                          className="px-2.5 py-1 rounded-full text-[10px] w1 font-bold border shadow-xs flex items-center gap-1.5 bg-[#090d16]/90 backdrop-blur-xs text-yellow-400 border-yellow-500/60"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
+                          PHASE {item.step}
+                        </span>
+                      </div>
                     </div>
-                  </div>
 
-                  {/* Card Content with Refined Modern Typography */}
-                  <div className="p-6 flex flex-col text-slate-800">
-                    {/* Category */}
-                    <span
-                      className="text-[11px] w2 font-bold uppercase tracking-wider block mb-1.5"
-                      style={{ color: item.themeColor }}
-                    >
-                      {item.category}
-                    </span>
+                    {/* Card Content with Refined Modern Typography */}
+                    <div className="p-6 flex flex-col text-slate-800">
+                      {/* Category */}
+                      <span
+                        className="text-[11px] w2 font-bold uppercase tracking-wider block mb-1.5"
+                        style={{ color: item.themeColor }}
+                      >
+                        {item.category}
+                      </span>
 
-                    {/* Stage Title */}
-                    <h3 className="text-xl font-bold card-title text-slate-900 group-hover:text-purple-600 transition-colors line-clamp-1">
-                      {item.title}
-                    </h3>
+                      {/* Stage Title */}
+                      <h3 className="text-xl font-bold card-title text-slate-900 group-hover:text-purple-600 transition-colors line-clamp-1">
+                        {item.title}
+                      </h3>
 
-                    {/* Description */}
-                    <p className="mt-2.5 text-sm font-sans leading-relaxed line-clamp-3 min-h-[60px] text-slate-600 font-normal">
-                      {item.desc}
-                    </p>
+                      {/* Description */}
+                      <p className="mt-2.5 text-sm font-sans leading-relaxed line-clamp-3 min-h-[60px] text-slate-600 font-normal">
+                        {item.desc}
+                      </p>
 
-                    {/* Deliverable Pill */}
-                    <div className="mt-4 py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-center w2 text-xs text-slate-700 truncate shadow-2xs">
-                      {item.deliverable}
+                      {/* Deliverable Pill */}
+                      <div className="mt-4 py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-center w2 text-xs text-slate-700 truncate shadow-2xs">
+                        {item.deliverable}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </NeonBorder>
             );
           })}
         </div>

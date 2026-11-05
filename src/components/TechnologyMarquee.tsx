@@ -121,18 +121,10 @@ export default function TechnologyMarquee() {
   const marqueeList = [...technologies, ...technologies, ...technologies];
 
   return (
-    <section className="relative w-full overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 text-slate-900 border-y border-slate-200/90 py-12 select-none z-10">
+    <section className="relative w-full overflow-hidden bg-gradient-to-b from-slate-50 via-white to-slate-50/80 text-slate-900 border-y border-slate-200/90 py-6 sm:py-8 select-none z-10">
       {/* Subtle Ambient Engineering Glow & Micro-Grid */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_50%,rgba(56,189,248,0.06),transparent_100%)] pointer-events-none" />
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#f1f5f9_1px,transparent_1px),linear-gradient(to_bottom,#f1f5f9_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_70%_70%_at_50%_50%,#000_60%,transparent_100%)] pointer-events-none opacity-60" />
-
-      {/* Eyebrow Label */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-7 text-center relative z-10">
-        <div className="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full bg-white/95 border border-slate-200 text-slate-700 text-xs font-heading font-bold uppercase tracking-wider shadow-xs backdrop-blur-sm">
-          <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
-          <span>ENTERPRISE TECHNOLOGY STACK • ARCHITECTED FOR 99.999% SLA PRODUCTION</span>
-        </div>
-      </div>
 
       {/* Sleek edge fade masks for smooth infinite flow matching light background */}
       <div className="absolute left-0 inset-y-0 w-28 sm:w-44 bg-gradient-to-r from-slate-50 via-slate-50/90 to-transparent z-20 pointer-events-none" />

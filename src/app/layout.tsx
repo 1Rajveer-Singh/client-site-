@@ -13,6 +13,7 @@ import {
   Handlee,
 } from "next/font/google";
 import CookieConsent from "@/components/CookieConsent";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import "./globals.css";
 
 const openSans = Open_Sans({
@@ -185,6 +186,7 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased selection:bg-cyan-500/30 selection:text-cyan-900">
         {children}
+        <WhatsAppButton />
         <CookieConsent />
       </body>
     </html>

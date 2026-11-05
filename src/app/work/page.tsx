@@ -72,18 +72,18 @@ export default function WorkPage() {
       <SmoothCursor />
       <Navbar />
 
-      {/* Work Hero Header with Animated Grid Pixel Reveal Cyber Matrix Background */}
+      {/* Work Hero Header with Animated Grid Pixel Reveal Background */}
       <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-16 lg:pb-20 bg-[#060913] text-white overflow-hidden border-b-2 border-emerald-500/20">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <PixelImage
-            src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=90&w=2000&auto=format&fit=crop"
+            src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=90&w=2000&auto=format&fit=crop"
             customGrid={{ rows: 4, cols: 6 }}
             grayscaleAnimation
-            className="w-full h-full opacity-85 contrast-105 saturate-110"
+            className="w-full h-full opacity-90 contrast-110 saturate-115"
             imageClassName="object-cover object-center w-full h-full"
             alt="Work Hero Background"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#060913]/55 via-[#060913]/35 to-[#060913]/90 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#060913]/40 via-[#060913]/25 to-[#060913]/85 pointer-events-none" />
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
@@ -125,9 +125,6 @@ export default function WorkPage() {
       <section className="py-24 bg-white border-b-2 border-slate-200 text-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <span className="text-xs font-heading font-extrabold text-emerald-600 uppercase tracking-widest block mb-2">
-              DEEP ARCHITECTURAL BREAKDOWN
-            </span>
             <h2 className="text-3xl sm:text-4xl font-black font-heading text-slate-950">
               How We Engineered Maurya ERF for Global Scale
             </h2>

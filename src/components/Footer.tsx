@@ -127,7 +127,7 @@ export default function Footer() {
               © 2026 Rajveer Singh | Developer. All rights reserved.
             </p>
 
-            <div className="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 text-xs font-medium text-slate-400 font-sans">
+            <div className="flex flex-row items-center justify-center gap-x-2.5 sm:gap-x-5 text-[11px] sm:text-xs font-medium text-slate-400 font-sans flex-nowrap whitespace-nowrap overflow-x-auto no-scrollbar">
               <button
                 type="button"
                 onClick={() => setActiveModal("faq")}
