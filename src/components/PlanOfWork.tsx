@@ -12,7 +12,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import { KineticText } from "@/registry/magicui/kinetic-text";
-import NeonBorder from "@/components/ui/neon-border";
+import LordIcon from "@/components/ui/lord-icon";
 
 interface StepItem {
   step: string;
@@ -143,20 +143,10 @@ export default function PlanOfWork() {
             const Icon = item.icon;
 
             return (
-              <NeonBorder
+              <div
                 key={item.step}
-                borderRadius={16}
-                color={item.themeColor}
-                secondaryColor="#38bdf8"
-                trackColor="rgba(0, 0, 0, 0.08)"
-                borderWidth={2}
-                duration={6}
-                glow={1.1}
-                containerClassName="w-full h-full"
+                className="rounded-2xl border border-slate-200 bg-white shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group hover:-translate-y-1.5 h-full"
               >
-                <div
-                  className="rounded-2xl border border-slate-200 bg-white shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group hover:-translate-y-1.5 h-full"
-                >
                   <div>
                     {/* Top Visual Image Banner with Gradient & Stage Badges */}
                     <div className="relative w-full h-48 overflow-hidden bg-slate-900">
@@ -172,49 +162,48 @@ export default function PlanOfWork() {
                       <span className="absolute bottom-2 right-3 text-6xl font-black font-heading text-white/20 select-none pointer-events-none group-hover:text-white/35 transition-colors">
                         {item.step}
                       </span>
-
-                      {/* Stage Hero Icon */}
-                      <div
-                        className="absolute bottom-3 left-4 z-10 w-12 h-12 rounded-xl flex items-center justify-center shadow-xl border border-white/20 transition-transform duration-300 group-hover:scale-110"
-                        style={{ backgroundColor: item.themeColor }}
-                      >
-                        <Icon className="w-6 h-6 text-white" strokeWidth={2.5} />
-                      </div>
-
-                      {/* Stage Badge */}
-                      <div className="absolute top-3 left-3 pointer-events-none z-10">
-                        <span
-                          className={`px-3 py-1 rounded-full text-[10px] w2 font-bold uppercase tracking-wider border shadow-xs ${item.tagBg}`}
-                        >
-                          {item.stageBadge}
-                        </span>
-                      </div>
-
-                      {/* Verified Step Tag */}
-                      <div className="absolute top-3 right-3 pointer-events-none z-10">
-                        <span
-                          className="px-2.5 py-1 rounded-full text-[10px] w1 font-bold border shadow-xs flex items-center gap-1.5 bg-[#090d16]/90 backdrop-blur-xs text-yellow-400 border-yellow-500/60"
-                        >
-                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                          PHASE {item.step}
-                        </span>
-                      </div>
                     </div>
 
-                    {/* Card Content with Refined Modern Typography */}
+                    {/* Card Content with Refined Modern Typography & Pure SVG Icon */}
                     <div className="p-6 flex flex-col text-slate-800">
-                      {/* Category */}
-                      <span
-                        className="text-[11px] w2 font-bold uppercase tracking-wider block mb-1.5"
-                        style={{ color: item.themeColor }}
-                      >
-                        {item.category}
-                      </span>
-
-                      {/* Stage Title */}
-                      <h3 className="text-xl font-bold card-title text-slate-900 group-hover:text-purple-600 transition-colors line-clamp-1">
-                        {item.title}
-                      </h3>
+                      <div className="flex items-center gap-3 mb-3">
+                        <div
+                          className="w-10 h-10 rounded-xl flex items-center justify-center text-white shadow-xs shrink-0"
+                          style={{ backgroundColor: item.themeColor }}
+                        >
+                          <LordIcon
+                            src={
+                              item.step === "01"
+                                ? "wzwygmng"
+                                : item.step === "02"
+                                ? "wloilxuq"
+                                : item.step === "03"
+                                ? "nobciafz"
+                                : item.step === "04"
+                                ? "ofwpzftr"
+                                : item.step === "05"
+                                ? "yxyampao"
+                                : "msoeawqm"
+                            }
+                            trigger="hover"
+                            size={24}
+                            colors="primary:#ffffff,secondary:#38bdf8"
+                          />
+                        </div>
+                        <div>
+                          {/* Category */}
+                          <span
+                            className="text-[11px] w2 font-bold uppercase tracking-wider block"
+                            style={{ color: item.themeColor }}
+                          >
+                            {item.category}
+                          </span>
+                          {/* Stage Title */}
+                          <h3 className="text-lg font-bold card-title text-slate-900 group-hover:text-purple-600 transition-colors line-clamp-1">
+                            {item.title}
+                          </h3>
+                        </div>
+                      </div>
 
                       {/* Description */}
                       <p className="mt-2.5 text-sm font-sans leading-relaxed line-clamp-3 min-h-[60px] text-slate-600 font-normal">
@@ -228,7 +217,6 @@ export default function PlanOfWork() {
                     </div>
                   </div>
                 </div>
-              </NeonBorder>
             );
           })}
         </div>

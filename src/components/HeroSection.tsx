@@ -37,16 +37,14 @@ export default function HeroSection({ onReplayIntro }: HeroSectionProps = {}) {
           
           {/* ================= LEFT COLUMN: CONTENT (AUTO RESPONSIVE) ================= */}
           <div className="lg:col-span-7 text-center lg:text-left flex flex-col justify-center">
-            {/* Main Headline with "TURN YOUR IDEAS INTO" strictly in one line */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black font-heading tracking-tight text-white leading-tight">
+            {/* Main Headline with 3 distinct curated font styles */}
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black tracking-tight text-white leading-tight">
               <span className="whitespace-nowrap block">
-                <KineticText
-                  text="TURN YOUR IDEAS INTO"
-                  as="span"
-                  className="font-black font-heading text-white tracking-tight cursor-default inline-block"
-                />
+                <span className="hero-font-1 text-white inline-block">TURN YOUR </span>
+                <span className="hero-font-2 text-cyan-300 inline-block px-1">Ideas </span>
+                <span className="hero-font-1 text-white inline-block">INTO</span>
               </span>
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 block mt-1 sm:mt-2">
+              <span className="hero-font-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 block mt-1 sm:mt-2">
                 DIGITAL SOLUTIONS
               </span>
             </h1>
@@ -134,27 +132,27 @@ export default function HeroSection({ onReplayIntro }: HeroSectionProps = {}) {
 
         </div>
 
-        {/* ================= FULL-WIDTH KPI METRICS (Strict 2x2 Grid on Mobile) ================= */}
-        <div className="w-full mt-7 sm:mt-10 pt-4 sm:pt-5 border-t border-slate-800/60">
+        {/* ================= FULL-WIDTH KPI METRICS (Glassmorphism & Strict 2x2 Grid) ================= */}
+        <div className="w-full mt-7 sm:mt-10 pt-4 sm:pt-5 border-t border-white/10">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-2.5 sm:gap-6 lg:gap-10 xl:gap-12 w-full text-left">
             {[
               {
-                value: 100,
+                value: 10,
                 suffix: "+",
                 label: "HAPPY CLIENTS",
                 badge: "GLOBAL TRUST",
                 desc: "Trusted worldwide",
                 color: "text-cyan-400",
-                borderColor: "hover:border-cyan-500/50",
+                borderColor: "hover:border-cyan-400/50",
               },
               {
-                value: 50,
+                value: 10,
                 suffix: "+",
                 label: "PROJECTS DELIVERED",
                 badge: "PRODUCTION READY",
                 desc: "Web, AI & Enterprise",
                 color: "text-emerald-400",
-                borderColor: "hover:border-emerald-500/50",
+                borderColor: "hover:border-emerald-400/50",
               },
               {
                 value: 99.99,
@@ -164,7 +162,7 @@ export default function HeroSection({ onReplayIntro }: HeroSectionProps = {}) {
                 badge: "HIGH AVAILABILITY",
                 desc: "Zero-downtime integrity",
                 color: "text-violet-400",
-                borderColor: "hover:border-violet-500/50",
+                borderColor: "hover:border-violet-400/50",
               },
               {
                 value: 24,
@@ -173,16 +171,16 @@ export default function HeroSection({ onReplayIntro }: HeroSectionProps = {}) {
                 badge: "ALWAYS ON",
                 desc: "24/7 technical support",
                 color: "text-amber-400",
-                borderColor: "hover:border-amber-500/50",
+                borderColor: "hover:border-amber-400/50",
               },
             ].map((item, idx) => (
               <div
                 key={idx}
-                className={`rounded-xl px-3 py-2 sm:px-5 sm:py-3.5 flex flex-col justify-between border border-slate-800/80 bg-[#0c1322]/75 backdrop-blur-md shadow-md hover:-translate-y-1 transition-all duration-300 group ${item.borderColor}`}
+                className={`rounded-2xl px-3.5 py-3 sm:px-5 sm:py-4 flex flex-col justify-between border border-white/15 bg-white/[0.04] backdrop-blur-xl shadow-[0_8px_32px_0_rgba(0,0,0,0.36)] hover:bg-white/[0.08] hover:border-white/25 hover:-translate-y-1 transition-all duration-300 group ${item.borderColor}`}
               >
                 <div>
-                  <div className="flex items-center justify-between mb-1">
-                    <span className="text-[8px] sm:text-[9px] font-mono font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-slate-900/90 text-slate-300 border border-slate-700/70 tracking-wider">
+                  <div className="flex items-center justify-between mb-1.5">
+                    <span className="text-[8px] sm:text-[9px] font-mono font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-white/10 text-slate-200 border border-white/15 backdrop-blur-sm tracking-wider">
                       {item.badge}
                     </span>
                     <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
@@ -196,7 +194,7 @@ export default function HeroSection({ onReplayIntro }: HeroSectionProps = {}) {
                     {item.suffix}
                   </div>
                 </div>
-                <div className="mt-2 pt-1.5 sm:mt-2.5 sm:pt-2 border-t border-slate-800/60">
+                <div className="mt-2.5 pt-2 border-t border-white/10">
                   <div className="text-[9px] sm:text-[11px] font-heading font-extrabold text-slate-200 tracking-wider truncate">
                     {item.label}
                   </div>

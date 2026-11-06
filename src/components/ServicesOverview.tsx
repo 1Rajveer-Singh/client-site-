@@ -13,11 +13,12 @@ import {
   Sparkles,
 } from "lucide-react";
 import { KineticText } from "@/registry/magicui/kinetic-text";
+import LordIcon from "@/components/ui/lord-icon";
 
 export default function ServicesOverview() {
   const services = [
     {
-      icon: Server,
+      lordIcon: "wjrtlwtp",
       title: "High-Availability Cloud Servers",
       desc: "Bare-metal Linux servers, Nginx reverse proxy clusters, automated SSL provisioning, multi-region failover, and Docker orchestration for zero-downtime reliability.",
       tag: "99.999% SLA",
@@ -25,7 +26,7 @@ export default function ServicesOverview() {
       accent: "#2563EB",
     },
     {
-      icon: Code2,
+      lordIcon: "qhgmphtg",
       title: "Full-Stack Web Development",
       desc: "Next.js 16 App Router architecture with React 19 Server Components, edge-rendered micro-frontends, and sub-350ms First Contentful Paint benchmarks.",
       tag: "NEXT.JS 16",
@@ -33,7 +34,7 @@ export default function ServicesOverview() {
       accent: "#06B6D4",
     },
     {
-      icon: Bot,
+      lordIcon: "kdduutaw",
       title: "Autonomous AI Agent Swarms",
       desc: "Self-orchestrating multi-agent LLM systems with real-time vector memory, automated customer task triage, and high-throughput tool calling.",
       tag: "RAG & LLM",
@@ -41,7 +42,7 @@ export default function ServicesOverview() {
       accent: "#9333EA",
     },
     {
-      icon: Search,
+      lordIcon: "msoeawqm",
       title: "Algorithmic SEO Optimization",
       desc: "Programmatic search engine dominance with automated semantic JSON-LD schema generation, dynamic XML sitemaps, and technical Core Web Vitals perfection.",
       tag: "GOOGLE RANK #1",
@@ -49,7 +50,7 @@ export default function ServicesOverview() {
       accent: "#059669",
     },
     {
-      icon: BarChart3,
+      lordIcon: "gqdnbnwt",
       title: "Power BI Executive Telemetry",
       desc: "Real-time executive HUD dashboards, DAX statistical modeling, automated data warehousing pipelines, and financial KPI telemetry for leadership teams.",
       tag: "REAL-TIME HUD",
@@ -57,7 +58,7 @@ export default function ServicesOverview() {
       accent: "#D97706",
     },
     {
-      icon: Smartphone,
+      lordIcon: "tftaqjwp",
       title: "Cross-Platform Mobile Apps",
       desc: "Butter-smooth iOS and Android applications engineered with offline-first SQLite synchronization, background location streaming, and tactile haptics.",
       tag: "120HZ NATIVE",
@@ -100,30 +101,36 @@ export default function ServicesOverview() {
         {/* 6 Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {services.map((srv, idx) => {
-            const Icon = srv.icon;
             return (
               <div
                 key={idx}
                 className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200 shadow-xs hover:shadow-xl transition-all duration-300 flex flex-col justify-between group hover:-translate-y-1 text-left"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-5">
+                  {/* Header Row: Icon and Title on same row */}
+                  <div className="flex items-center gap-3.5 pb-4 mb-4 border-b border-slate-200/80">
                     <div
-                      className="w-12 h-12 rounded-xl flex items-center justify-center shadow-xs text-white group-hover:scale-110 transition-transform"
-                      style={{ backgroundColor: srv.accent }}
+                      className="w-13 h-13 rounded-2xl flex items-center justify-center text-white group-hover:scale-110 transition-all duration-300 relative shrink-0 shadow-lg border border-white/20"
+                      style={{
+                        background: `linear-gradient(135deg, ${srv.accent}, ${srv.accent}dd)`,
+                        boxShadow: `0 8px 24px -2px ${srv.accent}66`,
+                      }}
                     >
-                      <Icon className="w-6 h-6" />
+                      <LordIcon
+                        src={srv.lordIcon}
+                        trigger="hover"
+                        size={32}
+                        colors="primary:#ffffff,secondary:#38bdf8"
+                      />
                     </div>
-                    <span className={`text-[10px] font-bold font-heading px-2.5 py-1 rounded-full border ${srv.tagColor}`}>
-                      {srv.tag}
-                    </span>
+
+                    <h3 className="text-lg sm:text-xl font-bold font-heading text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                      {srv.title}
+                    </h3>
                   </div>
 
-                  <h3 className="text-lg sm:text-xl font-bold font-heading text-slate-900 group-hover:text-blue-600 transition-colors">
-                    {srv.title}
-                  </h3>
-
-                  <p className="mt-2.5 text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
+                  {/* Paragraph Row: Smaller font size with clean line-height */}
+                  <p className="text-xs sm:text-[13px] text-slate-600 font-sans leading-relaxed">
                     {srv.desc}
                   </p>
                 </div>

@@ -14,7 +14,6 @@ import {
   Users,
 } from "lucide-react";
 import { KineticText } from "@/registry/magicui/kinetic-text";
-import NeonBorder from "@/components/ui/neon-border";
 
 export default function CompanyIntro() {
   return (
@@ -24,43 +23,32 @@ export default function CompanyIntro() {
           
           {/* Left Column: Visual Story & Proof Grid */}
           <div className="lg:col-span-5 relative order-2 lg:order-1">
-            <NeonBorder
-              borderRadius={24}
-              color="#00e5ff"
-              secondaryColor="#3b82f6"
-              trackColor="rgba(255, 255, 255, 0.12)"
-              borderWidth={2}
-              duration={5}
-              glow={1.3}
-              containerClassName="w-full"
-            >
-              <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-900 text-white">
-                <img
-                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=85&w=1200&auto=format&fit=crop"
-                  alt="Engineering Team Collaboration"
-                  className="w-full h-80 object-cover filter brightness-90"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/50 to-transparent" />
+            <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-900 text-white">
+              <img
+                src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=85&w=1200&auto=format&fit=crop"
+                alt="Engineering Team Collaboration"
+                className="w-full h-80 object-cover filter brightness-90"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/50 to-transparent" />
 
-                {/* Floating Stat Overlay */}
-                <div className="absolute bottom-6 inset-x-6 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
-                  <div className="grid grid-cols-3 gap-2 text-center">
-                    <div>
-                      <span className="text-xl sm:text-2xl font-black font-heading text-white block">99.999%</span>
-                      <span className="text-[10px] text-slate-300 font-sans uppercase">SLA Uptime</span>
-                    </div>
-                    <div className="border-x border-white/20">
-                      <span className="text-xl sm:text-2xl font-black font-heading text-cyan-300 block">&lt;300ms</span>
-                      <span className="text-[10px] text-slate-300 font-sans uppercase">Global Speed</span>
-                    </div>
-                    <div>
-                      <span className="text-xl sm:text-2xl font-black font-heading text-emerald-300 block">50+</span>
-                      <span className="text-[10px] text-slate-300 font-sans uppercase">Delivered</span>
-                    </div>
+              {/* Floating Stat Overlay */}
+              <div className="absolute bottom-6 inset-x-6 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
+                <div className="grid grid-cols-3 gap-2 text-center">
+                  <div>
+                    <span className="text-xl sm:text-2xl font-black font-heading text-white block">99.999%</span>
+                    <span className="text-[10px] text-slate-300 font-sans uppercase">SLA Uptime</span>
+                  </div>
+                  <div className="border-x border-white/20">
+                    <span className="text-xl sm:text-2xl font-black font-heading text-cyan-300 block">&lt;300ms</span>
+                    <span className="text-[10px] text-slate-300 font-sans uppercase">Global Speed</span>
+                  </div>
+                  <div>
+                    <span className="text-xl sm:text-2xl font-black font-heading text-emerald-300 block">10+</span>
+                    <span className="text-[10px] text-slate-300 font-sans uppercase">Delivered</span>
                   </div>
                 </div>
               </div>
-            </NeonBorder>
+            </div>
 
             {/* Accent Card */}
             <div className="hidden sm:flex items-center gap-3 absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl border border-slate-200 shadow-xl z-20">

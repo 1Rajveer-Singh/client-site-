@@ -2,61 +2,58 @@
 
 import React from "react";
 import Link from "next/link";
-import {
-  ShieldCheck,
-  Zap,
-  Lock,
-  Headphones,
-  Cpu,
-  Gauge,
-  CheckCircle2,
-  ArrowRight,
-} from "lucide-react";
 import { KineticText } from "@/registry/magicui/kinetic-text";
+import LordIcon from "@/components/ui/lord-icon";
 
 export default function WhyChooseUs() {
   const differentiators = [
     {
-      icon: Gauge,
+      lordIcon: "yxyampao",
       title: "Sub-300ms Global Edge Latency",
       desc: "Every website and API is architected with modern edge caching, zero unnecessary hydration, and 100/100 Core Web Vitals for maximum conversion.",
       metric: "<300ms FCP",
       color: "text-cyan-600 bg-cyan-50 border-cyan-200",
+      accent: "#06B6D4",
     },
     {
-      icon: ShieldCheck,
+      lordIcon: "ssdupzsv",
       title: "Contractual 99.999% SLA Uptime",
       desc: "Engineered on high-concurrency bare-metal Linux servers and Docker clusters with automated health-checks and multi-region failover.",
       metric: "99.999% SLA",
       color: "text-emerald-600 bg-emerald-50 border-emerald-200",
+      accent: "#10B981",
     },
     {
-      icon: Cpu,
+      lordIcon: "nobciafz",
       title: "Direct Senior Architect Access",
       desc: "No middlemen or junior handoffs. You collaborate directly with Rajveer Singh to architect systems built specifically for your business goals.",
       metric: "1-on-1 Lead Dev",
       color: "text-blue-600 bg-blue-50 border-blue-200",
+      accent: "#2563EB",
     },
     {
-      icon: Lock,
+      lordIcon: "lbjtvqiv",
       title: "100% Code Ownership & IP Transfer",
       desc: "All source code, Dockerfiles, and database schemas belong to you completely upon milestone completion. Zero vendor lock-in.",
       metric: "Full Ownership",
       color: "text-purple-600 bg-purple-50 border-purple-200",
+      accent: "#8B5CF6",
     },
     {
-      icon: Zap,
+      lordIcon: "kdduutaw",
       title: "Autonomous AI & Vector RAG",
       desc: "We don't just wrap ChatGPT; we build autonomous LangGraph multi-agent pipelines with Milvus vector search for mission-critical automation.",
       metric: "Custom AI RAG",
       color: "text-amber-600 bg-amber-50 border-amber-200",
+      accent: "#F59E0B",
     },
     {
-      icon: Headphones,
+      lordIcon: "tftaqjwp",
       title: "24/7 Telemetry & Continuous Support",
       desc: "Proactive server monitoring, automated security patches, error alerting, and dedicated ongoing maintenance to keep your systems bulletproof.",
       metric: "24/7 Active Support",
       color: "text-rose-600 bg-rose-50 border-rose-200",
+      accent: "#F43F5E",
     },
   ];
 
@@ -85,27 +82,36 @@ export default function WhyChooseUs() {
         {/* 6 Grid Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 text-left">
           {differentiators.map((diff, idx) => {
-            const Icon = diff.icon;
             return (
               <div
                 key={idx}
                 className="p-6 sm:p-7 rounded-2xl bg-slate-50 border border-slate-200 hover:border-slate-300 hover:bg-white hover:shadow-xl transition-all duration-300 flex flex-col justify-between group"
               >
                 <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="w-11 h-11 rounded-xl bg-white border border-slate-200 flex items-center justify-center text-slate-800 shadow-2xs group-hover:bg-slate-900 group-hover:text-white transition-colors">
-                      <Icon className="w-5 h-5" />
+                  {/* Header Row: Icon and Title on same row */}
+                  <div className="flex items-center gap-3.5 pb-4 mb-4 border-b border-slate-200/80">
+                    <div
+                      className="w-12 h-12 rounded-xl flex items-center justify-center text-white shrink-0 transition-all duration-300 group-hover:scale-110 shadow-lg relative border border-white/20"
+                      style={{
+                        background: `linear-gradient(135deg, ${diff.accent}, ${diff.accent}dd)`,
+                        boxShadow: `0 8px 24px -2px ${diff.accent}66`,
+                      }}
+                    >
+                      <LordIcon
+                        src={diff.lordIcon}
+                        trigger="hover"
+                        size={30}
+                        colors="primary:#ffffff,secondary:#38bdf8"
+                      />
                     </div>
-                    <span className={`text-[10px] font-bold font-mono px-2.5 py-1 rounded-full border ${diff.color}`}>
-                      {diff.metric}
-                    </span>
+
+                    <h3 className="text-base sm:text-lg font-bold font-heading text-slate-900 group-hover:text-emerald-700 transition-colors leading-snug">
+                      {diff.title}
+                    </h3>
                   </div>
 
-                  <h3 className="text-base sm:text-lg font-bold font-heading text-slate-900 mb-2">
-                    {diff.title}
-                  </h3>
-
-                  <p className="text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
+                  {/* Paragraph Row: Smaller font size with clean line-height */}
+                  <p className="text-xs sm:text-[13px] text-slate-600 font-sans leading-relaxed">
                     {diff.desc}
                   </p>
                 </div>

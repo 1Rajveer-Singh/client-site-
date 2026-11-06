@@ -14,14 +14,14 @@ export default function ClientTestimonials() {
   const testimonials: TestimonialItem[] = [
     {
       name: "Elena Rostova",
-      designation: "VP of Engineering, FinScale Commerce",
-      service: "Next.js 16 Cloud Architecture",
+      designation: "Head of Growth, Instagram Automation",
+      service: "Autonomous Lead & DM Pipeline",
       src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop",
       initials: "ER",
       rating: 5,
       quote:
-        "Rajveer Singh completely re-engineered our core customer checkout portal using Next.js 16 and high-concurrency cloud servers. Our first contentful paint dropped from 3.8s down to 320ms, and we experienced zero downtime during peak seasonal traffic. He is a technical master.",
-      metric: "FCP: 320ms // +340% Sales",
+        "Rajveer Singh engineered our 24/7 Instagram lead automation and webhook pipeline. Every comment, DM, and story mention is qualified within seconds and synced straight to our CRM. Our lead conversion jumped 4.8x and response latency is practically zero.",
+      metric: "98.4% Open Rate // 4.8x Leads",
     },
     {
       name: "David Vance",

@@ -20,6 +20,7 @@ import {
 import { LiquidMetalButton } from "@/components/ui/liquid-metal";
 import { KineticText } from "@/registry/magicui/kinetic-text";
 import { PixelImage } from "@/registry/magicui/pixel-image";
+import LordIcon from "@/components/ui/lord-icon";
 
 export default function WorkPage() {
   useEffect(() => {
@@ -152,25 +153,17 @@ export default function WorkPage() {
                         {card.step}
                       </span>
 
+                      {/* Center Hero Icon - Animated Lordicon */}
                       <div
                         className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl border-2 border-white/20 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
                         style={{ backgroundColor: card.themeColor }}
                       >
-                        <Icon className="w-8 h-8 text-white" strokeWidth={2.5} />
-                      </div>
-
-                      <div className="absolute top-3 left-3 pointer-events-none z-10">
-                        <span className={`px-3 py-1 rounded-full text-[10px] w2 font-bold uppercase tracking-wider border shadow-xs ${card.tagBg}`}>
-                          FEATURE {card.step}
-                        </span>
-                      </div>
-
-                      <div className="absolute top-3 right-3 pointer-events-none z-10">
-                        <span
-                          className="px-2.5 py-1 rounded-full text-[10px] w1 font-bold border shadow-xs bg-[#090d16] text-yellow-400 border-yellow-500/60"
-                        >
-                          {card.badge}
-                        </span>
+                        <LordIcon
+                          src={card.step === "01" ? "yxyampao" : card.step === "02" ? "msoeawqm" : "wjrtlwtp"}
+                          trigger="hover"
+                          size={36}
+                          colors="primary:#ffffff,secondary:#ffffff"
+                        />
                       </div>
 
                       <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />

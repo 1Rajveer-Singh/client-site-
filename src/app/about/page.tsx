@@ -6,6 +6,7 @@ import Footer from "@/components/Footer";
 import ClientWork from "@/components/ClientWork";
 import ClientTestimonials from "@/components/ClientTestimonials";
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
+import LordIcon from "@/components/ui/lord-icon";
 import {
   Globe,
   Server,
@@ -32,7 +33,6 @@ import {
 import { LiquidMetalButton } from "@/components/ui/liquid-metal";
 import { KineticText } from "@/registry/magicui/kinetic-text";
 import { SparklesText } from "@/components/ui/sparkles-text";
-import NeonBorder from "@/components/ui/neon-border";
 import { PixelImage } from "@/registry/magicui/pixel-image";
 
 export default function AboutPage() {
@@ -349,31 +349,20 @@ export default function AboutPage() {
             </div>
 
             <div className="lg:col-span-6">
-              <NeonBorder
-                borderRadius={24}
-                color="#00e5ff"
-                secondaryColor="#6366f1"
-                trackColor="rgba(255, 255, 255, 0.12)"
-                borderWidth={2}
-                duration={5}
-                glow={1.3}
-                containerClassName="w-full"
-              >
-                <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-100">
-                  <img
-                    src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=90&w=1200&auto=format&fit=crop"
-                    alt="Engineering Team Collaboration"
-                    className="w-full h-[400px] object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 sm:p-8 text-white text-left">
-                    <span className="text-xs font-mono font-bold text-cyan-300 uppercase tracking-widest">[LEADERSHIP STATEMENT]</span>
-                    <p className="font-heading font-extrabold text-base sm:text-lg mt-1 text-slate-100">
-                      "We don't just ship websites; we build scalable digital assets that generate revenue while you sleep."
-                    </p>
-                    <span className="text-xs text-slate-300 font-sans mt-2">— Rajveer Singh, Lead Engineer & Founder</span>
-                  </div>
+              <div className="relative rounded-3xl overflow-hidden border border-slate-200 shadow-xl bg-slate-100">
+                <img
+                  src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=90&w=1200&auto=format&fit=crop"
+                  alt="Engineering Team Collaboration"
+                  className="w-full h-[400px] object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent flex flex-col justify-end p-6 sm:p-8 text-white text-left">
+                  <span className="text-xs font-mono font-bold text-cyan-300 uppercase tracking-widest">[LEADERSHIP STATEMENT]</span>
+                  <p className="font-heading font-extrabold text-base sm:text-lg mt-1 text-slate-100">
+                    "We don't just ship websites; we build scalable digital assets that generate revenue while you sleep."
+                  </p>
+                  <span className="text-xs text-slate-300 font-sans mt-2">— Rajveer Singh, Lead Engineer & Founder</span>
                 </div>
-              </NeonBorder>
+              </div>
             </div>
 
           </div>
@@ -395,7 +384,6 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {coreServices.map((srv, idx) => {
-              const IconComp = srv.icon;
               return (
                 <div
                   key={idx}
@@ -403,8 +391,31 @@ export default function AboutPage() {
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-slate-50 border border-slate-100 shadow-2xs group-hover:scale-105 transition-transform">
-                        <IconComp className="w-6 h-6" style={{ color: srv.themeColor }} />
+                      <div
+                        className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-all duration-300 relative"
+                        style={{
+                          background: `linear-gradient(135deg, ${srv.themeColor}, ${srv.themeColor}cc)`,
+                          boxShadow: `0 8px 20px -4px ${srv.themeColor}55`,
+                        }}
+                      >
+                        <LordIcon
+                          src={
+                            srv.num === "01"
+                              ? "qhgmphtg"
+                              : srv.num === "02"
+                              ? "wjrtlwtp"
+                              : srv.num === "03"
+                              ? "msoeawqm"
+                              : srv.num === "04"
+                              ? "kdduutaw"
+                              : srv.num === "05"
+                              ? "tftaqjwp"
+                              : "gqdnbnwt"
+                          }
+                          trigger="hover"
+                          size={28}
+                          colors="primary:#ffffff,secondary:#ffffff"
+                        />
                       </div>
                       <span className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border ${srv.tagBg}`}>
                         STAGE {srv.num}
@@ -505,19 +516,52 @@ export default function AboutPage() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
             {whyChooseUsPoints.map((item, idx) => {
-              const IconComp = item.icon;
               return (
                 <div
                   key={idx}
-                  className="p-7 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 text-left"
+                  className="p-6 sm:p-7 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 text-left"
                 >
-                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center mb-4 border ${item.color}`}>
-                    <IconComp className="w-6 h-6" />
+                  {/* Header Row: Icon and Title on same row */}
+                  <div className="flex items-center gap-3.5 pb-4 mb-4 border-b border-slate-200/80">
+                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border shadow-md group-hover:scale-110 transition-all duration-300 ${item.color}`}>
+                      <LordIcon
+                        src={
+                          idx === 0
+                            ? "nobciafz"
+                            : idx === 1
+                            ? "yxyampao"
+                            : idx === 2
+                            ? "ssdupzsv"
+                            : idx === 3
+                            ? "kdduutaw"
+                            : idx === 4
+                            ? "wzwygmng"
+                            : "tftaqjwp"
+                        }
+                        trigger="hover"
+                        size={30}
+                        colors={
+                          idx === 0
+                            ? "primary:#2563eb,secondary:#3b82f6"
+                            : idx === 1
+                            ? "primary:#d97706,secondary:#f59e0b"
+                            : idx === 2
+                            ? "primary:#059669,secondary:#10b981"
+                            : idx === 3
+                            ? "primary:#9333ea,secondary:#a855f7"
+                            : idx === 4
+                            ? "primary:#0891b2,secondary:#06b6d4"
+                            : "primary:#e11d48,secondary:#f43f5e"
+                        }
+                      />
+                    </div>
+                    <h3 className="font-heading font-bold text-base sm:text-lg text-slate-900 leading-snug">
+                      {item.title}
+                    </h3>
                   </div>
-                  <h3 className="font-heading font-bold text-base text-slate-900">
-                    {item.title}
-                  </h3>
-                  <p className="text-xs sm:text-sm font-sans text-slate-600 mt-2 leading-relaxed">
+
+                  {/* Paragraph Row: Smaller font size */}
+                  <p className="text-xs sm:text-[13px] font-sans text-slate-600 leading-relaxed">
                     {item.desc}
                   </p>
                 </div>

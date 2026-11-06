@@ -14,6 +14,7 @@ export interface FloatingDockItem {
   icon: React.ReactNode;
   href: string;
   badge?: string;
+  isActive?: boolean;
   onClick?: () => void;
 }
 
@@ -61,6 +62,7 @@ function IconContainer({
   title,
   icon,
   href,
+  isActive,
   onClick,
 }: FloatingDockItem & { mouseX: any }) {
   const ref = useRef<HTMLDivElement>(null);
@@ -70,16 +72,24 @@ function IconContainer({
     return val - bounds.x - bounds.width / 2;
   });
 
-  const scaleSync = useTransform(distance, [-120, 0, 120], [1, 1.1, 1]);
+  const scaleSync = useTransform(distance, [-120, 0, 120], [1, 1.05, 1]);
   const scale = useSpring(scaleSync, { mass: 0.1, stiffness: 220, damping: 16 });
 
   const [hovered, setHovered] = useState(false);
 
   return (
-    <a
+    <motion.a
       href={href}
       onClick={onClick}
-      className="cursor-pointer select-none"
+      whileHover={{ y: -3.5 }}
+      whileTap={{ y: 2.5, scale: 0.94 }}
+      transition={{
+        type: "spring",
+        stiffness: 450,
+        damping: 18,
+        mass: 0.2,
+      }}
+      className="cursor-pointer select-none inline-block outline-none"
     >
       <motion.div
         ref={ref}
@@ -87,19 +97,23 @@ function IconContainer({
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className={cn(
-          "relative flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 border",
-          hovered
-            ? "bg-slate-800 text-yellow-300 border-yellow-400 shadow-[0_0_15px_rgba(250,204,21,0.35)]"
-            : "bg-[#101728]/90 text-slate-300 border-slate-700/80 hover:text-white"
+          "relative flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 select-none",
+          "shadow-[0_4px_10px_rgba(0,0,0,0.5),0_1px_0_rgba(255,255,255,0.1)_inset]",
+          "active:shadow-[inset_0_3px_6px_rgba(0,0,0,0.8)]",
+          isActive
+            ? "bg-gradient-to-b from-slate-800 to-slate-900 text-cyan-300 border-cyan-400/80 shadow-[0_0_15px_rgba(6,182,212,0.35)]"
+            : hovered
+            ? "bg-gradient-to-b from-slate-800 to-slate-900 text-yellow-300 border-yellow-400 shadow-[0_8px_20px_rgba(250,204,21,0.35)]"
+            : "bg-gradient-to-b from-[#162036]/90 to-[#0e1626]/95 text-slate-300 border-slate-700/80 hover:text-white hover:border-slate-500"
         )}
       >
-        <div className="flex items-center justify-center shrink-0 w-4 h-4">
+        <div className="flex items-center justify-center shrink-0 w-4 h-4 transition-transform duration-200">
           {icon}
         </div>
         <span className="font-heading font-medium tracking-tight text-[11px] sm:text-xs">
           {title}
         </span>
       </motion.div>
-    </a>
+    </motion.a>
   );
 }

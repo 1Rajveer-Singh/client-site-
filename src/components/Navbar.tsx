@@ -188,7 +188,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
           {/* Left-Side Corner: Brand Title */}
           <a
             href="/"
-            className="flex items-center gap-3 pl-0 group shrink-0 z-10 select-none"
+            className="flex items-center gap-3 pl-0 group shrink-0 z-10 select-none transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98]"
             title="Rajveer Singh | Developer"
           >
             {/* Official Website Brand Logo */}
@@ -215,26 +215,31 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
                   title: "Home",
                   icon: <Home className="w-5 h-5 text-slate-300" />,
                   href: "/",
+                  isActive: pathname === "/",
                 },
                 {
                   title: "About Us",
                   icon: <Users className="w-5 h-5 text-slate-300" />,
                   href: "/about",
+                  isActive: pathname?.startsWith("/about"),
                 },
                 {
                   title: "Services",
                   icon: <Code className="w-5 h-5 text-slate-300" />,
                   href: "/services",
+                  isActive: pathname?.startsWith("/services"),
                 },
                 {
                   title: "Our Work",
                   icon: <Trophy className="w-5 h-5 text-slate-300" />,
                   href: "/work",
+                  isActive: pathname?.startsWith("/work"),
                 },
                 {
                   title: "Contact",
                   icon: <Mail className="w-5 h-5 text-slate-300" />,
                   href: "/contact",
+                  isActive: pathname?.startsWith("/contact"),
                 },
               ]}
             />
@@ -245,7 +250,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
             <button
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 cursor-pointer touch-manipulation select-none active:scale-95 shadow-sm"
+              className="p-2.5 rounded-xl text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 cursor-pointer touch-manipulation select-none transition-all duration-150 hover:-translate-y-0.5 active:translate-y-1 active:scale-95 shadow-md active:shadow-inner"
               aria-label="Toggle mobile menu"
             >
               {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-slate-200" />}
@@ -260,7 +265,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
             <a
               href="/"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-colors"
+              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-sm active:shadow-inner"
             >
               <Home className="w-4 h-4 text-slate-400" />
               <span className="font-semibold text-sm">Home</span>
@@ -270,7 +275,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
             <a
               href="/about"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-colors"
+              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-sm active:shadow-inner"
             >
               <Users className="w-4 h-4 text-slate-400" />
               <span className="font-semibold text-sm">About Us</span>
@@ -280,7 +285,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
             <a
               href="/services"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-colors"
+              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-sm active:shadow-inner"
             >
               <Code className="w-4 h-4 text-slate-400" />
               <span className="font-semibold text-sm">Services & Infrastructure</span>
@@ -290,7 +295,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
             <a
               href="/work"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-colors"
+              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-sm active:shadow-inner"
             >
               <Trophy className="w-4 h-4 text-slate-400" />
               <span className="font-semibold text-sm">Featured Projects</span>
@@ -300,7 +305,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
             <a
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white border border-blue-500 transition-colors"
+              className="flex items-center gap-3 p-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white border border-blue-500 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-sm active:shadow-inner"
             >
               <Mail className="w-4 h-4 text-white" />
               <span className="font-semibold text-sm">Get in Touch</span>
