@@ -144,6 +144,9 @@ export function SmoothCursor({
           [role="button"], .cursor-pointer, .cursor-text, .cursor-grab, .cursor-grabbing, [class*="cursor-"] {
             cursor: none !important;
           }
+          iframe, [data-booking-frame], [data-booking-frame] * {
+            cursor: auto !important;
+          }
         }
       `;
       document.head.appendChild(styleEl);
@@ -263,6 +266,23 @@ export function SmoothCursor({
       setIsVisible(true);
     };
 
+    const handleCursorHide = () => {
+      setIsVisible(false);
+    };
+
+    const handleCursorShow = () => {
+      setIsVisible(true);
+    };
+
+    const handleWindowBlur = () => {
+      // Hide smooth cursor when focus moves inside iframe to prevent cursor freezing
+      setIsVisible(false);
+    };
+
+    const handleWindowFocus = () => {
+      setIsVisible(true);
+    };
+
     window.addEventListener("pointermove", throttledPointerMove, {
       passive: true,
     });
@@ -277,6 +297,10 @@ export function SmoothCursor({
     });
     document.documentElement.addEventListener("mouseleave", handleMouseLeave);
     document.documentElement.addEventListener("mouseenter", handleMouseEnter);
+    window.addEventListener("smooth-cursor-hide", handleCursorHide);
+    window.addEventListener("smooth-cursor-show", handleCursorShow);
+    window.addEventListener("blur", handleWindowBlur);
+    window.addEventListener("focus", handleWindowFocus);
 
     return () => {
       window.removeEventListener("pointermove", throttledPointerMove);
@@ -285,6 +309,10 @@ export function SmoothCursor({
       window.removeEventListener("mouseup", handleMouseUp);
       document.documentElement.removeEventListener("mouseleave", handleMouseLeave);
       document.documentElement.removeEventListener("mouseenter", handleMouseEnter);
+      window.removeEventListener("smooth-cursor-hide", handleCursorHide);
+      window.removeEventListener("smooth-cursor-show", handleCursorShow);
+      window.removeEventListener("blur", handleWindowBlur);
+      window.removeEventListener("focus", handleWindowFocus);
       if (rafId) cancelAnimationFrame(rafId);
       if (timeout !== null) {
         clearTimeout(timeout);

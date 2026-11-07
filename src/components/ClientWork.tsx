@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 import { KineticText } from "@/registry/magicui/kinetic-text";
 import { PixelImage } from "@/registry/magicui/pixel-image";
+import { getTechIcon } from "./TechIcons";
 
 interface ProjectItem {
   id: string;
@@ -74,12 +75,12 @@ export default function ClientWork() {
         "Strict academic copyright & IP protection protocols",
       ],
       techStack: [
-        "Next.js 16",
-        "React 19",
-        "Linux Bare-Metal",
-        "Nginx Reverse Proxy",
+        "Next.js",
+        "React",
+        "Linux",
+        "Nginx",
         "Tailwind CSS",
-        "Semantic JSON-LD",
+        "JSON-LD",
       ],
       metric: "12+ Journals • 0.38s FCP • 99.999% Uptime",
       url: "https://www.mauryaerf.com/",
@@ -152,7 +153,7 @@ export default function ClientWork() {
         "Milvus",
         "LangGraph",
         "Docker",
-        "Next.js 16",
+        "Next.js",
       ],
       metric: "74% Auto-Resolved • <28ms Response",
       url: "/contact",
@@ -472,7 +473,7 @@ export default function ClientWork() {
                     </ul>
                   </div>
 
-                  {/* Technology Architecture */}
+                  {/* Technology Architecture with Real SVGs */}
                   <div className="mt-5">
                     <h4
                       className="text-xs sm:text-sm font-black font-heading uppercase tracking-wider mb-2.5"
@@ -480,15 +481,17 @@ export default function ClientWork() {
                     >
                       CORE TECHNOLOGY STACK
                     </h4>
-                    <div className="flex flex-wrap gap-1.5">
+                    <div className="flex flex-wrap gap-2">
                       {activeProject.techStack.map((tech, idx) => (
-                        <span
+                        <div
                           key={idx}
-                          className="text-xs font-mono px-2.5 py-1 rounded-lg bg-slate-100 border border-slate-300"
-                          style={{ color: "#000000", fontWeight: 700 }}
+                          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-mono font-bold text-slate-900 shadow-2xs hover:bg-white hover:border-blue-500 transition-all group"
                         >
-                          {tech}
-                        </span>
+                          <div className="w-4 h-4 shrink-0 flex items-center justify-center group-hover:scale-110 transition-transform">
+                            {getTechIcon(tech)}
+                          </div>
+                          <span>{tech}</span>
+                        </div>
                       ))}
                     </div>
                   </div>

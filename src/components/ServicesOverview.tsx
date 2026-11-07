@@ -16,6 +16,8 @@ import {
   Layers,
   Sparkles,
   Loader2,
+  ChevronRight,
+  ChevronDown,
 } from "lucide-react";
 import { KineticText } from "@/registry/magicui/kinetic-text";
 import LordIcon from "@/components/ui/lord-icon";
@@ -119,7 +121,7 @@ export default function ServicesOverview() {
         "Industrial-grade web applications engineered with strictly typed TypeScript, server actions, optimistic UI mutations, and fluid micro-animations. Built for maximum speed, SEO indexing, and zero hydration layout shifts.",
       technologies: [
         {
-          name: "Next.js 16",
+          name: "Next.js",
           role: "App Router • PPR • Turbopack",
           logo: (
             <svg className="w-5 h-5 shrink-0" viewBox="0 0 180 180" fill="currentColor">
@@ -130,7 +132,7 @@ export default function ServicesOverview() {
           ),
         },
         {
-          name: "React 19",
+          name: "React",
           role: "Server Components • Suspense",
           logo: (
             <svg className="w-5 h-5 shrink-0" viewBox="-11.5 -10.232 23 20.463">
@@ -194,7 +196,7 @@ export default function ServicesOverview() {
         "Autonomous multi-agent intelligence collectives that act as tireless digital employees. Powered by LangGraph state machines, Milvus/Qdrant vector embeddings, and deterministic tool execution for enterprise workflows.",
       technologies: [
         {
-          name: "Python 3.12",
+          name: "Python",
           role: "Asyncio • FastAPI Microservices",
           logo: (
             <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none">
@@ -403,7 +405,7 @@ export default function ServicesOverview() {
         "High-performance native-feeling mobile applications built with Flutter and React Native. Featuring offline SQLite database synchronization, push notification architectures, and biometric hardware authentication.",
       technologies: [
         {
-          name: "Flutter 3.x",
+          name: "Flutter",
           role: "Dart Engine • 120Hz Hardware Accelerated",
           logo: (
             <svg className="w-5 h-5 shrink-0" viewBox="0 0 24 24">
@@ -550,17 +552,139 @@ export default function ServicesOverview() {
             )}
           </div>
 
-          {/* Browser Main Window: Left Sidebar Navigation + Right Content Display */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 min-h-[480px]">
+          {/* Mobile View: Vertical Accordion (Row by Row) with Up/Down Expand */}
+          <div className="block lg:hidden divide-y divide-slate-200">
+            {services.map((srv) => {
+              const isExpanded = srv.id === activeTabId;
+              return (
+                <div key={srv.id} className="transition-colors">
+                  {/* Row Label Header Button */}
+                  <button
+                    type="button"
+                    onClick={() => setActiveTabId(isExpanded ? "" : srv.id)}
+                    className={`w-full flex items-center justify-between p-3.5 sm:p-4 text-left cursor-pointer transition-colors ${
+                      isExpanded ? "bg-slate-50 text-blue-700" : "bg-white text-slate-900 hover:bg-slate-50/70"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3 min-w-0 pr-2">
+                      <div
+                        className="w-9 h-9 rounded-xl flex items-center justify-center shrink-0 shadow-xs"
+                        style={{ backgroundColor: isExpanded ? srv.accent : "#f1f5f9" }}
+                      >
+                        <LordIcon
+                          src={srv.lordIcon}
+                          trigger="hover"
+                          size={20}
+                          colors={isExpanded ? "primary:#ffffff,secondary:#38bdf8" : "primary:#475569,secondary:#94a3b8"}
+                        />
+                      </div>
+                      <div className="min-w-0">
+                        <span
+                          className={`text-xs sm:text-sm font-heading font-extrabold block truncate ${
+                            isExpanded ? "text-blue-700" : "text-slate-900"
+                          }`}
+                        >
+                          {srv.title}
+                        </span>
+                        <span className="text-[10px] font-mono text-slate-400 block truncate uppercase">
+                          {srv.category}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div
+                      className={`w-7 h-7 rounded-lg flex items-center justify-center bg-slate-100 shrink-0 transition-transform duration-300 ${
+                        isExpanded ? "rotate-90 bg-blue-100 text-blue-700" : "text-slate-500"
+                      }`}
+                    >
+                      <ChevronRight className="w-4 h-4" />
+                    </div>
+                  </button>
+
+                  {/* Inner Content: Expands Down / Up Right Below the Label */}
+                  {isExpanded && (
+                    <div className="p-4 sm:p-5 bg-slate-50/60 border-t border-slate-200 space-y-4 animate-in slide-in-from-top-2 duration-200">
+                      {/* Image */}
+                      <div className="relative w-full aspect-[16/9] max-h-48 rounded-xl overflow-hidden border border-slate-200 shadow-xs bg-slate-900">
+                        <img
+                          src={srv.image}
+                          alt={srv.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent" />
+                        <div className="absolute bottom-2 left-2 right-2 p-2 rounded-lg bg-white/95 backdrop-blur-md border border-slate-200 text-[11px] font-mono text-slate-900 flex items-center justify-between">
+                          <span className="truncate font-semibold">{srv.deliverableMetric}</span>
+                          <span className="text-emerald-600 font-bold shrink-0 flex items-center gap-1 text-[10px]">
+                            <ShieldCheck className="w-3 h-3" /> VERIFIED
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Scope Description */}
+                      <div>
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                          SCOPE & CAPABILITY OVERVIEW
+                        </span>
+                        <p className="text-xs text-slate-700 leading-relaxed font-sans font-normal">
+                          {srv.detailedScope}
+                        </p>
+                      </div>
+
+                      {/* Technologies Section */}
+                      <div className="pt-3 border-t border-slate-200">
+                        <span className="font-heading font-extrabold text-xs text-slate-950 block mb-2">
+                          Technologies
+                        </span>
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                          {srv.technologies.map((tech, idx) => (
+                            <div
+                              key={idx}
+                              className="p-2.5 rounded-xl border border-slate-200 bg-white flex items-center gap-2.5 shadow-2xs"
+                            >
+                              <div className="w-7 h-7 rounded-lg bg-slate-50 border border-slate-200 flex items-center justify-center shrink-0">
+                                {tech.logo}
+                              </div>
+                              <div className="flex flex-col min-w-0 pr-1">
+                                <span className="font-heading font-extrabold text-xs text-slate-900 truncate">
+                                  {tech.name}
+                                </span>
+                                <span className="text-[10px] font-mono text-slate-500 truncate font-medium">
+                                  {tech.role}
+                                </span>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* CTA Link */}
+                      <div className="pt-2">
+                        <Link
+                          href="/contact"
+                          className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-blue-600 text-white font-heading font-bold text-xs uppercase tracking-wider transition-colors shadow-sm"
+                        >
+                          <span>Request Technical Proposal</span>
+                          <ArrowRight className="w-3.5 h-3.5" />
+                        </Link>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Desktop View: Left Sidebar Navigation + Right Content Display */}
+          <div className="hidden lg:grid lg:grid-cols-12 min-h-[480px]">
             
             {/* Left Sidebar: Service Headings Navigation */}
-            <div className="lg:col-span-4 p-3 sm:p-4 bg-slate-50/70 border-b lg:border-b-0 lg:border-r border-slate-200 flex flex-col gap-1.5 sm:gap-2">
+            <div className="lg:col-span-4 p-3 sm:p-4 bg-slate-50/70 border-r border-slate-200 flex flex-col gap-1.5 sm:gap-2">
               <div className="px-3 py-1 text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 flex items-center justify-between">
                 <span>SERVICE DIRECTORY</span>
                 <span>[6 ACTIVE]</span>
               </div>
 
-              <div className="flex flex-row lg:flex-col gap-1.5 overflow-x-auto lg:overflow-x-visible pb-2 lg:pb-0 scrollbar-none">
+              <div className="flex flex-col gap-1.5">
                 {services.map((srv, idx) => {
                   const isSelected = srv.id === activeTabId;
                   // Forward: first-to-last (idx * 0.12s)

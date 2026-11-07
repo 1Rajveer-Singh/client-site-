@@ -26,24 +26,25 @@ export default function BookingWindowModal({
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "auto";
+      window.dispatchEvent(new CustomEvent("smooth-cursor-show"));
     };
   }, [isOpen, onClose]);
 
   if (!isOpen) return null;
 
   const directUrl = `https://cal.com/${calLink}`;
-  const iframeSrc = `https://cal.com/${calLink}?embed=true&layout=month_view`;
+  const iframeSrc = `https://cal.com/${calLink}?embed=true&layout=month_view&theme=light`;
 
   return (
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-2 sm:p-4 md:p-6 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-150"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-0 sm:p-4 md:p-6 bg-slate-950/80 backdrop-blur-md animate-in fade-in duration-150"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}
     >
-      <div className="relative w-full max-w-4xl h-[94vh] sm:h-[88vh] max-h-[860px] bg-white rounded-2xl sm:rounded-3xl shadow-[0_25px_70px_-15px_rgba(0,0,0,0.6)] border border-slate-200/90 overflow-hidden flex flex-col">
+      <div className="relative w-full max-w-4xl h-[100dvh] sm:h-[88vh] max-h-[860px] bg-white rounded-none sm:rounded-3xl shadow-[0_25px_70px_-15px_rgba(0,0,0,0.6)] border-0 sm:border sm:border-slate-200/90 overflow-hidden flex flex-col">
         {/* Linux / macOS Styled Window Titlebar */}
         <div className="flex items-center justify-between px-4 sm:px-6 py-3.5 border-b border-slate-200 bg-slate-50 select-none shrink-0 z-20">
           <div className="flex items-center gap-3">
@@ -96,21 +97,26 @@ export default function BookingWindowModal({
           </div>
         </div>
 
-        {/* Scrollable Window Body: Smooth vertical scroll till the very end on mobile & desktop */}
+        {/* Single unified scroll container: Iframe fills 100% height with zero outer scrollbar */}
         <div
-          className="relative flex-1 w-full bg-white overflow-y-auto overflow-x-hidden pb-8 sm:pb-6"
-          style={{ WebkitOverflowScrolling: "touch" }}
+          data-booking-frame="true"
+          onPointerEnter={() => {
+            window.dispatchEvent(new CustomEvent("smooth-cursor-hide"));
+          }}
+          onPointerLeave={() => {
+            window.dispatchEvent(new CustomEvent("smooth-cursor-show"));
+          }}
+          className="relative flex-1 w-full h-full bg-white overflow-hidden min-h-0"
         >
           <iframe
             src={iframeSrc}
             title="Book Free Consultation"
             style={{
               width: "100%",
-              minHeight: "820px",
               height: "100%",
               border: 0,
             }}
-            className="w-full min-h-[820px] h-full border-0 block"
+            className="w-full h-full border-0 block"
             allow="camera; microphone; autoplay; fullscreen"
           />
         </div>
