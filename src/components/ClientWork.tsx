@@ -315,9 +315,9 @@ export default function ClientWork() {
             <div className="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-7 py-3.5 sm:py-4 border-b border-slate-200/90 bg-slate-50/95 backdrop-blur-md shrink-0">
               <div className="flex items-center gap-2.5 truncate pr-2">
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                <span className="text-xs font-mono font-bold tracking-wider text-slate-600 uppercase truncate">
-                  PROJECT SHOWCASE // {activeProject.category}
-                </span>
+                <h3 className="text-base sm:text-lg font-black font-heading tracking-tight text-slate-900 truncate">
+                  {activeProject.title}
+                </h3>
               </div>
 
               <button
@@ -427,15 +427,6 @@ export default function ClientWork() {
                   <h3 className="text-2xl sm:text-3xl font-black font-heading text-slate-950 tracking-tight leading-tight">
                     {activeProject.title}
                   </h3>
-
-                  {/* Performance / Metric Highlight Pill */}
-                  <div
-                    className="mt-3 py-2.5 px-3.5 rounded-xl border-2 border-slate-300 bg-white text-xs sm:text-sm font-sans font-bold flex items-center gap-2 shadow-xs"
-                    style={{ color: "#000000" }}
-                  >
-                    <Zap className="w-4 h-4 text-amber-500 shrink-0" />
-                    <span style={{ color: "#000000", fontWeight: 700 }}>{activeProject.metric}</span>
-                  </div>
 
                   {/* Section Divider */}
                   <div className="my-5 border-b border-slate-200" />

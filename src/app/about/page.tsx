@@ -390,9 +390,10 @@ export default function AboutPage() {
                   className="flex flex-col justify-between p-7 rounded-2xl bg-white border border-slate-200/90 shadow-sm hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group text-left"
                 >
                   <div>
-                    <div className="flex items-center justify-between mb-4">
+                    {/* Header: Icon + Title on same row with proper separation border */}
+                    <div className="flex items-center gap-3.5 pb-4 mb-4 border-b border-slate-200/80">
                       <div
-                        className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-all duration-300 relative"
+                        className="w-12 h-12 rounded-2xl flex items-center justify-center text-white shadow-md group-hover:scale-110 transition-all duration-300 relative shrink-0"
                         style={{
                           background: `linear-gradient(135deg, ${srv.themeColor}, ${srv.themeColor}cc)`,
                           boxShadow: `0 8px 20px -4px ${srv.themeColor}55`,
@@ -417,14 +418,12 @@ export default function AboutPage() {
                           colors="primary:#ffffff,secondary:#ffffff"
                         />
                       </div>
-                      <span className={`text-[10px] font-mono font-bold px-2.5 py-1 rounded-full border ${srv.tagBg}`}>
-                        STAGE {srv.num}
-                      </span>
+
+                      <h3 className="text-lg font-black font-heading text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                        {srv.title}
+                      </h3>
                     </div>
 
-                    <h3 className="text-lg font-black font-heading text-slate-900 group-hover:text-blue-600 transition-colors">
-                      {srv.title}
-                    </h3>
                     <div className="text-xs font-heading font-bold text-slate-700 mt-1 leading-snug">
                       "{srv.headline}"
                     </div>

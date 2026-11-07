@@ -13,7 +13,6 @@ import {
   Award,
   Users,
 } from "lucide-react";
-import { KineticText } from "@/registry/magicui/kinetic-text";
 
 export default function CompanyIntro() {
   return (
@@ -65,18 +64,16 @@ export default function CompanyIntro() {
           {/* Right Column: Mission & Company Introduction */}
           <div className="lg:col-span-7 flex flex-col text-left order-1 lg:order-2">
             <div className="flex items-center gap-2 flex-wrap mb-4">
-              <KineticText
-                text="ABOUT RAJVEER SINGH"
-                as="h2"
-                className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-slate-950 tracking-tight cursor-default"
-              />
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black font-heading text-slate-950 tracking-tight">
+                ABOUT RAJVEER SINGH
+              </h2>
             </div>
 
-            <p className="text-base sm:text-lg text-slate-700 font-sans leading-relaxed">
-              We are an engineering-first digital studio and architecture practice founded by <strong>Rajveer Singh</strong>. We specialize in designing, engineering, and scaling resilient digital solutions for ambitious startups and global enterprises.
+            <p className="mt-2 text-base sm:text-lg font-medium text-slate-900 leading-relaxed">
+              We are an engineering-first digital studio and architecture practice founded by Rajveer Singh. We specialize in designing, engineering, and scaling resilient digital solutions for ambitious startups and global enterprises.
             </p>
 
-            <p className="mt-4 text-sm sm:text-base text-slate-600 font-sans leading-relaxed">
+            <p className="mt-4 text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
               Unlike traditional agencies that pass your project through layers of non-technical account managers, we provide direct senior architectural expertise. From bare-metal high-availability Linux clusters and Next.js 16 full-stack systems to autonomous AI multi-agent pipelines, every line of code is engineered for speed, security, and measurable ROI.
             </p>
 

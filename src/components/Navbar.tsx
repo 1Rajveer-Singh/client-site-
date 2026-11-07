@@ -21,9 +21,11 @@ import {
   Sparkles,
   Compass,
   Award,
+  Calendar,
 } from "lucide-react";
 import { FloatingDock } from "./ui/floating-dock";
 import { Text3DFlip } from "./ui/text-3d-flip";
+import BookingWindowModal from "./BookingWindowModal";
 
 interface NavbarProps {
   onReplayIntro?: () => void;
@@ -36,7 +38,14 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [servicesDropdownOpen, setServicesDropdownOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
+  const [bookingWindowOpen, setBookingWindowOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const handleOpen = () => setBookingWindowOpen(true);
+    window.addEventListener("open-booking-window", handleOpen);
+    return () => window.removeEventListener("open-booking-window", handleOpen);
+  }, []);
 
   // Dynamic header styling according to each individual page
   const getPageTheme = (path: string) => {
@@ -241,6 +250,13 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
                   href: "/contact",
                   isActive: pathname?.startsWith("/contact"),
                 },
+                {
+                  title: "Book Call",
+                  icon: <Calendar className="w-5 h-5 text-emerald-400" />,
+                  href: "#",
+                  onClick: () => setBookingWindowOpen(true),
+                  isActive: false,
+                },
               ]}
             />
           </div>
@@ -305,14 +321,33 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
             <a
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white border border-blue-500 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-sm active:shadow-inner"
+              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-sm active:shadow-inner"
             >
-              <Mail className="w-4 h-4 text-white" />
+              <Mail className="w-4 h-4 text-slate-400" />
               <span className="font-semibold text-sm">Get in Touch</span>
             </a>
+
+            {/* [Book Call] */}
+            <button
+              type="button"
+              onClick={() => {
+                setMobileMenuOpen(false);
+                setBookingWindowOpen(true);
+              }}
+              className="w-full text-left flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white border border-emerald-400 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-md active:shadow-inner cursor-pointer"
+            >
+              <Calendar className="w-4 h-4 text-white" />
+              <span className="font-semibold text-sm">Book Call</span>
+            </button>
           </div>
         )}
       </header>
+
+      {/* Embedded Scheduling Window Modal */}
+      <BookingWindowModal
+        isOpen={bookingWindowOpen}
+        onClose={() => setBookingWindowOpen(false)}
+      />
     </>
   );
 }

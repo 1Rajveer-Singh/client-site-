@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@calcom/embed-react": "^1.5.3",
     "@lordicon/element": "^3.0.2",
     "@types/three": "^0.187.0",
     "clsx": "^2.1.1",

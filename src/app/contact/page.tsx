@@ -13,12 +13,15 @@ import {
   CheckCircle2,
   ShieldCheck,
   Zap,
+  Calendar,
 } from "lucide-react";
 import { KineticText } from "@/registry/magicui/kinetic-text";
 import { PixelImage } from "@/registry/magicui/pixel-image";
+import BookingWindowModal from "@/components/BookingWindowModal";
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
+  const [bookingModalOpen, setBookingModalOpen] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -282,7 +285,7 @@ ${formData.email}`;
                           required
                           value={formData.name}
                           onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                          placeholder="John Doe"
+                          placeholder="Enter your full name"
                           className="w-full px-4 py-3 rounded-xl border border-slate-300 text-slate-900 font-sans text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white placeholder:text-slate-400 transition-all"
                         />
                       </div>
@@ -296,7 +299,7 @@ ${formData.email}`;
                           required
                           value={formData.email}
                           onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                          placeholder="john@example.com"
+                          placeholder="Enter your email address"
                           className="w-full px-4 py-3 rounded-xl border border-slate-300 text-slate-900 font-sans text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white placeholder:text-slate-400 transition-all"
                         />
                       </div>
@@ -311,7 +314,7 @@ ${formData.email}`;
                           type="tel"
                           value={formData.phone}
                           onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                          placeholder="+1 (555) 000-0000"
+                          placeholder="Enter your phone number"
                           className="w-full px-4 py-3 rounded-xl border border-slate-300 text-slate-900 font-sans text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white placeholder:text-slate-400 transition-all"
                         />
                       </div>
@@ -345,18 +348,29 @@ ${formData.email}`;
                         rows={5}
                         value={formData.message}
                         onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                        placeholder="Tell me about your project, timeline, deliverables, and goals..."
+                        placeholder="Write your message, goals, and project requirements here..."
                         className="w-full px-4 py-3 rounded-xl border border-slate-300 text-slate-900 font-sans text-sm focus:outline-hidden focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white placeholder:text-slate-400 leading-relaxed transition-all"
                       />
                     </div>
 
-                    <button
-                      type="submit"
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-heading text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-[0.99] transition-all shadow-md cursor-pointer"
-                    >
-                      <Send className="w-4 h-4" />
-                      <span>Send to Gmail Composer</span>
-                    </button>
+                    <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3.5 pt-2 flex-wrap">
+                      <button
+                        type="submit"
+                        className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-xl font-heading text-sm font-bold text-white bg-blue-600 hover:bg-blue-700 active:scale-[0.99] transition-all shadow-md cursor-pointer"
+                      >
+                        <Send className="w-4 h-4" />
+                        <span>Send to Gmail Composer</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => setBookingModalOpen(true)}
+                        className="inline-flex items-center justify-center gap-2 px-6 py-3.5 rounded-xl font-heading text-sm font-bold text-slate-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 hover:border-emerald-400 active:scale-[0.99] transition-all shadow-xs cursor-pointer group"
+                      >
+                        <Calendar className="w-4 h-4 text-emerald-600 group-hover:scale-110 transition-transform" />
+                        <span>Book Call</span>
+                      </button>
+                    </div>
                   </form>
                 )}
               </div>
@@ -364,6 +378,11 @@ ${formData.email}`;
           </div>
         </div>
       </section>
+
+      <BookingWindowModal
+        isOpen={bookingModalOpen}
+        onClose={() => setBookingModalOpen(false)}
+      />
 
       <Footer />
     </main>
