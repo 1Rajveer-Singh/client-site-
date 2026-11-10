@@ -6,7 +6,6 @@ import HeroSection from "@/components/HeroSection";
 import CompanyIntro from "@/components/CompanyIntro";
 import ServicesOverview from "@/components/ServicesOverview";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import TechnologyMarquee from "@/components/TechnologyMarquee";
 import PlanOfWork from "@/components/PlanOfWork";
 import ClientWork from "@/components/ClientWork";
 import ClientTestimonials from "@/components/ClientTestimonials";
@@ -26,13 +25,10 @@ export default function Home() {
       {/* Hero Section with CTAs: Get Started & Explore Our Services */}
       <HeroSection />
 
-      {/* Technologies We Use (Infinite Marquee) — Shifted just below Hero Section */}
-      <TechnologyMarquee />
-
       {/* Company Introduction */}
       <CompanyIntro />
 
-      {/* Services Overview */}
+      {/* Interactive Services Overview */}
       <ServicesOverview />
 
       {/* Why Choose Us */}

@@ -5,7 +5,6 @@ import Link from "next/link";
 import {
   ArrowRight,
   Sparkles,
-  CheckCircle2,
   Code2,
 } from "lucide-react";
 import { NumberTicker } from "./ui/number-ticker";
@@ -51,7 +50,7 @@ export default function HeroSection({ onReplayIntro }: HeroSectionProps = {}) {
 
             {/* Subtitle / Description - Reduced height & tighter spacing on mobile */}
             <p className="mt-2 sm:mt-3 max-w-xl mx-auto lg:mx-0 text-xs sm:text-base text-slate-300 font-sans leading-snug sm:leading-relaxed">
-              We architect high-availability cloud servers, Next.js 16 web applications, and autonomous AI automation systems built for measurable enterprise growth.
+              We architect high-availability cloud servers, Next.js web applications, and autonomous AI automation systems built for measurable enterprise growth.
             </p>
 
             {/* CTA Buttons: Get Started & Explore Our Services - Strictly in One Single Row */}
@@ -89,20 +88,59 @@ export default function HeroSection({ onReplayIntro }: HeroSectionProps = {}) {
               </LiquidMetalButton>
             </div>
 
-            {/* Next Row Perks - Strictly in One Row */}
-            <div className="mt-3 sm:mt-4 flex items-center justify-center lg:justify-start gap-2 sm:gap-6 text-[10px] xs:text-[11px] sm:text-xs text-slate-300 font-sans flex-nowrap whitespace-nowrap overflow-x-auto no-scrollbar">
-              <span className="inline-flex items-center gap-1 shrink-0">
-                <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-emerald-400 shrink-0" />
-                Verified Delivery
-              </span>
-              <span className="inline-flex items-center gap-1 shrink-0">
-                <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-blue-400 shrink-0" />
-                Modern Tech Stack
-              </span>
-              <span className="inline-flex items-center gap-1 shrink-0">
-                <CheckCircle2 className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-violet-400 shrink-0" />
-                24/7 Dedicated Support
-              </span>
+            {/* Trust & Verification Row */}
+            <div className="mt-4 sm:mt-5 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-slate-300 font-sans select-none">
+              {/* Client Avatars with Real Images + Social Proof Rating */}
+              <div className="flex items-center gap-2.5 shrink-0">
+                <div className="flex flex-row items-center">
+                  <div className="group relative -mr-2.5">
+                    <div className="relative w-10 h-10 rounded-full border-2 border-white bg-slate-900 overflow-hidden shadow-md group-hover:scale-110 group-hover:z-30 transition-all cursor-pointer">
+                      <img
+                        src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=200&auto=format&fit=crop"
+                        alt="Client Avatar"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div className="group relative -mr-2.5">
+                    <div className="relative w-10 h-10 rounded-full border-2 border-white bg-slate-900 overflow-hidden shadow-md group-hover:scale-110 group-hover:z-30 transition-all cursor-pointer">
+                      <img
+                        src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop"
+                        alt="Client Avatar"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div className="group relative -mr-2.5">
+                    <div className="relative w-10 h-10 rounded-full border-2 border-white bg-slate-900 overflow-hidden shadow-md group-hover:scale-110 group-hover:z-30 transition-all cursor-pointer">
+                      <img
+                        src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop"
+                        alt="Client Avatar"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                  <div className="group relative">
+                    <div className="relative w-10 h-10 rounded-full border-2 border-white bg-slate-900 overflow-hidden shadow-md group-hover:scale-110 group-hover:z-30 transition-all cursor-pointer">
+                      <img
+                        src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop"
+                        alt="Client Avatar"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div className="flex flex-col text-left leading-tight">
+                  <div className="flex items-center gap-1 text-amber-400 text-xs">
+                    <span className="tracking-tighter">★★★★★</span>
+                    <span className="font-bold text-white text-[11px] ml-0.5">5.0</span>
+                  </div>
+                  <span className="text-[10px] text-slate-400 font-medium font-sans">
+                    Trusted by Founders & Teams
+                  </span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -180,12 +218,12 @@ export default function HeroSection({ onReplayIntro }: HeroSectionProps = {}) {
               >
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <span className="text-[8px] sm:text-[9px] font-mono font-bold px-1.5 sm:px-2 py-0.5 rounded-full bg-white/10 text-slate-200 border border-white/15 backdrop-blur-sm tracking-wider">
+                    <span className="text-[8px] sm:text-[9px] font-mono font-medium px-1.5 sm:px-2 py-0.5 rounded-md bg-white/10 text-slate-200 border border-white/15">
                       {item.badge}
                     </span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                   </div>
-                  <div className={`text-lg sm:text-2xl font-black font-heading tracking-tight ${item.color} mt-0.5 sm:mt-1`}>
+                  <div className={`text-lg sm:text-2xl font-semibold font-heading tracking-tight tabular-nums ${item.color} mt-0.5 sm:mt-1`}>
                     <NumberTicker
                       value={item.value}
                       decimalPlaces={item.decimals ?? 0}
@@ -195,7 +233,7 @@ export default function HeroSection({ onReplayIntro }: HeroSectionProps = {}) {
                   </div>
                 </div>
                 <div className="mt-2.5 pt-2 border-t border-white/10">
-                  <div className="text-[9px] sm:text-[11px] font-heading font-extrabold text-slate-200 tracking-wider truncate">
+                  <div className="text-[9px] sm:text-[11px] font-medium text-slate-200 truncate">
                     {item.label}
                   </div>
                   <p className="text-[8.5px] sm:text-[10px] text-slate-400 font-sans mt-0.5 leading-tight truncate">

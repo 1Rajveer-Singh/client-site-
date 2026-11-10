@@ -174,7 +174,7 @@ export default function AboutPage() {
     {
       icon: Zap,
       title: "Modern Technologies",
-      desc: "We leverage cutting-edge frameworks including Next.js 16, React 19, LangGraph AI, and Docker to ensure your software remains ahead of the curve.",
+      desc: "We leverage cutting-edge frameworks including Next.js, React, LangGraph AI, and Docker to ensure your software remains ahead of the curve.",
       color: "text-amber-600 bg-amber-50 border-amber-200",
     },
     {
@@ -206,7 +206,7 @@ export default function AboutPage() {
   const faqs = [
     {
       q: "What services do you provide?",
-      a: "We provide comprehensive full-stack digital services including modern website design & development (Next.js 16, React 19), domain & high-availability cloud server hosting (99.999% SLA), algorithmic SEO optimization, custom AI agent workflows & RAG chatbots, cross-platform mobile app development (iOS & Android), and interactive Power BI business analytics dashboards.",
+      a: "We provide comprehensive full-stack digital services including modern website design & development (Next.js, React), domain & high-availability cloud server hosting (99.999% SLA), algorithmic SEO optimization, custom AI agent workflows & RAG chatbots, cross-platform mobile app development (iOS & Android), and interactive Power BI business analytics dashboards.",
     },
     {
       q: "How much does website development cost?",

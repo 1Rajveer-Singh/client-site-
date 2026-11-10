@@ -100,7 +100,7 @@ export default async function Image() {
               margin: 0,
             }}
           >
-            High-availability cloud servers, Next.js 16 architectures, autonomous AI agent swarms, and mission-critical engineering with 99.999% SLA integrity.
+            High-availability cloud servers, Next.js architectures, autonomous AI agent swarms, and mission-critical engineering with 99.999% SLA integrity.
           </p>
         </div>
 
@@ -143,7 +143,7 @@ export default async function Image() {
               color: "#fde047",
             }}
           >
-            🚀 Next.js 16 & AI Swarms
+            🚀 Next.js & AI Swarms
           </div>
         </div>
       </div>

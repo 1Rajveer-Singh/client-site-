@@ -1,9 +1,9 @@
 "use client";
 
 import React, { useEffect } from "react";
+import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import TechnologyMarquee from "@/components/TechnologyMarquee";
 import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import {
   Server,
@@ -20,10 +20,8 @@ import {
   CheckCircle2,
 } from "lucide-react";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal";
-import { SparklesText } from "@/components/ui/sparkles-text";
 import { KineticText } from "@/registry/magicui/kinetic-text";
 import { PixelImage } from "@/registry/magicui/pixel-image";
-import LordIcon from "@/components/ui/lord-icon";
 
 export default function ServicesPage() {
   useEffect(() => {
@@ -35,6 +33,7 @@ export default function ServicesPage() {
   const services = [
     {
       id: "servers",
+      slug: "cloud-infrastructure",
       step: "01",
       icon: Server,
       title: "High-Availability Cloud Servers",
@@ -48,19 +47,21 @@ export default function ServicesPage() {
     },
     {
       id: "web",
+      slug: "web-development",
       step: "02",
       icon: Code2,
       title: "Full-Stack Web Development",
-      category: "NEXT.JS 16 & REACT 19",
+      category: "NEXT.JS & REACT",
       badge: "LIGHTHOUSE 100",
       themeColor: "#06B6D4",
       tagBg: "bg-cyan-600 text-white border-cyan-500",
       gradientBg: "from-cyan-950 via-slate-900 to-slate-950",
-      desc: "Next.js 16 App Router architecture with React 19 Server Components, edge-rendered micro-frontends, and sub-350ms First Contentful Paint benchmarks.",
+      desc: "Next.js App Router architecture with React Server Components, edge-rendered micro-frontends, and sub-350ms First Contentful Paint benchmarks.",
       deliverable: "0.38s FCP • Edge Prerender • Zero Hydration Shift",
     },
     {
       id: "ai",
+      slug: "ai-automation",
       step: "03",
       icon: Bot,
       title: "Autonomous AI Agent Swarms",
@@ -74,6 +75,7 @@ export default function ServicesPage() {
     },
     {
       id: "seo",
+      slug: "seo-optimization",
       step: "04",
       icon: Search,
       title: "Algorithmic SEO & JSON-LD Schema",
@@ -87,6 +89,7 @@ export default function ServicesPage() {
     },
     {
       id: "bi",
+      slug: "power-bi-telemetry",
       step: "05",
       icon: BarChart3,
       title: "Power BI Executive Telemetry",
@@ -100,6 +103,7 @@ export default function ServicesPage() {
     },
     {
       id: "mobile",
+      slug: "mobile-apps",
       step: "06",
       icon: Smartphone,
       title: "Cross-Platform Mobile Apps",
@@ -140,16 +144,13 @@ export default function ServicesPage() {
               as="h1"
               className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black font-heading tracking-tight text-white leading-tight cursor-default max-w-full break-words"
             />
-            <SparklesText
-              className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black font-heading tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-emerald-300 to-cyan-400 inline-block mt-2 leading-tight max-w-full break-words"
-              sparklesCount={6}
-            >
+            <span className="text-2xl sm:text-4xl md:text-5xl lg:text-7xl font-black font-heading tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-emerald-300 to-cyan-400 inline-block mt-2 leading-tight max-w-full break-words">
               SERVICES & SERVERS
-            </SparklesText>
+            </span>
           </div>
 
           <p className="mt-4 sm:mt-5 max-w-2xl lg:max-w-3xl mx-auto text-xs sm:text-sm md:text-base font-sans text-slate-200 leading-relaxed font-normal px-2">
-            From high-availability cloud servers to autonomous AI swarms and Next.js 16 architectures, we engineer software systems with industrial-grade reliability.
+            From high-availability cloud servers to autonomous AI swarms and Next.js architectures, we engineer software systems with industrial-grade reliability.
           </p>
 
           <div className="mt-6 sm:mt-8 flex justify-center w-full px-2">
@@ -171,8 +172,6 @@ export default function ServicesPage() {
           </div>
         </div>
       </section>
-
-      <TechnologyMarquee />
 
       {/* Services Grid Section (Matching Plan of Work exact card sizing) */}
       <section className="py-24 bg-white border-b-2 border-slate-200 text-slate-900">
@@ -208,29 +207,12 @@ export default function ServicesPage() {
                         {service.step}
                       </span>
 
-                      {/* Center Hero Icon - Animated Lordicon */}
+                      {/* Center Hero Icon */}
                       <div
-                        className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center shadow-2xl border-2 border-white/20 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3"
+                        className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl border-2 border-white/20 transition-transform duration-300 group-hover:scale-105"
                         style={{ backgroundColor: service.themeColor }}
                       >
-                        <LordIcon
-                          src={
-                            service.step === "01"
-                              ? "wjrtlwtp"
-                              : service.step === "02"
-                              ? "qhgmphtg"
-                              : service.step === "03"
-                              ? "msoeawqm"
-                              : service.step === "04"
-                              ? "kdduutaw"
-                              : service.step === "05"
-                              ? "tftaqjwp"
-                              : "gqdnbnwt"
-                          }
-                          trigger="hover"
-                          size={36}
-                          colors="primary:#ffffff,secondary:#38bdf8"
-                        />
+                        <Icon className="w-8 h-8 text-white" />
                       </div>
 
                       <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
@@ -257,6 +239,17 @@ export default function ServicesPage() {
                         {/* Deliverables / Specs Pill */}
                         <div className="mt-4 py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-center w2 text-xs text-slate-700 truncate shadow-xs">
                           {service.deliverable}
+                        </div>
+
+                        {/* View Service Details & Tools Link */}
+                        <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
+                          <Link
+                            href={`/services/${service.slug}`}
+                            className="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-blue-600 hover:text-blue-700 group-hover:translate-x-0.5 transition-transform"
+                          >
+                            <span>Explore Tech Stack & Specs</span>
+                            <ArrowRight className="w-3.5 h-3.5" />
+                          </Link>
                         </div>
                       </div>
                     </div>

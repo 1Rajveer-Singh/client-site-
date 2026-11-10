@@ -15,7 +15,10 @@ export interface FloatingDockItem {
   href: string;
   badge?: string;
   isActive?: boolean;
-  onClick?: () => void;
+  suffix?: React.ReactNode;
+  onClick?: (e: React.MouseEvent) => void;
+  onMouseEnter?: () => void;
+  onMouseLeave?: () => void;
 }
 
 export const FloatingDock = ({
@@ -46,7 +49,7 @@ const FloatingDockDesktop = ({
       onMouseMove={(e) => mouseX.set(e.pageX)}
       onMouseLeave={() => mouseX.set(Infinity)}
       className={cn(
-        "mx-auto flex h-14 items-center gap-2 sm:gap-2.5 rounded-full bg-slate-950/90 px-3.5 py-2 border border-slate-700/80 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),0_0_20px_rgba(6,182,212,0.2)]",
+        "mx-auto flex h-11 items-center gap-1.5 sm:gap-2 rounded-full bg-slate-950/90 px-2.5 py-1 border border-slate-700/80 backdrop-blur-md shadow-[0_8px_30px_rgba(0,0,0,0.5),0_0_20px_rgba(6,182,212,0.2)]",
         className
       )}
     >
@@ -63,7 +66,10 @@ function IconContainer({
   icon,
   href,
   isActive,
+  suffix,
   onClick,
+  onMouseEnter,
+  onMouseLeave,
 }: FloatingDockItem & { mouseX: any }) {
   const ref = useRef<HTMLDivElement>(null);
 
@@ -81,6 +87,14 @@ function IconContainer({
     <motion.a
       href={href}
       onClick={onClick}
+      onMouseEnter={() => {
+        setHovered(true);
+        if (onMouseEnter) onMouseEnter();
+      }}
+      onMouseLeave={() => {
+        setHovered(false);
+        if (onMouseLeave) onMouseLeave();
+      }}
       whileHover={{ y: -3.5 }}
       whileTap={{ y: 2.5, scale: 0.94 }}
       transition={{
@@ -97,14 +111,14 @@ function IconContainer({
         onMouseEnter={() => setHovered(true)}
         onMouseLeave={() => setHovered(false)}
         className={cn(
-          "relative flex items-center gap-2 px-3 sm:px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all duration-200 select-none",
+          "relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-xs font-semibold border transition-all duration-200 select-none",
           "shadow-[0_4px_10px_rgba(0,0,0,0.5),0_1px_0_rgba(255,255,255,0.1)_inset]",
           "active:shadow-[inset_0_3px_6px_rgba(0,0,0,0.8)]",
           isActive
-            ? "bg-gradient-to-b from-slate-800 to-slate-900 text-cyan-300 border-cyan-400/80 shadow-[0_0_15px_rgba(6,182,212,0.35)]"
+            ? "bg-slate-800 text-white border-slate-600 shadow-xs"
             : hovered
-            ? "bg-gradient-to-b from-slate-800 to-slate-900 text-yellow-300 border-yellow-400 shadow-[0_8px_20px_rgba(250,204,21,0.35)]"
-            : "bg-gradient-to-b from-[#162036]/90 to-[#0e1626]/95 text-slate-300 border-slate-700/80 hover:text-white hover:border-slate-500"
+            ? "bg-slate-800/80 text-white border-slate-700"
+            : "bg-slate-900/90 text-slate-400 border-slate-800 hover:text-slate-200 hover:border-slate-700"
         )}
       >
         <div className="flex items-center justify-center shrink-0 w-4 h-4 transition-transform duration-200">
@@ -113,6 +127,7 @@ function IconContainer({
         <span className="font-heading font-medium tracking-tight text-[11px] sm:text-xs">
           {title}
         </span>
+        {suffix}
       </motion.div>
     </motion.a>
   );

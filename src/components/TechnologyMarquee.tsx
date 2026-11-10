@@ -8,7 +8,7 @@ export default function TechnologyMarquee() {
   const technologies = [
     {
       name: "Next.js",
-      desc: "App Router • React 19 • Edge Rendering",
+      desc: "App Router • React • Edge Rendering",
       tag: "FULL-STACK",
       badgeBg: "bg-slate-100 border-slate-200 text-slate-900",
       logo: (

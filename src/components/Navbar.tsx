@@ -2,8 +2,8 @@
 
 import React, { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
+import Link from "next/link";
 import {
-  Gamepad2,
   Menu,
   X,
   Home,
@@ -11,20 +11,17 @@ import {
   ChevronDown,
   Code,
   Bot,
+  Server,
   Search,
   BarChart3,
   Smartphone,
   Trophy,
   Mail,
   Phone,
-  Coins,
-  Sparkles,
-  Compass,
-  Award,
   Calendar,
+  ArrowRight,
 } from "lucide-react";
 import { FloatingDock } from "./ui/floating-dock";
-import { Text3DFlip } from "./ui/text-3d-flip";
 import BookingWindowModal from "./BookingWindowModal";
 
 interface NavbarProps {
@@ -40,6 +37,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
   const [bookingWindowOpen, setBookingWindowOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
     const handleOpen = () => setBookingWindowOpen(true);
@@ -47,67 +45,19 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
     return () => window.removeEventListener("open-booking-window", handleOpen);
   }, []);
 
-  // Dynamic header styling according to each individual page
-  const getPageTheme = (path: string) => {
-    if (path.startsWith("/about")) {
-      return {
-        bg: "bg-[#0a1026]/95 border-b border-indigo-500/40",
-        accent: "text-indigo-400",
-        glow: "shadow-[0_4px_30px_rgba(99,102,241,0.2)]",
-        badge: "border-indigo-500/50 text-indigo-300",
-      };
-    }
-    if (path.startsWith("/services")) {
-      return {
-        bg: "bg-[#071328]/95 border-b border-blue-500/40",
-        accent: "text-blue-400",
-        glow: "shadow-[0_4px_30px_rgba(37,99,235,0.2)]",
-        badge: "border-blue-500/50 text-blue-300",
-      };
-    }
-    if (path.startsWith("/plan")) {
-      return {
-        bg: "bg-[#130826]/95 border-b border-purple-500/40",
-        accent: "text-purple-400",
-        glow: "shadow-[0_4px_30px_rgba(168,85,247,0.2)]",
-        badge: "border-purple-500/50 text-purple-300",
-      };
-    }
-    if (path.startsWith("/work")) {
-      return {
-        bg: "bg-[#041a14]/95 border-b border-emerald-500/40",
-        accent: "text-emerald-400",
-        glow: "shadow-[0_4px_30px_rgba(16,185,129,0.2)]",
-        badge: "border-emerald-500/50 text-emerald-300",
-      };
-    }
-    if (path.startsWith("/testimonials")) {
-      return {
-        bg: "bg-[#1c1305]/95 border-b border-amber-500/40",
-        accent: "text-amber-400",
-        glow: "shadow-[0_4px_30px_rgba(245,158,11,0.2)]",
-        badge: "border-amber-500/50 text-amber-300",
-      };
-    }
-    if (path.startsWith("/contact")) {
-      return {
-        bg: "bg-[#1c0812]/95 border-b border-rose-500/40",
-        accent: "text-rose-400",
-        glow: "shadow-[0_4px_30px_rgba(244,63,94,0.2)]",
-        badge: "border-rose-500/50 text-rose-300",
-      };
-    }
-    // Default Home ("/")
-    return {
-      bg: "bg-[#050814]/95 border-b border-cyan-500/30",
-      accent: "text-cyan-400",
-      glow: "shadow-[0_4px_30px_rgba(6,182,212,0.18)]",
-      badge: "border-cyan-500/50 text-cyan-300",
-    };
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    setServicesDropdownOpen(true);
   };
 
-  const pageTheme = getPageTheme(pathname || "/");
+  const handleMouseLeave = () => {
+    if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    timeoutRef.current = setTimeout(() => {
+      setServicesDropdownOpen(false);
+    }, 120);
+  };
 
+  // Close dropdown on click outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
@@ -118,226 +68,350 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const servicesList = [
+  // Dynamic header styling according to each individual page
+  const getPageTheme = (path: string) => {
+    if (path.startsWith("/about")) {
+      return {
+        bg: "bg-[#0a1026]/95 border-b border-indigo-500/30",
+        accent: "text-indigo-400",
+      };
+    }
+    if (path.startsWith("/services")) {
+      return {
+        bg: "bg-[#071328]/95 border-b border-blue-500/30",
+        accent: "text-blue-400",
+      };
+    }
+    if (path.startsWith("/plan")) {
+      return {
+        bg: "bg-[#130826]/95 border-b border-purple-500/30",
+        accent: "text-purple-400",
+      };
+    }
+    if (path.startsWith("/work")) {
+      return {
+        bg: "bg-[#041a14]/95 border-b border-emerald-500/30",
+        accent: "text-emerald-400",
+      };
+    }
+    if (path.startsWith("/testimonials")) {
+      return {
+        bg: "bg-[#1c1305]/95 border-b border-amber-500/30",
+        accent: "text-amber-400",
+      };
+    }
+    if (path.startsWith("/contact")) {
+      return {
+        bg: "bg-[#1c0812]/95 border-b border-rose-500/30",
+        accent: "text-rose-400",
+      };
+    }
+    // Default Home ("/")
+    return {
+      bg: "bg-[#050814]/95 border-b border-slate-800",
+      accent: "text-cyan-400",
+    };
+  };
+
+  const pageTheme = getPageTheme(pathname || "/");
+
+  const serviceObjectives = [
     {
       title: "Web Development",
-      desc: "Next.js 16, React 19, 60FPS engine",
+      objective: "Next.js, React, responsive websites & web apps",
       icon: Code,
-      badge: "PWR-UP 01",
-      color: "bg-cyan-500 text-black",
-      href: "#work",
+      href: "/services/web-development",
     },
     {
-      title: "AI Agent Automation",
-      desc: "Autonomous LLM swarms & neural pipelines",
+      title: "AI Automation",
+      objective: "Workflow automation, business copilots & API pipelines",
       icon: Bot,
-      badge: "PWR-UP 02",
-      color: "bg-fuchsia-500 text-white",
-      href: "#work",
+      href: "/services/ai-automation",
+    },
+    {
+      title: "Cloud Infrastructure",
+      objective: "High-availability Linux servers, Nginx & 99.999% SLA",
+      icon: Server,
+      href: "/services/cloud-infrastructure",
     },
     {
       title: "SEO Optimization",
-      desc: "Pixel-perfect rank & Core Web Vitals",
+      objective: "Search ranking, technical schema & speed optimization",
       icon: Search,
-      badge: "PWR-UP 03",
-      color: "bg-emerald-400 text-black",
-      href: "#work",
+      href: "/services/seo-optimization",
     },
     {
-      title: "Power BI Dashboard",
-      desc: "Real-time telemetry HUD & analytics",
+      title: "Power BI Telemetry",
+      objective: "Executive dashboards, DAX modeling & KPI reporting",
       icon: BarChart3,
-      badge: "PWR-UP 04",
-      color: "bg-amber-400 text-black",
-      href: "#work",
+      href: "/services/power-bi-telemetry",
     },
     {
-      title: "Mobile App",
-      desc: "Cross-platform iOS & Android cartridges",
+      title: "Mobile Apps",
+      objective: "Cross-platform iOS & Android mobile applications",
       icon: Smartphone,
-      badge: "PWR-UP 05",
-      color: "bg-rose-500 text-white",
-      href: "#work",
+      href: "/services/mobile-apps",
     },
   ];
 
   return (
     <>
-      {/* Upper Div: Always Solid Black, NOT sticky (scrolls away naturally) */}
-      <div className="w-full bg-black text-slate-300 border-b border-white/10 text-xs py-2 px-2 sm:px-4 relative z-40 select-none">
-        <div className="w-full flex items-center justify-between">
+      {/* Upper Div: Always Solid Black, scrolls away */}
+      <div className="w-full bg-black text-slate-300 border-b border-white/10 text-xs py-1 px-3 sm:px-6 relative z-40 select-none">
+        <div className="w-full flex items-center justify-between text-[11px] sm:text-xs">
           <a
             href="mailto:rakshitsingcse@gmail.com"
-            className="inline-flex items-center gap-1.5 hover:text-white transition-colors pl-0 shrink-0"
+            className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors truncate max-w-[170px] sm:max-w-none"
           >
-            <Mail className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
-            <span className="font-sans font-medium text-[11px] sm:text-xs text-slate-200">
+            <Mail className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+            <span className="font-sans font-medium truncate">
               rakshitsingcse@gmail.com
             </span>
           </a>
           <a
             href="tel:+918529348446"
-            className="inline-flex items-center gap-1.5 hover:text-white transition-colors pr-0 shrink-0"
+            className="inline-flex items-center gap-1.5 text-slate-300 hover:text-white transition-colors shrink-0"
           >
-            <Phone className="w-3.5 h-3.5 text-amber-400 shrink-0" />
-            <span className="font-sans font-medium text-[11px] sm:text-xs text-slate-200">
+            <Phone className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+            <span className="font-sans font-medium">
               +91 8529348446
             </span>
           </a>
         </div>
       </div>
 
-      {/* Sticky Header: Sticks to top when scrolling down, dynamic theme color per page */}
+      {/* Sticky Header */}
       <header
-        className={`sticky top-0 z-50 w-full backdrop-blur-xl transition-all duration-300 ${pageTheme.bg} ${pageTheme.glow}`}
+        className={`sticky top-0 z-50 w-full backdrop-blur-xl transition-all duration-300 ${pageTheme.bg}`}
       >
-        {/* Main Full-Width Header Bar: Left Corner Brand, Right Nav Dock */}
-        <div className="relative w-full px-3 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <div className="relative w-full px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
 
-          {/* Left-Side Corner: Brand Title */}
-          <a
-            href="/"
-            className="flex items-center gap-3 pl-0 group shrink-0 z-10 select-none transition-transform duration-200 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98]"
-            title="Rajveer Singh | Developer"
-          >
-            {/* Official Website Brand Logo */}
-            <div className="relative flex items-center justify-center w-11 h-11 rounded-xl bg-slate-900 p-1 border border-slate-700/80 shadow-xs group-hover:border-slate-500 transition-all overflow-hidden shrink-0">
-              <img
-                src="/logo.png"
-                alt="Rajveer Singh Developer Logo"
-                className="w-full h-full object-contain filter group-hover:scale-105 transition-transform"
-              />
-            </div>
+          {/* Left: Brand */}
+          <div className="flex items-center z-20 shrink-0">
+            <Link
+              href="/"
+              className="flex items-center gap-2.5 group select-none"
+              title="Rajveer Singh | Developer"
+            >
+              <div className="relative flex items-center justify-center w-9 h-9 rounded-xl bg-slate-900 p-1 border border-slate-700/80 shadow-xs group-hover:border-slate-500 transition-colors overflow-hidden shrink-0">
+                <img
+                  src="/logo.png"
+                  alt="Rajveer Singh Developer Logo"
+                  className="w-full h-full object-contain filter"
+                />
+              </div>
 
-            <div className="flex flex-col text-left">
-              <span className="text-base sm:text-lg font-bold tracking-tight font-heading text-white group-hover:text-slate-200 transition-colors">
-                Rajveer Singh <span className={`${pageTheme.accent} font-normal transition-colors duration-300`}>| Developer</span>
-              </span>
-            </div>
-          </a>
-
-          {/* Right Corner: Navigation Dock */}
-          <div className="hidden lg:flex items-center gap-2 pr-2 sm:pr-4 z-20">
-            <FloatingDock
-              items={[
-                {
-                  title: "Home",
-                  icon: <Home className="w-5 h-5 text-slate-300" />,
-                  href: "/",
-                  isActive: pathname === "/",
-                },
-                {
-                  title: "About Us",
-                  icon: <Users className="w-5 h-5 text-slate-300" />,
-                  href: "/about",
-                  isActive: pathname?.startsWith("/about"),
-                },
-                {
-                  title: "Services",
-                  icon: <Code className="w-5 h-5 text-slate-300" />,
-                  href: "/services",
-                  isActive: pathname?.startsWith("/services"),
-                },
-                {
-                  title: "Our Work",
-                  icon: <Trophy className="w-5 h-5 text-slate-300" />,
-                  href: "/work",
-                  isActive: pathname?.startsWith("/work"),
-                },
-                {
-                  title: "Contact",
-                  icon: <Mail className="w-5 h-5 text-slate-300" />,
-                  href: "/contact",
-                  isActive: pathname?.startsWith("/contact"),
-                },
-                {
-                  title: "Book Call",
-                  icon: <Calendar className="w-5 h-5 text-emerald-400" />,
-                  href: "#",
-                  onClick: () => setBookingWindowOpen(true),
-                  isActive: false,
-                },
-              ]}
-            />
+              <div className="flex flex-col text-left">
+                <span className="text-sm sm:text-base font-bold tracking-tight font-heading text-white group-hover:text-slate-200 transition-colors">
+                  Rajveer Singh <span className={`${pageTheme.accent} font-normal`}>| Developer</span>
+                </span>
+              </div>
+            </Link>
           </div>
 
-          {/* Mobile Hamburger Toggle Button */}
-          <div className="flex lg:hidden items-center gap-2 relative z-50">
+          {/* Center: Centered Navbar Dock */}
+          <div
+            className="hidden lg:flex absolute left-1/2 -translate-x-1/2 items-center z-30"
+            ref={dropdownRef}
+          >
+            <div
+              className="relative"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            >
+              <FloatingDock
+                items={[
+                  {
+                    title: "Home",
+                    icon: <Home className="w-4 h-4 text-slate-300" />,
+                    href: "/",
+                    isActive: pathname === "/",
+                  },
+                  {
+                    title: "About Us",
+                    icon: <Users className="w-4 h-4 text-slate-300" />,
+                    href: "/about",
+                    isActive: pathname?.startsWith("/about"),
+                  },
+                  {
+                    title: "Services",
+                    icon: <Code className="w-4 h-4 text-slate-300" />,
+                    href: "/services",
+                    isActive: pathname?.startsWith("/services"),
+                    suffix: (
+                      <ChevronDown
+                        className={`w-3 h-3 text-slate-400 transition-transform duration-200 ${
+                          servicesDropdownOpen ? "rotate-180 text-cyan-400" : ""
+                        }`}
+                      />
+                    ),
+                    onClick: (e: React.MouseEvent) => {
+                      if (window.innerWidth >= 1024) {
+                        e.preventDefault();
+                        setServicesDropdownOpen((prev) => !prev);
+                      }
+                    },
+                    onMouseEnter: handleMouseEnter,
+                    onMouseLeave: handleMouseLeave,
+                  },
+                  {
+                    title: "Our Work",
+                    icon: <Trophy className="w-4 h-4 text-slate-300" />,
+                    href: "/work",
+                    isActive: pathname?.startsWith("/work"),
+                  },
+                  {
+                    title: "Contact",
+                    icon: <Mail className="w-4 h-4 text-slate-300" />,
+                    href: "/contact",
+                    isActive: pathname?.startsWith("/contact"),
+                  },
+                ]}
+              />
+
+              {/* Clean Services Dropdown (strictly on hover/click, quiet no-slop chrome) */}
+              {servicesDropdownOpen && (
+                <div
+                  onMouseEnter={handleMouseEnter}
+                  onMouseLeave={handleMouseLeave}
+                  className="absolute top-full left-1/2 -translate-x-1/2 pt-2.5 z-50 w-[580px] max-w-[92vw]"
+                >
+                  <div className="p-3.5 rounded-2xl bg-[#090d1a]/98 backdrop-blur-2xl border border-slate-800 shadow-[0_20px_50px_rgba(0,0,0,0.7)] text-white">
+                    {/* 2-Column Grid */}
+                    <div className="grid grid-cols-2 gap-2">
+                      {serviceObjectives.map((srv) => {
+                        const Icon = srv.icon;
+                        return (
+                          <Link
+                            key={srv.title}
+                            href={srv.href}
+                            onClick={() => setServicesDropdownOpen(false)}
+                            className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-slate-900/90 border border-transparent hover:border-slate-800/90 transition-colors group"
+                          >
+                            <div className="p-2 rounded-lg bg-slate-900 text-slate-400 border border-slate-800 group-hover:text-cyan-400 group-hover:border-slate-700 transition-colors shrink-0 mt-0.5">
+                              <Icon className="w-4 h-4" />
+                            </div>
+                            <div className="flex flex-col min-w-0">
+                              <span className="text-xs font-semibold text-white group-hover:text-cyan-300 transition-colors truncate">
+                                {srv.title}
+                              </span>
+                              <span className="text-[11px] text-slate-400 font-sans line-clamp-2 mt-0.5 leading-snug">
+                                {srv.objective}
+                              </span>
+                            </div>
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+
+          {/* Right: Book Call Button */}
+          <div className="flex items-center gap-3 z-20">
             <button
               type="button"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2.5 rounded-xl text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 cursor-pointer touch-manipulation select-none transition-all duration-150 hover:-translate-y-0.5 active:translate-y-1 active:scale-95 shadow-md active:shadow-inner"
-              aria-label="Toggle mobile menu"
+              onClick={() => setBookingWindowOpen(true)}
+              className="hidden lg:inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-semibold bg-emerald-500 hover:bg-emerald-400 text-slate-950 transition-colors shadow-xs cursor-pointer select-none"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-slate-200" />}
+              <Calendar className="w-4 h-4 shrink-0 text-slate-950" />
+              <span>Book Call</span>
             </button>
+
+            {/* Mobile Hamburger Toggle Button */}
+            <div className="flex lg:hidden items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                className="p-2 rounded-lg text-slate-200 bg-slate-800 hover:bg-slate-700 border border-slate-700 cursor-pointer touch-manipulation select-none transition-colors shadow-xs"
+                aria-label="Toggle mobile menu"
+              >
+                {mobileMenuOpen ? <X className="w-5 h-5 text-white" /> : <Menu className="w-5 h-5 text-slate-200" />}
+              </button>
+            </div>
           </div>
         </div>
 
-        {/* Mobile Drawer */}
+        {/* Mobile Drawer - Strictly No Slop, Quiet & Clean */}
         {mobileMenuOpen && (
-          <div className="lg:hidden relative z-50 bg-slate-900/98 backdrop-blur-2xl border-t border-slate-800 px-5 py-5 flex flex-col gap-2 font-heading text-xs shadow-2xl touch-manipulation text-slate-200">
-            {/* [Home] */}
-            <a
+          <div className="lg:hidden relative z-50 bg-slate-950/98 backdrop-blur-xl border-t border-slate-800 px-4 py-3.5 flex flex-col gap-1 text-sm text-slate-200 shadow-xl select-none">
+            <Link
               href="/"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-sm active:shadow-inner"
+              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-900 transition-colors font-medium text-sm"
             >
-              <Home className="w-4 h-4 text-slate-400" />
-              <span className="font-semibold text-sm">Home</span>
-            </a>
+              Home
+            </Link>
 
-            {/* [About Us] */}
-            <a
+            <Link
               href="/about"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-sm active:shadow-inner"
+              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-900 transition-colors font-medium text-sm"
             >
-              <Users className="w-4 h-4 text-slate-400" />
-              <span className="font-semibold text-sm">About Us</span>
-            </a>
+              About Us
+            </Link>
 
-            {/* [Services] */}
-            <a
-              href="/services"
-              onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-sm active:shadow-inner"
-            >
-              <Code className="w-4 h-4 text-slate-400" />
-              <span className="font-semibold text-sm">Services & Infrastructure</span>
-            </a>
+            {/* Mobile Services Accordion */}
+            <div className="flex flex-col rounded-lg border border-slate-800/80 bg-slate-900/40 overflow-hidden">
+              <button
+                type="button"
+                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                className="w-full flex items-center justify-between px-3 py-2 text-slate-200 hover:text-white hover:bg-slate-900/60 transition-colors cursor-pointer text-sm font-medium"
+              >
+                <span>Services</span>
+                <ChevronDown
+                  className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                    mobileServicesOpen ? "rotate-180" : ""
+                  }`}
+                />
+              </button>
 
-            {/* [Work] */}
-            <a
+              {mobileServicesOpen && (
+                <div className="flex flex-col bg-slate-950/95 border-t border-slate-800/80 p-1.5 gap-0.5 text-xs">
+                  {serviceObjectives.map((srv) => (
+                    <Link
+                      key={srv.title}
+                      href={srv.href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="p-2 rounded-md text-slate-300 hover:text-white hover:bg-slate-900 flex flex-col"
+                    >
+                      <span className="font-medium text-white">{srv.title}</span>
+                      <span className="text-[11px] text-slate-400 font-sans">{srv.objective}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            <Link
               href="/work"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-sm active:shadow-inner"
+              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-900 transition-colors font-medium text-sm"
             >
-              <Trophy className="w-4 h-4 text-slate-400" />
-              <span className="font-semibold text-sm">Featured Projects</span>
-            </a>
+              Our Work
+            </Link>
 
-            {/* [Contact] */}
-            <a
+            <Link
               href="/contact"
               onClick={() => setMobileMenuOpen(false)}
-              className="flex items-center gap-3 p-3 rounded-xl bg-slate-800/60 hover:bg-slate-800 text-white border border-slate-700/60 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-sm active:shadow-inner"
+              className="px-3 py-2 rounded-lg text-slate-200 hover:text-white hover:bg-slate-900 transition-colors font-medium text-sm"
             >
-              <Mail className="w-4 h-4 text-slate-400" />
-              <span className="font-semibold text-sm">Get in Touch</span>
-            </a>
+              Contact
+            </Link>
 
-            {/* [Book Call] */}
+            {/* Book Call Button in Mobile - Solid, No Slop */}
             <button
               type="button"
               onClick={() => {
                 setMobileMenuOpen(false);
                 setBookingWindowOpen(true);
               }}
-              className="w-full text-left flex items-center gap-3 p-3 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white border border-emerald-400 transition-all duration-150 hover:-translate-y-0.5 active:translate-y-0.5 active:scale-[0.98] shadow-md active:shadow-inner cursor-pointer"
+              className="w-full flex items-center justify-center gap-2 py-2.5 px-4 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-semibold text-xs tracking-wider uppercase transition-colors cursor-pointer mt-2 shadow-xs"
             >
-              <Calendar className="w-4 h-4 text-white" />
-              <span className="font-semibold text-sm">Book Call</span>
+              <Calendar className="w-4 h-4 shrink-0 text-slate-950" />
+              <span>Book Call</span>
             </button>
           </div>
         )}

@@ -3,16 +3,14 @@
 import React from "react";
 import Link from "next/link";
 import {
-  Code2,
-  Server,
-  Cpu,
-  ShieldCheck,
-  CheckCircle2,
   ArrowRight,
-  TrendingUp,
-  Award,
-  Users,
 } from "lucide-react";
+import {
+  IconCodeOwnership,
+  IconSpeedBenchmark,
+  IconAiAutomation,
+  IconSlaSupport,
+} from "@/components/icons/SvgRepoCollections";
 
 export default function CompanyIntro() {
   return (
@@ -29,35 +27,6 @@ export default function CompanyIntro() {
                 className="w-full h-80 object-cover filter brightness-90"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/50 to-transparent" />
-
-              {/* Floating Stat Overlay */}
-              <div className="absolute bottom-6 inset-x-6 p-4 rounded-2xl bg-white/10 backdrop-blur-md border border-white/20">
-                <div className="grid grid-cols-3 gap-2 text-center">
-                  <div>
-                    <span className="text-xl sm:text-2xl font-black font-heading text-white block">99.999%</span>
-                    <span className="text-[10px] text-slate-300 font-sans uppercase">SLA Uptime</span>
-                  </div>
-                  <div className="border-x border-white/20">
-                    <span className="text-xl sm:text-2xl font-black font-heading text-cyan-300 block">&lt;300ms</span>
-                    <span className="text-[10px] text-slate-300 font-sans uppercase">Global Speed</span>
-                  </div>
-                  <div>
-                    <span className="text-xl sm:text-2xl font-black font-heading text-emerald-300 block">10+</span>
-                    <span className="text-[10px] text-slate-300 font-sans uppercase">Delivered</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Accent Card */}
-            <div className="hidden sm:flex items-center gap-3 absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl border border-slate-200 shadow-xl z-20">
-              <div className="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
-                <Award className="w-5 h-5" />
-              </div>
-              <div className="text-left">
-                <span className="text-xs font-bold text-slate-900 block font-heading">Senior Full-Stack Architect</span>
-                <span className="text-[11px] text-slate-500 font-sans">End-to-End Delivery & Zero Tech Debt</span>
-              </div>
             </div>
           </div>
 
@@ -70,18 +39,18 @@ export default function CompanyIntro() {
             </div>
 
             <p className="mt-2 text-base sm:text-lg font-medium text-slate-900 leading-relaxed">
-              We are an engineering-first digital studio and architecture practice founded by Rajveer Singh. We specialize in designing, engineering, and scaling resilient digital solutions for ambitious startups and global enterprises.
+              We are an engineering-led digital solutions company dedicated to enabling businesses to leverage technology to enhance performance, drive innovation, and operate more efficiently. We specialize in designing, developing, and scaling reliable digital solutions tailored to your business needs.
             </p>
 
             <p className="mt-4 text-sm sm:text-base text-slate-700 leading-relaxed font-normal">
-              Unlike traditional agencies that pass your project through layers of non-technical account managers, we provide direct senior architectural expertise. From bare-metal high-availability Linux clusters and Next.js 16 full-stack systems to autonomous AI multi-agent pipelines, every line of code is engineered for speed, security, and measurable ROI.
+              Unlike traditional agencies with multiple layers of communication, we believe in direct collaboration, technical expertise, and transparent execution. You work directly with the people responsible for bringing your ideas to life, ensuring a clear development process, thoughtful solutions, and quality-driven results.
             </p>
 
-            {/* Core Value Pillars */}
+            {/* Core Value Pillars - Rich Business Vectors */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8 pt-6 border-t border-slate-200">
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 border border-emerald-100">
-                  <CheckCircle2 className="w-4 h-4" />
+              <div className="flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50/80 flex items-center justify-center shrink-0 border border-emerald-200/90 shadow-2xs">
+                  <IconCodeOwnership className="w-6 h-6" />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-slate-900 font-heading">100% Code Ownership</h4>
@@ -89,9 +58,9 @@ export default function CompanyIntro() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center shrink-0 border border-blue-100">
-                  <CheckCircle2 className="w-4 h-4" />
+              <div className="flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-blue-50/80 flex items-center justify-center shrink-0 border border-blue-200/90 shadow-2xs">
+                  <IconSpeedBenchmark className="w-6 h-6" />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-slate-900 font-heading">Sub-300ms Global Benchmarks</h4>
@@ -99,9 +68,9 @@ export default function CompanyIntro() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-purple-50 text-purple-600 flex items-center justify-center shrink-0 border border-purple-100">
-                  <CheckCircle2 className="w-4 h-4" />
+              <div className="flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-purple-50/80 flex items-center justify-center shrink-0 border border-purple-200/90 shadow-2xs">
+                  <IconAiAutomation className="w-6 h-6" />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-slate-900 font-heading">Modern AI Integration</h4>
@@ -109,9 +78,9 @@ export default function CompanyIntro() {
                 </div>
               </div>
 
-              <div className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center shrink-0 border border-amber-100">
-                  <CheckCircle2 className="w-4 h-4" />
+              <div className="flex items-start gap-3.5">
+                <div className="w-10 h-10 rounded-xl bg-amber-50/80 flex items-center justify-center shrink-0 border border-amber-200/90 shadow-2xs">
+                  <IconSlaSupport className="w-6 h-6" />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-slate-900 font-heading">Continuous SLA Support</h4>

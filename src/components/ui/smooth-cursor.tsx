@@ -144,9 +144,6 @@ export function SmoothCursor({
           [role="button"], .cursor-pointer, .cursor-text, .cursor-grab, .cursor-grabbing, [class*="cursor-"] {
             cursor: none !important;
           }
-          iframe, [data-booking-frame], [data-booking-frame] * {
-            cursor: auto !important;
-          }
         }
       `;
       document.head.appendChild(styleEl);

@@ -15,6 +15,7 @@ import {
 import { KineticText } from "@/registry/magicui/kinetic-text";
 import { PixelImage } from "@/registry/magicui/pixel-image";
 import { getTechIcon } from "./TechIcons";
+import { FlatAnalyticsGrowthIcon } from "@/components/icons/SvgRepoCollections";
 
 interface ProjectItem {
   id: string;
@@ -258,18 +259,18 @@ export default function ClientWork() {
                       </span>
                     </div>
 
-                    <h3 className="text-xl font-bold card-title text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1">
+                    <h3 className="text-lg sm:text-xl font-bold font-heading text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
                       {project.title}
                     </h3>
 
-                    <p className="mt-2.5 text-sm font-sans leading-relaxed line-clamp-3 min-h-[56px] text-slate-600 font-normal">
+                    <p className="mt-2.5 text-sm font-sans leading-relaxed text-slate-600 font-normal">
                       {project.desc}
                     </p>
 
                     {/* Key Deliverables Pill */}
-                    <div className="mt-4 py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-center w2 text-xs text-slate-700 shadow-xs flex items-center justify-center gap-1.5 truncate">
-                      <Zap className="w-3.5 h-3.5 text-amber-500 shrink-0" />
-                      <span className="truncate">{project.metric}</span>
+                    <div className="mt-4 py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-center w2 text-xs text-slate-700 shadow-xs flex items-center justify-center gap-2 truncate">
+                      <FlatAnalyticsGrowthIcon className="w-4 h-4 shrink-0" />
+                      <span className="truncate font-medium">{project.metric}</span>
                     </div>
                   </div>
 
@@ -315,8 +316,8 @@ export default function ClientWork() {
             {/* Top Modal Navigation Header - Pinned at top */}
             <div className="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-7 py-3.5 sm:py-4 border-b border-slate-200/90 bg-slate-50/95 backdrop-blur-md shrink-0">
               <div className="flex items-center gap-2.5 truncate pr-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                <h3 className="text-base sm:text-lg font-black font-heading tracking-tight text-slate-900 truncate">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
+                <h3 className="text-base sm:text-lg font-semibold font-heading tracking-tight text-slate-900 truncate">
                   {activeProject.title}
                 </h3>
               </div>
@@ -395,9 +396,9 @@ export default function ClientWork() {
                           key={idx}
                           type="button"
                           onClick={() => setSelectedImageIndex(idx)}
-                          className={`relative w-20 sm:w-24 h-14 sm:h-16 rounded-xl overflow-hidden shrink-0 border-2 transition-all duration-200 cursor-pointer ${
+                          className={`relative w-20 sm:w-24 h-14 sm:h-16 rounded-xl overflow-hidden shrink-0 border transition-all duration-150 cursor-pointer ${
                             selectedImageIndex === idx
-                              ? "border-cyan-400 scale-105 shadow-[0_0_15px_rgba(6,182,212,0.4)] opacity-100"
+                              ? "border-blue-500 ring-2 ring-blue-500/20 opacity-100"
                               : "border-slate-800 opacity-60 hover:opacity-90 hover:border-slate-600"
                           }`}
                         >
@@ -417,30 +418,27 @@ export default function ClientWork() {
               <div className="lg:col-span-5 flex flex-col justify-between p-5 sm:p-8 bg-white overflow-visible lg:overflow-y-auto">
                 <div>
                   <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-bold font-heading text-blue-600 uppercase tracking-wider">
+                    <span className="text-xs font-medium text-slate-500">
                       {activeProject.category}
                     </span>
-                    <span className="text-[10px] font-bold font-mono px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                      LIVE
+                    <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
+                      Live
                     </span>
                   </div>
 
-                  <h3 className="text-2xl sm:text-3xl font-black font-heading text-slate-950 tracking-tight leading-tight">
+                  <h3 className="text-2xl sm:text-3xl font-semibold font-heading text-slate-900 tracking-tight leading-tight">
                     {activeProject.title}
                   </h3>
 
                   {/* Section Divider */}
                   <div className="my-5 border-b border-slate-200" />
 
-                  {/* About the Project - Inner div text in pure black (#000000) with guaranteed high visibility */}
-                  <div className="bg-slate-50 p-5 rounded-2xl border-2 border-slate-300 shadow-sm">
+                  {/* About the Project */}
+                  <div className="bg-slate-50 p-5 rounded-xl border border-slate-200">
                     <div className="flex items-center gap-2 mb-3 pb-2.5 border-b border-slate-200">
-                      <span className="w-2.5 h-2.5 rounded-full bg-blue-600 shrink-0" />
-                      <h4
-                        className="text-sm sm:text-base font-black font-heading uppercase tracking-wider"
-                        style={{ color: "#000000", fontWeight: 900 }}
-                      >
-                        ABOUT THIS PROJECT
+                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
+                      <h4 className="text-xs font-semibold text-slate-900 uppercase tracking-wider">
+                        About this project
                       </h4>
                     </div>
                     <div

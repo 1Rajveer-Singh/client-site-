@@ -98,14 +98,14 @@ export const metadata: Metadata = {
     template: "%s | Rajveer Singh | Developer",
   },
   description:
-    "Architecting high-availability cloud servers, Next.js 16 web applications, autonomous AI agents, SEO dominance, and sub-300ms global latency systems with 99.999% SLA integrity.",
+    "Architecting high-availability cloud servers, Next.js web applications, autonomous AI agents, SEO dominance, and sub-300ms global latency systems with 99.999% SLA integrity.",
   applicationName: "Rajveer Singh | Developer",
   keywords: [
     "Rajveer Singh",
     "Rajveer Singh Developer",
     "Full Stack Developer",
     "Cloud Server Architecture",
-    "Next.js 16 Web Engineering",
+    "Next.js Web Engineering",
     "Autonomous AI Agent Swarms",
     "High-Availability Infrastructure",
     "Algorithmic SEO Optimization",
@@ -126,7 +126,7 @@ export const metadata: Metadata = {
     siteName: "Rajveer Singh | Developer",
     title: "Rajveer Singh | Developer - Full Stack, Cloud Servers & AI Automation",
     description:
-      "Architecting high-availability cloud servers, Next.js 16 web applications, autonomous AI agents, and sub-300ms systems with 99.999% SLA integrity.",
+      "Architecting high-availability cloud servers, Next.js web applications, autonomous AI agents, and sub-300ms systems with 99.999% SLA integrity.",
     images: [
       {
         url: "/logo.png",
@@ -140,7 +140,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Rajveer Singh | Developer - Full Stack, Cloud Servers & AI Automation",
     description:
-      "Architecting high-availability cloud servers, Next.js 16 web applications, autonomous AI agents, and sub-300ms systems with 99.999% SLA integrity.",
+      "Architecting high-availability cloud servers, Next.js web applications, autonomous AI agents, and sub-300ms systems with 99.999% SLA integrity.",
     images: ["/logo.png"],
   },
   robots: {

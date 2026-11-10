@@ -1,9 +1,17 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 export default function WhatsAppButton() {
+  const [mounted, setMounted] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
+
   const phoneNumber = "918529348446";
   const defaultMessage = encodeURIComponent(
     "Hello Rajveer, I visited your website and would like to discuss a project."
@@ -34,14 +42,11 @@ export default function WhatsAppButton() {
         aria-label="Chat on WhatsApp"
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        className="relative group w-14 h-14 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-[0_10px_25px_-5px_rgba(37,211,102,0.45),0_8px_10px_-6px_rgba(0,0,0,0.2)] hover:shadow-[0_15px_30px_-5px_rgba(37,211,102,0.65),0_10px_12px_-6px_rgba(0,0,0,0.3)] hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer"
+        className="relative group w-12 h-12 rounded-full bg-[#25D366] text-white flex items-center justify-center shadow-md hover:shadow-lg transition-transform duration-150 active:scale-95 cursor-pointer"
       >
-        {/* Radar Pulse Effect */}
-        <span className="absolute inset-0 rounded-full bg-[#25D366] animate-ping opacity-30 group-hover:opacity-50 pointer-events-none" />
-
         {/* WhatsApp Vector Icon */}
         <svg
-          className="w-7 h-7 fill-current relative z-10 transition-transform duration-300 group-hover:scale-105"
+          className="w-6 h-6 fill-current relative z-10"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
         >

@@ -34,19 +34,19 @@ export default function Footer() {
               </div>
 
               <p className="text-xs sm:text-sm text-slate-400 font-sans leading-relaxed max-w-sm mt-1">
-                Engineering high-availability cloud servers, Next.js 16 web applications, autonomous AI agent pipelines, and measurable business growth systems.
+                Engineering high-availability cloud servers, Next.js web applications, autonomous AI agent pipelines, and measurable business growth systems.
               </p>
 
               <div className="flex items-center gap-2 mt-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                <span className="w-2 h-2 rounded-full bg-emerald-400" />
                 <span className="text-xs text-emerald-400 font-medium">Available for new client engagements</span>
               </div>
             </div>
 
             {/* Column 2: Direct Contact (4 cols) */}
             <div className="lg:col-span-4 flex flex-col gap-3.5 text-left">
-              <h4 className="text-xs font-heading font-extrabold text-slate-200 uppercase tracking-widest">
-                Direct Contact
+              <h4 className="text-xs font-semibold text-slate-200">
+                Direct contact
               </h4>
               <ul className="space-y-3 text-xs sm:text-sm text-slate-300 font-sans">
                 <li>
@@ -206,7 +206,7 @@ export default function Footer() {
                 <>
                   <div>
                     <h4 className="font-semibold text-slate-900 mb-1">What core services does Rajveer Singh provide?</h4>
-                    <p>I deliver high-availability cloud server architectures, full-stack Next.js 16 web applications, autonomous AI agents, programmatic SEO, and custom enterprise software.</p>
+                    <p>I deliver high-availability cloud server architectures, full-stack Next.js web applications, autonomous AI agents, programmatic SEO, and custom enterprise software.</p>
                   </div>
                   <div>
                     <h4 className="font-semibold text-slate-900 mb-1">What is your typical project delivery timeline?</h4>

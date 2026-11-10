@@ -2,17 +2,19 @@
 
 import React, { useEffect, useState, useCallback } from "react";
 import { motion } from "motion/react";
-import { ChevronLeft, ChevronRight, Star, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, Star, CheckCircle2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface TestimonialItem {
   quote: string;
   name: string;
   designation: string;
+  company?: string;
   src?: string;
   initials?: string;
   service?: string;
   metric?: string;
+  metricLabel?: string;
   rating?: number;
 }
 
@@ -55,12 +57,12 @@ export const AnimatedTestimonials = ({
 
   return (
     <div
-      className={cn("w-full max-w-6xl mx-auto px-2 sm:px-6 py-6 sm:py-10", className)}
+      className={cn("w-full max-w-5xl mx-auto px-2 sm:px-4 py-4 sm:py-6", className)}
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
       {/* 3D Stage Container */}
-      <div className="relative w-full h-[520px] sm:h-[420px] md:h-[370px] flex items-center justify-center overflow-hidden">
+      <div className="relative w-full h-[480px] sm:h-[400px] md:h-[360px] flex items-center justify-center overflow-hidden">
         {testimonials.map((testimonial, index) => {
           const status = getCardStatus(index);
 
@@ -76,26 +78,26 @@ export const AnimatedTestimonials = ({
           if (status === "left") {
             animateProps = {
               x: "-46%",
-              scale: 0.86,
-              opacity: 0.42,
+              scale: 0.88,
+              opacity: 0.45,
               zIndex: 10,
-              filter: "blur(1.5px)",
+              filter: "blur(1px)",
             };
           } else if (status === "right") {
             animateProps = {
               x: "46%",
-              scale: 0.86,
-              opacity: 0.42,
+              scale: 0.88,
+              opacity: 0.45,
               zIndex: 10,
-              filter: "blur(1.5px)",
+              filter: "blur(1px)",
             };
           } else if (status === "hidden") {
             animateProps = {
               x: index > active ? "90%" : "-90%",
-              scale: 0.7,
+              scale: 0.72,
               opacity: 0,
               zIndex: 0,
-              filter: "blur(4px)",
+              filter: "blur(3px)",
             };
           }
 
@@ -105,64 +107,91 @@ export const AnimatedTestimonials = ({
               initial={false}
               animate={animateProps}
               transition={{
-                duration: 0.65,
-                ease: [0.16, 1, 0.3, 1], // Buttery smooth cubic bezier
+                duration: 0.6,
+                ease: [0.16, 1, 0.3, 1], // Smooth cubic bezier
               }}
               onClick={() => {
                 if (status === "left") handlePrev();
                 if (status === "right") handleNext();
               }}
               className={cn(
-                "absolute w-[92%] sm:w-[82%] md:w-[740px] max-w-full origin-center select-none",
-                status === "center" ? "cursor-default" : status !== "hidden" ? "cursor-pointer" : "pointer-events-none"
+                "absolute w-[95%] sm:w-[88%] md:w-[760px] max-w-full origin-center select-none",
+                status === "center"
+                  ? "cursor-default"
+                  : status !== "hidden"
+                  ? "cursor-pointer"
+                  : "pointer-events-none"
               )}
             >
-              {/* Card divided into two parts vertically: Left (Picture + Name + Designation), Right (Message) */}
-              <div className="w-full rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-slate-900 via-slate-950 to-slate-900 border-2 border-slate-700/80 text-white shadow-2xl relative overflow-hidden">
-                {/* Luminous Top Gradient Accent Bar */}
-                <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-blue-500 via-cyan-400 to-amber-400" />
-
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-5 sm:gap-7 items-center">
-                  
-                  {/* Left Column: First Picture, then next line Name, then Designation */}
-                  <div className="md:col-span-4 flex flex-col items-center md:items-start text-center md:text-left md:pr-6 md:border-r border-slate-800/80 shrink-0">
-                    {/* 1. Picture */}
-                    <div className="relative w-20 h-20 sm:w-24 sm:h-24 rounded-2xl overflow-hidden border-2 border-cyan-400 shadow-[0_0_20px_rgba(6,182,212,0.35)] mb-3 shrink-0 bg-slate-800">
-                      <img
-                        src={testimonial.src}
-                        alt={testimonial.name}
-                        className="w-full h-full object-cover"
-                      />
+              {/* New Unslopped Card Design Embedded in Carousel */}
+              <div className="w-full rounded-2xl p-6 sm:p-7 md:p-8 bg-white border border-slate-200/90 shadow-[0_12px_40px_-15px_rgba(0,0,0,0.12)] text-slate-900 relative flex flex-col justify-between">
+                <div>
+                  {/* Top Row: Client Info & Outcome Pill */}
+                  <div className="flex items-start justify-between gap-3 mb-4">
+                    <div className="flex items-center gap-3.5 min-w-0">
+                      <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-full overflow-hidden border border-slate-200 bg-slate-100 shrink-0">
+                        {testimonial.src ? (
+                          <img
+                            src={testimonial.src}
+                            alt={testimonial.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex items-center justify-center font-mono font-bold text-slate-600">
+                            {testimonial.initials || testimonial.name.slice(0, 2)}
+                          </div>
+                        )}
+                      </div>
+                      <div className="flex flex-col min-w-0">
+                        <div className="flex items-center gap-1.5">
+                          <h3 className="text-base sm:text-lg font-bold font-heading text-slate-950 truncate">
+                            {testimonial.name}
+                          </h3>
+                          <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
+                        </div>
+                        <span className="text-xs sm:text-[13px] font-sans text-slate-500 truncate mt-0.5">
+                          {testimonial.designation} {testimonial.company ? `· ${testimonial.company}` : ""}
+                        </span>
+                      </div>
                     </div>
 
-                    {/* 2. Name */}
-                    <h4 className="text-lg sm:text-xl font-black font-heading text-white tracking-tight leading-snug">
-                      {testimonial.name}
-                    </h4>
-
-                    {/* 3. Designation */}
-                    <p className="text-xs sm:text-[13px] font-sans font-medium text-cyan-300 mt-1 leading-snug">
-                      {testimonial.designation}
-                    </p>
-
-                    {/* Star Ratings */}
-                    <div className="flex items-center gap-1 mt-2.5">
-                      {[...Array(testimonial.rating || 5)].map((_, i) => (
-                        <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                      ))}
-                    </div>
+                    {/* Impact Metric Pill */}
+                    {testimonial.metric && (
+                      <div className="shrink-0 text-right">
+                        <span className="px-2.5 sm:px-3 py-1 rounded-md bg-slate-50 border border-slate-200/90 text-[11px] sm:text-xs font-mono font-semibold text-slate-800 block">
+                          {testimonial.metric}
+                        </span>
+                        {testimonial.metricLabel && (
+                          <span className="text-[10px] font-mono text-slate-400 block mt-0.5">
+                            {testimonial.metricLabel}
+                          </span>
+                        )}
+                      </div>
+                    )}
                   </div>
 
-                  {/* Right Column: Message & Metrics */}
-                  <div className="md:col-span-8 flex flex-col justify-between h-full">
-                    <div>
-                      <p className="text-sm sm:text-base font-sans leading-relaxed text-slate-100 italic font-normal">
-                        "{testimonial.quote}"
-                      </p>
-                    </div>
+                  {/* Rating Stars */}
+                  <div className="flex items-center gap-1 mb-3.5">
+                    {[...Array(testimonial.rating || 5)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
+                    ))}
                   </div>
 
+                  {/* Quote Body */}
+                  <p className="text-sm sm:text-base font-sans text-slate-700 leading-relaxed font-normal">
+                    "{testimonial.quote}"
+                  </p>
                 </div>
+
+                {/* Footer Line with Service Domain */}
+                {testimonial.service && (
+                  <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs font-mono text-slate-500">
+                    <span>Delivered Architecture</span>
+                    <span className="font-semibold text-slate-800">
+                      {testimonial.service}
+                    </span>
+                  </div>
+                )}
               </div>
             </motion.div>
           );
@@ -175,10 +204,10 @@ export const AnimatedTestimonials = ({
         <button
           type="button"
           onClick={handlePrev}
-          className="w-11 h-11 rounded-2xl bg-white border border-slate-300 hover:border-slate-400 text-slate-800 hover:bg-slate-50 flex items-center justify-center shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer"
+          className="w-10 h-10 rounded-xl bg-white border border-slate-300 hover:border-slate-400 text-slate-800 hover:bg-slate-50 flex items-center justify-center shadow-2xs hover:shadow-xs transition-colors cursor-pointer"
           aria-label="Previous testimonial"
         >
-          <ChevronLeft className="w-5 h-5 text-slate-700" />
+          <ChevronLeft className="w-4 h-4 text-slate-700" />
         </button>
 
         {/* Dots Pagination */}
@@ -189,10 +218,10 @@ export const AnimatedTestimonials = ({
               type="button"
               onClick={() => setActive(idx)}
               className={cn(
-                "h-2.5 rounded-full transition-all duration-300 cursor-pointer",
+                "h-2 rounded-full transition-all duration-300 cursor-pointer",
                 idx === active
-                  ? "w-7 bg-blue-600"
-                  : "w-2.5 bg-slate-300 hover:bg-slate-400"
+                  ? "w-6 bg-slate-900"
+                  : "w-2 bg-slate-300 hover:bg-slate-400"
               )}
               aria-label={`Go to testimonial ${idx + 1}`}
             />
@@ -203,10 +232,10 @@ export const AnimatedTestimonials = ({
         <button
           type="button"
           onClick={handleNext}
-          className="w-11 h-11 rounded-2xl bg-white border border-slate-300 hover:border-slate-400 text-slate-800 hover:bg-slate-50 flex items-center justify-center shadow-xs hover:shadow-md transition-all active:scale-95 cursor-pointer"
+          className="w-10 h-10 rounded-xl bg-white border border-slate-300 hover:border-slate-400 text-slate-800 hover:bg-slate-50 flex items-center justify-center shadow-2xs hover:shadow-xs transition-colors cursor-pointer"
           aria-label="Next testimonial"
         >
-          <ChevronRight className="w-5 h-5 text-slate-700" />
+          <ChevronRight className="w-4 h-4 text-slate-700" />
         </button>
       </div>
     </div>
