@@ -16,6 +16,17 @@
     --arcade-green: #22c55e;
     --arcade-purple: #a855f7;
   }
+
+  body {
+    background-color: #ffffff;
+    color: #0f172a;
+    overflow-x: hidden;
+  }
+
+  p {
+    color: #334155;
+    line-height: 1.65;
+  }
 }
 
 html {
@@ -63,52 +74,31 @@ p,
   font-family: var(--font-open-sans), 'Open Sans', system-ui, -apple-system, sans-serif !important;
 }
 
-body {
-  background-color: #ffffff;
-  color: #0f172a;
-  overflow-x: hidden;
-}
+/* Paragraph contrast tuning in dark atmospheric sections & explicit utility preservation */
+p.text-slate-100, p[class*="text-slate-100"] { color: #f1f5f9 !important; }
+p.text-slate-200, p[class*="text-slate-200"] { color: #e2e8f0 !important; }
+p.text-slate-300, p[class*="text-slate-300"] { color: #cbd5e1 !important; }
+p.text-slate-400, p[class*="text-slate-400"] { color: #94a3b8 !important; }
+p.text-white, p[class*="text-white"] { color: #ffffff !important; }
 
-p {
-  color: #334155;
-  line-height: 1.65;
-}
+p.text-slate-500, p[class*="text-slate-500"] { color: #64748b !important; }
+p.text-slate-600, p[class*="text-slate-600"] { color: #475569 !important; }
+p.text-slate-700, p[class*="text-slate-700"] { color: #334155 !important; }
+p.text-slate-800, p[class*="text-slate-800"] { color: #1e293b !important; }
+p.text-slate-900, p[class*="text-slate-900"] { color: #0f172a !important; }
+p.text-slate-950, p[class*="text-slate-950"] { color: #020617 !important; }
+p.text-black, p[class*="text-black"] { color: #000000 !important; }
 
-/* Ana Tudor inspired CSS Scroll-Driven Character / Word Fill Reveal */
-@keyframes scroll-text-fill {
-  from {
-    background-size: 0% 100%;
-  }
-  to {
-    background-size: 100% 100%;
-  }
-}
-
-.css-scroll-reveal {
-  background: linear-gradient(to right, #0f172a 0%, #0f172a 100%) no-repeat;
-  background-size: 0% 100%;
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: rgba(148, 163, 184, 0.3);
-  transition: color 0.2s ease;
-}
-
-@supports (animation-timeline: view()) {
-  .css-scroll-reveal {
-    animation: scroll-text-fill linear both;
-    animation-timeline: view();
-    animation-range: entry 15% cover 55%;
-  }
-}
-
-/* Paragraph contrast tuning in dark atmospheric sections */
-.text-white p,
-.text-slate-100 p,
-.text-slate-200 p,
+/* Default paragraph contrast in dark atmospheric sections when not explicitly colored */
+.hero-section p,
+#hero p,
 [class*="bg-\[\#060913\]"] p,
+[class*="bg-\[\#0a1026\]"] p,
+[class*="bg-\[\#070b16\]"] p,
 [class*="bg-\[\#0a0f1d\]"] p,
-[class*="bg-slate-900"] p,
-[class*="bg-slate-950"] p {
+[class*="bg-black"] p,
+section[class*="text-white"] p,
+div[class*="text-white"] p {
   color: #e2e8f0;
 }
 
@@ -120,17 +110,6 @@ p {
 .bg-slate-100 p,
 [class*="bg-slate-100"] p {
   color: #0f172a;
-}
-
-p.text-black,
-[class*="text-black"] p,
-p[class*="text-black"],
-p.text-slate-950,
-p.text-slate-900,
-p.text-slate-800,
-p.text-slate-700,
-p.text-slate-600 {
-  color: inherit;
 }
 
 /* Button Typography - Normal, highly legible, clean & modern */
