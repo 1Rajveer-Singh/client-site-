@@ -45,6 +45,7 @@ export function PixelImage({
 }: PixelImageProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [showColor, setShowColor] = useState(!grayscaleAnimation);
+  const [hasError, setHasError] = useState(false);
 
   const MIN_GRID = 1;
   const MAX_GRID = 16;
@@ -82,16 +83,16 @@ export function PixelImage({
       const row = Math.floor(index / cols);
       const col = index % cols;
 
-      const clipPath = `polygon(
-        ${col * (100 / cols)}% ${row * (100 / rows)}%,
-        ${(col + 1) * (100 / cols)}% ${row * (100 / rows)}%,
-        ${(col + 1) * (100 / cols)}% ${(row + 1) * (100 / rows)}%,
-        ${col * (100 / cols)}% ${(row + 1) * (100 / rows)}%
-      )`;
+      const x1 = Number(((col * 100) / cols).toFixed(2));
+      const y1 = Number(((row * 100) / rows).toFixed(2));
+      const x2 = Number((((col + 1) * 100) / cols).toFixed(2));
+      const y2 = Number((((row + 1) * 100) / rows).toFixed(2));
+
+      const clipPath = `polygon(${x1}% ${y1}%, ${x2}% ${y1}%, ${x2}% ${y2}%, ${x1}% ${y2}%)`;
 
       // Deterministic pseudo-random seed to satisfy Next.js static prerendering
       const pseudoRand = Math.abs(Math.sin((index + 1) * 9973)) % 1;
-      const delay = pseudoRand * maxAnimationDelay;
+      const delay = Math.round(pseudoRand * maxAnimationDelay);
       return {
         clipPath,
         delay,
@@ -99,11 +100,28 @@ export function PixelImage({
     });
   }, [rows, cols, maxAnimationDelay]);
 
+  if (hasError) {
+    return (
+      <div
+        className={cn(
+          "relative w-full h-full bg-gradient-to-br from-slate-900 via-slate-950 to-black overflow-hidden flex items-center justify-center",
+          className
+        )}
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent pointer-events-none" />
+      </div>
+    );
+  }
+
   return (
-    <div className={cn("relative w-full h-full select-none overflow-hidden", className)}>
+    <div
+      suppressHydrationWarning
+      className={cn("relative w-full h-full select-none overflow-hidden", className)}
+    >
       {pieces.map((piece, index) => (
         <div
           key={index}
+          suppressHydrationWarning
           className={cn(
             "absolute inset-0 transition-all ease-out",
             isVisible ? "opacity-100" : "opacity-0"
@@ -118,6 +136,7 @@ export function PixelImage({
           <img
             src={src}
             alt={`${alt} piece ${index + 1}`}
+            onError={() => setHasError(true)}
             className={cn(
               "w-full h-full object-cover",
               imageClassName,

@@ -148,6 +148,10 @@ export default function PlanOfWork() {
                   <img
                     src={item.image}
                     alt={item.title}
+                    loading="lazy"
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).style.display = "none";
+                    }}
                     className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 filter brightness-90"
                   />
                   {/* Dark gradient overlay for text legibility */}

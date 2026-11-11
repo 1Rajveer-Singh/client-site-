@@ -455,6 +455,105 @@ export function getTechIcon(name: string): React.ReactNode {
     );
   }
 
+  // Figma
+  if (normalized.includes("figma")) {
+    return (
+      <svg className="w-full h-full" viewBox="0 0 38 57" fill="none">
+        <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
+        <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
+        <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
+        <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
+        <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
+      </svg>
+    );
+  }
+
+  // WordPress
+  if (normalized.includes("wordpress") || normalized.includes("word press")) {
+    return (
+      <svg className="w-full h-full" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M12 0C5.373 0 0 5.373 0 12c0 6.627 5.373 12 12 12 6.627 0 12-5.373 12-12 0-6.627-5.373-12-12-12zm-1.077 18.064L7.545 8.163c.478-.023.957-.058 1.436-.058.455 0 .864.035 1.319.058l2.25 6.75 2.114-6.75c.386-.023.773-.058 1.159-.058.387 0 .819.035 1.25.058l-3.327 9.901h-1.769zm-7.65-6.064c0-2.432.864-4.682 2.318-6.432l4.432 12.182C6.182 16.591 3.273 14.545 3.273 12zm8.727 8.727c-1.386 0-2.682-.364-3.818-1l3.523-10.227 3.59 9.818c-1.023.886-2.068 1.409-3.295 1.409zm5.682-3.841l2.455-7.114c.409 1.455.636 2.977.636 4.545 0 2.591-.932 4.977-2.477 6.841l-.614-4.272z" fill="#21759B"/>
+      </svg>
+    );
+  }
+
+  // GraphQL
+  if (normalized.includes("graphql")) {
+    return (
+      <svg className="w-full h-full" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2l8.66 5v10L12 22l-8.66-5V7L12 2z" stroke="#E10098" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+        <circle cx="12" cy="2" r="1.5" fill="#E10098"/>
+        <circle cx="20.66" cy="7" r="1.5" fill="#E10098"/>
+        <circle cx="20.66" cy="17" r="1.5" fill="#E10098"/>
+        <circle cx="12" cy="22" r="1.5" fill="#E10098"/>
+        <circle cx="3.34" cy="17" r="1.5" fill="#E10098"/>
+        <circle cx="3.34" cy="7" r="1.5" fill="#E10098"/>
+        <path d="M4 7.5L20 16.5M4 16.5L20 7.5M12 2v20" stroke="#E10098" strokeWidth="1.2"/>
+      </svg>
+    );
+  }
+
+  // WebSockets
+  if (normalized.includes("websocket")) {
+    return (
+      <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="#0284C7" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#0284C7" fillOpacity="0.2"/>
+      </svg>
+    );
+  }
+
+  // REST API
+  if (normalized.includes("rest") || normalized.includes("api")) {
+    return (
+      <svg className="w-full h-full" viewBox="0 0 24 24" fill="none" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="3" width="20" height="6" rx="2" fill="#2563EB" fillOpacity="0.15"/>
+        <rect x="2" y="15" width="20" height="6" rx="2" fill="#2563EB" fillOpacity="0.15"/>
+        <line x1="6" y1="6" x2="6.01" y2="6"/>
+        <line x1="6" y1="18" x2="6.01" y2="18"/>
+        <path d="M14 9v6M18 9v6"/>
+      </svg>
+    );
+  }
+
+  // Postman
+  if (normalized.includes("postman")) {
+    return (
+      <svg className="w-full h-full" viewBox="0 0 24 24" fill="none">
+        <circle cx="12" cy="12" r="10" fill="#FF6C37"/>
+        <path d="M6 13.5l11-5-4.5 10-2-3.5-4.5-1.5z" fill="#ffffff"/>
+      </svg>
+    );
+  }
+
+  // MongoDB
+  if (normalized.includes("mongo")) {
+    return (
+      <svg className="w-full h-full" viewBox="0 0 24 24" fill="none">
+        <path d="M12 2C11.5 2 7 6 7 13c0 4.5 3 7.5 5 9 2-1.5 5-4.5 5-9 0-7-4.5-11-5-11z" fill="#47A248"/>
+        <path d="M12 2v20c2-1.5 5-4.5 5-9 0-7-4.5-11-5-11z" fill="#499D4A"/>
+      </svg>
+    );
+  }
+
+  // MySQL
+  if (normalized.includes("mysql")) {
+    return (
+      <svg className="w-full h-full" viewBox="0 0 24 24" fill="#00758F">
+        <path d="M12 3c-4.97 0-9 4.03-9 9 0 2.12.74 4.07 1.97 5.61L4.2 19.8c-.2.2-.06.55.22.55h15.16c.28 0 .42-.35.22-.55l-.77-2.19C20.26 16.07 21 14.12 21 12c0-4.97-4.03-9-9-9zm0 15c-3.31 0-6-2.69-6-6s2.69-6 6-6 6 2.69 6 6-2.69 6-6 6z" fill="#00758F"/>
+        <circle cx="12" cy="12" r="3" fill="#F29111"/>
+      </svg>
+    );
+  }
+
+  // Supabase
+  if (normalized.includes("supabase")) {
+    return (
+      <svg className="w-full h-full" viewBox="0 0 24 24" fill="none">
+        <path d="M13.2 2.5L3.5 14.2c-.4.5 0 1.2.6 1.2h7.7L10.6 22c-.3.6.5 1.1 1 .5l9.7-11.7c.4-.5 0-1.2-.6-1.2h-7.7l1.2-6.6c.3-.6-.5-1.1-1-.5z" fill="#3ECF8E"/>
+      </svg>
+    );
+  }
+
   // Meta / Instagram / WhatsApp
   if (normalized.includes("meta") || normalized.includes("instagram") || normalized.includes("whatsapp")) {
     return (

@@ -37,13 +37,13 @@ export default function HeroSection({ onReplayIntro }: HeroSectionProps = {}) {
           {/* ================= LEFT COLUMN: CONTENT (AUTO RESPONSIVE) ================= */}
           <div className="lg:col-span-7 text-center lg:text-left flex flex-col justify-center">
             {/* Main Headline with 3 distinct curated font styles */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black tracking-tight text-white leading-tight">
-              <span className="whitespace-nowrap block">
-                <span className="hero-font-1 text-white inline-block">TURN YOUR </span>
-                <span className="hero-font-2 text-cyan-300 inline-block px-1">Ideas </span>
-                <span className="hero-font-1 text-white inline-block">INTO</span>
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl font-black tracking-tight text-white leading-tight break-normal [text-wrap:balance]">
+              <span className="inline-block break-normal [text-wrap:balance]">
+                <span className="hero-font-1 text-white inline-block whitespace-nowrap">TURN YOUR </span>{" "}
+                <span className="hero-font-2 text-cyan-300 inline-block px-1 whitespace-nowrap">Ideas </span>{" "}
+                <span className="hero-font-1 text-white inline-block whitespace-nowrap">INTO</span>
               </span>
-              <span className="hero-font-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 block mt-1 sm:mt-2">
+              <span className="hero-font-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-300 to-emerald-400 block mt-1 sm:mt-2 break-normal [text-wrap:balance]">
                 DIGITAL SOLUTIONS
               </span>
             </h1>

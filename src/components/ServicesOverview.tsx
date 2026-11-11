@@ -25,6 +25,7 @@ export default function ServicesOverview() {
       category: "CLOUD INFRASTRUCTURE",
       badge: "99.999% SLA",
       themeColor: "#3B82F6",
+      image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=85&w=1200&auto=format&fit=crop",
       gradientBg: "from-blue-950 via-slate-900 to-slate-950",
       desc: "Bare-metal Linux servers, Nginx reverse proxy clusters, automated SSL provisioning, multi-region failover, and Docker orchestration for zero-downtime reliability.",
       deliverable: "Sub-300ms Latency • Automated Failover • DDoS Hardened",
@@ -38,6 +39,7 @@ export default function ServicesOverview() {
       category: "NEXT.JS & REACT",
       badge: "LIGHTHOUSE 100",
       themeColor: "#06B6D4",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=85&w=1200&auto=format&fit=crop",
       gradientBg: "from-cyan-950 via-slate-900 to-slate-950",
       desc: "Next.js App Router architecture with React Server Components, edge-rendered micro-frontends, and sub-350ms First Contentful Paint benchmarks.",
       deliverable: "0.38s FCP • Edge Prerender • Zero Hydration Shift",
@@ -51,6 +53,7 @@ export default function ServicesOverview() {
       category: "MULTI-AGENT LLM PIPELINES",
       badge: "SUB-40MS TTFT",
       themeColor: "#A855F7",
+      image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=85&w=1200&auto=format&fit=crop",
       gradientBg: "from-purple-950 via-slate-900 to-slate-950",
       desc: "Self-orchestrating multi-agent LLM systems with real-time vector memory, automated customer task triage, and high-throughput tool calling.",
       deliverable: "LangGraph Multi-Agent • Milvus RAG • 70%+ Triage",
@@ -64,6 +67,7 @@ export default function ServicesOverview() {
       category: "GROWTH & SEARCH DOMINANCE",
       badge: "PAGE 1 SERP",
       themeColor: "#10B981",
+      image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=85&w=1200&auto=format&fit=crop",
       gradientBg: "from-emerald-950 via-slate-900 to-slate-950",
       desc: "Programmatic search engine dominance with automated semantic JSON-LD schema generation, dynamic XML sitemaps, and technical Core Web Vitals perfection.",
       deliverable: "Semantic JSON-LD • Top Google Ranking • Fast Indexing",
@@ -77,6 +81,7 @@ export default function ServicesOverview() {
       category: "DATA WAREHOUSING & DAX",
       badge: "REAL-TIME HUD",
       themeColor: "#F59E0B",
+      image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=85&w=1200&auto=format&fit=crop",
       gradientBg: "from-amber-950 via-slate-900 to-slate-950",
       desc: "Real-time executive HUD dashboards, DAX statistical modeling, automated data warehousing pipelines, and financial KPI telemetry for leadership teams.",
       deliverable: "Streaming Telemetry • DAX Modeling • Automated Alerts",
@@ -90,6 +95,7 @@ export default function ServicesOverview() {
       category: "FLUTTER & REACT NATIVE",
       badge: "120HZ FLUID",
       themeColor: "#E11D48",
+      image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?q=85&w=1200&auto=format&fit=crop",
       gradientBg: "from-rose-950 via-slate-900 to-slate-950",
       desc: "High-performance native-feeling mobile applications built with Flutter and React Native. Featuring offline SQLite database synchronization and biometric security.",
       deliverable: "120Hz Smooth • Offline-Ready • iOS & Android",
@@ -130,26 +136,39 @@ export default function ServicesOverview() {
                 className="rounded-2xl border-2 border-slate-200 bg-white shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group hover:-translate-y-1.5"
               >
                 <div>
-                  {/* Top Visual Banner matching Services page */}
-                  <div
-                    className={`relative w-full h-40 bg-gradient-to-br ${service.gradientBg} overflow-hidden flex items-center justify-center`}
-                  >
-                    <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-white/10 via-transparent to-transparent pointer-events-none" />
+                  {/* Top Visual Image Banner with Gradient & Badges */}
+                  <div className="relative w-full h-44 overflow-hidden bg-slate-950">
+                    <img
+                      src={service.image}
+                      alt={service.title}
+                      loading="lazy"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).style.display = "none";
+                      }}
+                      className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 filter brightness-90"
+                    />
+                    {/* Dark gradient overlay for text legibility & color harmony */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/95 via-slate-950/45 to-slate-950/20 pointer-events-none" />
+
+                    {/* Top Right SLA / Performance Badge */}
+                    <div className="absolute top-3 right-3 z-10">
+                      <span className="px-2.5 py-1 rounded-md text-[10px] font-mono font-bold tracking-wider bg-black/60 backdrop-blur-md text-white border border-white/15 shadow-xs">
+                        {service.badge}
+                      </span>
+                    </div>
 
                     {/* Step Number Watermark */}
-                    <span className="absolute -bottom-3 -right-2 text-7xl font-black font-heading text-white/10 select-none pointer-events-none group-hover:text-white/20 transition-colors">
+                    <span className="absolute bottom-2 right-3 text-6xl font-black font-heading text-white/20 select-none pointer-events-none group-hover:text-white/35 transition-colors">
                       {service.step}
                     </span>
 
-                    {/* Center Hero Icon */}
+                    {/* Floating Theme Icon Badge */}
                     <div
-                      className="relative z-10 w-16 h-16 rounded-2xl flex items-center justify-center shadow-xl border-2 border-white/20 transition-transform duration-300 group-hover:scale-105"
+                      className="absolute bottom-3 left-4 z-10 w-12 h-12 rounded-xl flex items-center justify-center shadow-lg border border-white/20 transition-transform duration-300 group-hover:scale-110"
                       style={{ backgroundColor: service.themeColor }}
                     >
-                      <Icon className="w-8 h-8 text-white" />
+                      <Icon className="w-6 h-6 text-white" />
                     </div>
-
-                    <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
                   </div>
 
                   {/* Card Content */}

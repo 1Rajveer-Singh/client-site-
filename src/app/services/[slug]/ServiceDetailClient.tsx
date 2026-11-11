@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Check, Layers } from "lucide-react";
 import { FlatProjectRoadmapIcon } from "@/components/icons/SvgRepoCollections";
 import { ServiceData } from "./page";
 import { getTechIcon } from "@/components/TechIcons";
@@ -50,7 +50,7 @@ function MetricValueTicker({
       <NumberTicker
         value={num}
         decimalPlaces={decimals}
-        className="font-heading"
+        className="text-xl sm:text-2xl font-black font-heading tracking-tight"
       />
       {suffix && <span className="ml-0.5">{suffix}</span>}
     </span>
@@ -62,6 +62,7 @@ export default function ServiceDetailClient({
   allServices,
 }: ServiceDetailClientProps) {
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
+  const [currency, setCurrency] = useState<"USD" | "INR">("USD");
 
   const otherServices = allServices.filter((s) => s.slug !== service.slug);
   const heroBackdrop =
@@ -73,10 +74,10 @@ export default function ServiceDetailClient({
       {/* 1. Hero Header - Interactive Kinetic Title with Atmospheric Backdrop */}
       <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20 bg-[#070b16] text-white overflow-hidden border-b border-slate-800">
         {/* Subtle Background Pixel Reveal */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
           <PixelImage
             src={heroBackdrop}
-            customGrid={{ rows: 4, cols: 6 }}
+            customGrid={{ rows: 6, cols: 8 }}
             grayscaleAnimation
             className="w-full h-full opacity-25 contrast-100 saturate-50"
             imageClassName="object-cover object-center w-full h-full"
@@ -86,19 +87,11 @@ export default function ServiceDetailClient({
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-slate-700 bg-slate-900/80 text-xs font-mono font-semibold tracking-wider text-slate-300 uppercase mb-4 shadow-xs">
-            <span
-              className="w-2 h-2 rounded-full"
-              style={{ backgroundColor: service.accentColor }}
-            />
-            <span>{service.category}</span>
-          </div>
-
           <div className="flex justify-center max-w-5xl mx-auto">
             <KineticText
               text={service.name}
               as="h1"
-              className="text-3xl sm:text-5xl lg:text-6xl font-black font-heading tracking-tight text-white leading-tight justify-center text-center cursor-default"
+              className="text-3xl sm:text-5xl lg:text-6xl font-black font-heading tracking-tight text-white leading-tight justify-center text-center cursor-default [text-wrap:balance] break-normal"
             />
           </div>
         </div>
@@ -184,9 +177,6 @@ export default function ServiceDetailClient({
                       isImageLeft ? "order-2" : "order-2 lg:order-1"
                     }`}
                   >
-                    <span className="text-xs font-mono font-semibold text-slate-500 tracking-wider uppercase mb-2">
-                      Capability 0{idx + 1}
-                    </span>
                     <h3 className="text-2xl sm:text-3xl font-bold font-heading text-slate-950 tracking-tight leading-snug">
                       {cap.title}
                     </h3>
@@ -194,8 +184,57 @@ export default function ServiceDetailClient({
                       {cap.description}
                     </p>
 
+                    {/* Clean 2-Column Specifications Table */}
+                    {cap.properties && cap.properties.length > 0 && (
+                      <div className="mt-5 rounded-xl border border-slate-200/90 bg-white overflow-hidden shadow-2xs">
+                        <table className="w-full text-left border-collapse">
+                          <tbody>
+                            {cap.properties.map((prop, pIdx) => (
+                              <tr
+                                key={pIdx}
+                                className={`border-b border-slate-200/70 last:border-b-0 transition-colors hover:bg-slate-50/70 ${
+                                  pIdx % 2 === 0 ? "bg-white" : "bg-slate-50/40"
+                                }`}
+                              >
+                                {/* Column 1: Direct Title */}
+                                <td className="py-3 sm:py-3.5 px-3.5 sm:px-4 text-[11px] sm:text-xs font-mono font-semibold text-slate-900 w-[36%] sm:w-[32%] align-middle border-r border-slate-200/80 bg-slate-50/60">
+                                  {prop.label}
+                                </td>
+
+                                {/* Column 2: Direct Data */}
+                                <td className="py-3 sm:py-3.5 px-3.5 sm:px-4 text-[11px] sm:text-xs font-mono text-slate-700 align-middle leading-relaxed">
+                                  {prop.detail}
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+
+                    {/* Technologies Used with Pure Icons & Proper Stack Spacing */}
+                    {cap.technologies && cap.technologies.length > 0 && (
+                      <div className="mt-4 pt-3.5 border-t border-slate-200/60 flex flex-wrap items-center gap-2">
+                        <span className="text-[11px] font-mono font-semibold uppercase tracking-wider text-slate-500 mr-1 flex items-center gap-1.5">
+                          <Layers className="w-3.5 h-3.5 text-slate-400" />
+                          Stack:
+                        </span>
+                        {cap.technologies.map((tech) => (
+                          <span
+                            key={tech}
+                            className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-slate-200/90 bg-slate-50/70 text-xs font-medium text-slate-800 shadow-2xs hover:bg-white hover:border-slate-300 transition-colors"
+                          >
+                            <span className="w-3.5 h-3.5 shrink-0 flex items-center justify-center">
+                              {getTechIcon(tech)}
+                            </span>
+                            <span>{tech}</span>
+                          </span>
+                        ))}
+                      </div>
+                    )}
+
                     {/* Deliverable Pill with Flat Roadmap Icon */}
-                    <div className="mt-5 py-2.5 px-3.5 rounded-lg border border-slate-200/90 bg-slate-50 flex items-center gap-2 text-xs font-mono text-slate-700 w-fit">
+                    <div className="mt-4 py-2 px-3 rounded-lg border border-slate-200/90 bg-slate-50/80 flex items-center gap-2 text-xs font-mono text-slate-700 w-fit">
                       <FlatProjectRoadmapIcon className="w-3.5 h-3.5 text-slate-600 shrink-0" />
                       <span>{cap.deliverable}</span>
                     </div>
@@ -291,7 +330,159 @@ export default function ServiceDetailClient({
         </div>
       </section>
 
-      {/* 6. Explore Other Services Navigation */}
+      {/* 6. Scope & Engagement Models (Pricing Ideas for Clients) */}
+      {service.pricingTiers && service.pricingTiers.length > 0 && (
+        <section className="py-20 lg:py-24 bg-slate-50 border-b border-slate-200/90 text-slate-900">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            {/* Header */}
+            <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-14 lg:mb-16">
+              <span className="text-xs font-mono font-semibold text-slate-500 uppercase tracking-widest mb-2 block">
+                Commercial Delivery Models
+              </span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold font-heading text-slate-950 tracking-tight">
+                Scope & Engagement Models
+              </h2>
+              <p className="mt-3 text-sm sm:text-base font-sans text-slate-600 max-w-2xl leading-relaxed">
+                Transparent, milestone-based pricing with fixed scope, deterministic delivery dates, and full intellectual property transfer upon launch.
+              </p>
+
+              {/* Currency Switcher Toggle */}
+              <div className="mt-6 inline-flex items-center p-1 rounded-xl bg-slate-200/80 border border-slate-300/80 text-xs font-mono font-semibold shadow-2xs">
+                <button
+                  type="button"
+                  onClick={() => setCurrency("USD")}
+                  className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                    currency === "USD"
+                      ? "bg-slate-950 text-white shadow-xs font-bold"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  USD ($)
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setCurrency("INR")}
+                  className={`px-3.5 py-1.5 rounded-lg transition-all cursor-pointer ${
+                    currency === "INR"
+                      ? "bg-slate-950 text-white shadow-xs font-bold"
+                      : "text-slate-600 hover:text-slate-900"
+                  }`}
+                >
+                  INR (₹)
+                </button>
+              </div>
+            </div>
+
+            {/* Pricing Cards Grid (dynamically sized for 2 or 3 cards) */}
+            <div
+              className={`grid grid-cols-1 ${
+                service.pricingTiers && service.pricingTiers.length === 2
+                  ? "md:grid-cols-2 max-w-4xl"
+                  : "md:grid-cols-3 max-w-6xl"
+              } gap-6 lg:gap-8 items-stretch mx-auto`}
+            >
+              {service.pricingTiers && service.pricingTiers.map((tier, tIdx) => {
+                const isFeatured = tier.featured;
+                return (
+                  <div
+                    key={tIdx}
+                    className={`rounded-2xl bg-white p-6 sm:p-7 flex flex-col justify-between transition-all hover:-translate-y-1 ${
+                      isFeatured
+                        ? "border-2 border-slate-900 shadow-sm relative hover:shadow-md"
+                        : "border border-slate-200/90 shadow-xs hover:border-slate-300"
+                    }`}
+                  >
+                    {tier.badge && (
+                      <div className="absolute -top-3 left-6">
+                        <span className="px-3 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-widest bg-slate-900 text-white shadow-xs uppercase">
+                          {tier.badge}
+                        </span>
+                      </div>
+                    )}
+
+                    <div>
+                      <div className={`flex items-center justify-between gap-2 mb-3 ${tier.badge ? "mt-1" : ""}`}>
+                        <span
+                          className={`text-[11px] font-mono font-bold tracking-wider uppercase ${
+                            isFeatured ? "text-slate-900" : "text-slate-500"
+                          }`}
+                        >
+                          {tier.tierId}
+                        </span>
+                        <span className="text-xs font-mono text-slate-500 font-medium">
+                          {tier.timeline}
+                        </span>
+                      </div>
+
+                      <h3 className="text-xl font-bold font-heading text-slate-950 mt-1">
+                        {tier.name}
+                      </h3>
+                      <p className="mt-2 text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
+                        {tier.description}
+                      </p>
+
+                      <div className="my-5 pb-5 border-b border-slate-100">
+                        <div className="flex items-baseline gap-1.5">
+                          <span className="text-xs font-mono font-bold text-slate-400">Starting from</span>
+                          <span className="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight text-slate-950">
+                            {currency === "USD" ? tier.priceUSD : tier.priceINR}
+                          </span>
+                        </div>
+                        <span className="text-[11px] font-mono text-slate-500 mt-1 block">
+                          {tier.priceNote}
+                        </span>
+                        <div className="mt-2.5 pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-1 text-[10px] font-mono text-slate-500">
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                            Official Agency Invoice (GST)
+                          </span>
+                          <span>Milestone: 50% Advance · 50% Launch</span>
+                        </div>
+                      </div>
+
+                      {/* Features list */}
+                      <div className="space-y-3 text-xs text-slate-700 font-sans">
+                        {tier.features.map((feat, fIdx) => (
+                          <div key={fIdx} className="flex items-start gap-2.5">
+                            <span
+                              className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
+                                isFeatured ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700"
+                              }`}
+                            >
+                              <Check
+                                className={`w-2.5 h-2.5 ${isFeatured ? "text-white" : "text-slate-700"}`}
+                                strokeWidth={2.5}
+                              />
+                            </span>
+                            <span>{feat}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="mt-8 pt-4 border-t border-slate-100">
+                      <button
+                        type="button"
+                        onClick={() => setBookingModalOpen(true)}
+                        className={`w-full py-2.5 px-4 rounded-xl text-xs font-semibold font-mono transition-colors flex items-center justify-center gap-2 cursor-pointer ${
+                          isFeatured
+                            ? "bg-slate-950 hover:bg-slate-800 text-white shadow-xs"
+                            : "bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 shadow-2xs"
+                        }`}
+                      >
+                        <span>{tier.ctaText}</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* 7. Explore Other Services Navigation */}
       <section className="py-16 sm:py-20 bg-slate-50 border-b border-slate-200/90 text-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 gap-4">

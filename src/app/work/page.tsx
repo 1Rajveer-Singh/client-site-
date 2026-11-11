@@ -37,9 +37,9 @@ export default function WorkPage() {
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black font-heading tracking-tight text-white leading-tight">
-            <KineticText text="OUR CLIENT" as="span" className="inline-block" /> <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-cyan-300 to-yellow-300">
+          <h1 className="text-4xl sm:text-5xl lg:text-7xl font-black font-heading tracking-tight text-white leading-tight break-normal [text-wrap:balance]">
+            <KineticText text="OUR CLIENT" as="span" className="inline-block break-normal [text-wrap:balance]" /> <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-cyan-300 to-yellow-300 break-normal [text-wrap:balance]">
               PRODUCTION WORK
             </span>
           </h1>

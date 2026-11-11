@@ -109,7 +109,28 @@ p {
 [class*="bg-\[\#0a0f1d\]"] p,
 [class*="bg-slate-900"] p,
 [class*="bg-slate-950"] p {
-  color: #e2e8f0 !important;
+  color: #e2e8f0;
+}
+
+/* Ensure light surfaces and modals inside any dark container maintain proper dark readable text */
+.bg-white p,
+[class*="bg-white"] p,
+.bg-slate-50 p,
+[class*="bg-slate-50"] p,
+.bg-slate-100 p,
+[class*="bg-slate-100"] p {
+  color: #0f172a;
+}
+
+p.text-black,
+[class*="text-black"] p,
+p[class*="text-black"],
+p.text-slate-950,
+p.text-slate-900,
+p.text-slate-800,
+p.text-slate-700,
+p.text-slate-600 {
+  color: inherit;
 }
 
 /* Button Typography - Normal, highly legible, clean & modern */
@@ -295,6 +316,10 @@ button svg *,
 .font-heading {
   font-family: var(--font-outfit), var(--font-jakarta), system-ui, sans-serif;
   letter-spacing: -0.02em;
+}
+
+.font-jakarta {
+  font-family: var(--font-jakarta), 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
 }
 
 /* Custom Arcade Scrollbar */

@@ -103,7 +103,7 @@ ${formData.email}`;
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black font-heading tracking-tight text-white leading-tight break-words max-w-full">
+          <h1 className="text-3xl sm:text-5xl lg:text-7xl font-black font-heading tracking-tight text-white leading-tight break-normal [text-wrap:balance] max-w-full">
             <KineticText text="GET IN TOUCH" as="span" className="inline-block" /> <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-300 via-yellow-300 to-cyan-400">
               WITH RAJVEER SINGH

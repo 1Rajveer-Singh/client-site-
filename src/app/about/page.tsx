@@ -263,11 +263,11 @@ export default function AboutPage() {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
           {/* Main Headline - Divided into Two Rows (Both Mobile & Desktop) */}
-          <h1 className="flex flex-col items-center justify-center text-center">
-            <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight text-white leading-tight block">
+          <h1 className="flex flex-col items-center justify-center text-center break-normal [text-wrap:balance]">
+            <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight text-white leading-tight block break-normal [text-wrap:balance]">
               EVERYTHING YOUR BUSINESS NEEDS
             </span>
-            <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-indigo-300 to-cyan-400 block mt-1 sm:mt-2">
+            <span className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-black font-heading tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-yellow-300 via-indigo-300 to-cyan-400 block mt-1 sm:mt-2 break-normal [text-wrap:balance]">
               TO SUCCEED DIGITALLY.
             </span>
           </h1>

@@ -245,11 +245,8 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
                         }`}
                       />
                     ),
-                    onClick: (e: React.MouseEvent) => {
-                      if (window.innerWidth >= 1024) {
-                        e.preventDefault();
-                        setServicesDropdownOpen((prev) => !prev);
-                      }
+                    onClick: () => {
+                      setServicesDropdownOpen(false);
                     },
                     onMouseEnter: handleMouseEnter,
                     onMouseLeave: handleMouseLeave,
@@ -303,6 +300,21 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
                         );
                       })}
                     </div>
+
+                    {/* Direct link to core /services page */}
+                    <div className="mt-2.5 pt-2.5 border-t border-slate-800/80 flex items-center justify-between px-1">
+                      <span className="text-[11px] text-slate-400 font-sans">
+                        Complete engineering capabilities & toolchains
+                      </span>
+                      <Link
+                        href="/services"
+                        onClick={() => setServicesDropdownOpen(false)}
+                        className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-400 hover:text-cyan-300 transition-colors"
+                      >
+                        <span>All Core Services</span>
+                        <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
               )}
@@ -355,21 +367,38 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
 
             {/* Mobile Services Accordion */}
             <div className="flex flex-col rounded-lg border border-slate-800/80 bg-slate-900/40 overflow-hidden">
-              <button
-                type="button"
-                onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
-                className="w-full flex items-center justify-between px-3 py-2 text-slate-200 hover:text-white hover:bg-slate-900/60 transition-colors cursor-pointer text-sm font-medium"
-              >
-                <span>Services</span>
-                <ChevronDown
-                  className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
-                    mobileServicesOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
+              <div className="w-full flex items-center justify-between px-3 py-2 text-slate-200 hover:text-white hover:bg-slate-900/60 transition-colors text-sm font-medium">
+                <Link
+                  href="/services"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex-1 text-slate-200 hover:text-white"
+                >
+                  Services
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setMobileServicesOpen(!mobileServicesOpen)}
+                  className="p-1 -mr-1 text-slate-400 hover:text-white cursor-pointer"
+                  aria-label="Toggle sub-services"
+                >
+                  <ChevronDown
+                    className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
+                      mobileServicesOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+              </div>
 
               {mobileServicesOpen && (
                 <div className="flex flex-col bg-slate-950/95 border-t border-slate-800/80 p-1.5 gap-0.5 text-xs">
+                  <Link
+                    href="/services"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="p-2 rounded-md bg-blue-950/40 text-cyan-300 font-semibold border border-blue-900/40 flex items-center justify-between mb-1"
+                  >
+                    <span>View All Core Services</span>
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
                   {serviceObjectives.map((srv) => (
                     <Link
                       key={srv.title}

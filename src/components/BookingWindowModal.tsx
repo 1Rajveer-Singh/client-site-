@@ -249,7 +249,7 @@ ${email}`;
     <div
       role="dialog"
       aria-modal="true"
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-0 sm:p-4 md:p-6 bg-slate-950/75 backdrop-blur-xs animate-in fade-in duration-100"
+      className="fixed inset-0 z-[9999] flex items-center justify-center p-0 sm:p-4 md:p-6 bg-black/75 backdrop-blur-xs animate-in fade-in duration-100"
       onClick={(e) => {
         if (e.target === e.currentTarget) onClose();
       }}

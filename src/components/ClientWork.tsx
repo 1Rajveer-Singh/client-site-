@@ -24,7 +24,7 @@ interface ProjectItem {
   tag: string;
   tagBg: string;
   desc: string;
-  detailedAbout: string;
+  modalDescription: string;
   features: string[];
   techStack: string[];
   metric: string;
@@ -64,9 +64,9 @@ export default function ClientWork() {
       category: "Academic Research & Scholarly Indexing",
       tag: "Live Production",
       tagBg: "bg-emerald-600 text-white border-emerald-500",
-      desc: "International peer-reviewed scholarly research publishing & academic journal indexing portal engineered for high-concurrency editorial workflows, automated DOI indexing, and lightning-fast global accessibility.",
-      detailedAbout:
-        "Maurya ERF (mauryaerf.com) is an enterprise academic publishing and scholarly indexing ecosystem. Engineered to host multiple high-impact peer-reviewed journals, the platform automates author manuscript submission pipelines, editorial review board assignments, automated DOI assignment, and semantic metadata tagging for instant Google Scholar and Crossref discovery. The architecture features zero hydration layout shift, server-side caching, and hardened security for research intellectual property.",
+      desc: "Enterprise platform operating 4 journals, academic book publications, research event management pipelines, and an international advisor board peer review workflow.",
+      modalDescription:
+        "Enterprise platform operating 4 journals, academic book publications, research event management pipelines, and an international advisor board peer review workflow.",
       features: [
         "Automated DOI & Crossref Metadata Indexing",
         "High-Concurrency Manuscript Submission Engine",
@@ -83,7 +83,7 @@ export default function ClientWork() {
         "Tailwind CSS",
         "JSON-LD",
       ],
-      metric: "12+ Journals • 0.38s FCP • 99.999% Uptime",
+      metric: "4 Journals • 0.38s FCP • 99.999% Uptime",
       url: "https://www.mauryaerf.com/",
       image: "/Projects/mearf/slide-1.png",
       gallery: [
@@ -100,9 +100,9 @@ export default function ClientWork() {
       category: "Autonomous Growth & Lead Generation",
       tag: "Live Production",
       tagBg: "bg-pink-600 text-white border-pink-500",
-      desc: "End-to-end autonomous Instagram growth and lead qualification engine. Triggers instant context-aware DM responses to story replies, reel comments, and bio link clicks with real-time CRM pipeline synchronization.",
-      detailedAbout:
-        "The Instagram Automation suite transforms inbound social media engagement into qualified, sales-ready leads without manual intervention. Operating 24/7 on official Meta Graph APIs and event webhooks, the system listens for trigger keywords across reel comments, direct messages, and story interactions. It conducts dynamic natural-language qualification dialogues, captures verified client contact data, and streams hot leads directly into cloud databases and team communication channels.",
+      desc: "Autonomous Meta webhook engine delivering instant keyword-triggered DM responses, dynamic CRM lead qualification, conversion telemetry, and anti-spam account security guardrails.",
+      modalDescription:
+        "Autonomous Meta webhook engine delivering instant keyword-triggered DM responses, dynamic CRM lead qualification, conversion telemetry, and anti-spam account security guardrails.",
       features: [
         "Real-Time Meta Webhook & Graph API Event Listeners",
         "Automated Keyword-Triggered DM & Comment Responses",
@@ -131,40 +131,6 @@ export default function ClientWork() {
         "/Projects/instagram/slide-5.png",
       ],
       badge: "AUTOMATION PIPELINE",
-    },
-    {
-      id: "automata",
-      title: "Automata AI Swarms",
-      category: "Autonomous Multi-Agent Triage",
-      tag: "Live Production",
-      tagBg: "bg-purple-600 text-white border-purple-500",
-      desc: "Self-orchestrating multi-agent LLM systems with real-time vector memory, automated enterprise customer triage, and high-throughput tool calling.",
-      detailedAbout:
-        "Enterprise autonomous agent collective engineered to resolve high-tier customer workflows and transactional triage autonomously. Featuring hybrid Milvus vector retrieval, automated ticket dispatch, and deterministic state-machine fallbacks.",
-      features: [
-        "Autonomous Multi-Agent Swarm Orchestration",
-        "Milvus Vector Database Semantic Memory",
-        "Deterministic Tool Calling & ERP Integration",
-        "Sub-28ms P99 Vector Retrieval Latency",
-        "Human-in-the-Loop Escalation Routing",
-      ],
-      techStack: [
-        "Python",
-        "FastAPI",
-        "Milvus",
-        "LangGraph",
-        "Docker",
-        "Next.js",
-      ],
-      metric: "74% Auto-Resolved • <28ms Response",
-      url: "/contact",
-      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?q=85&w=1000&auto=format&fit=crop",
-      gallery: [
-        "https://images.unsplash.com/photo-1518770660439-4636190af475?q=85&w=1000&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=85&w=1000&auto=format&fit=crop",
-        "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?q=85&w=1000&auto=format&fit=crop",
-      ],
-      badge: "ENTERPRISE AI SWARM",
     },
   ];
 
@@ -213,8 +179,8 @@ export default function ClientWork() {
             </p>
           </div>
 
-          {/* 3-Column Responsive Grid matching Plan of Work card size */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-stretch">
+          {/* 2-Column Responsive Grid matching Plan of Work card size */}
+          <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-8 items-stretch">
             {projects.map((project) => (
               <div
                 key={project.id}
@@ -249,13 +215,15 @@ export default function ClientWork() {
                 {/* Project Details with Refined Modern Typography */}
                 <div className="p-5 flex flex-col justify-between text-slate-800 flex-1">
                   <div>
-                    <div className="flex items-center justify-between gap-2 mb-1.5">
-                      <span className="text-[11px] w2 text-blue-600 uppercase tracking-wider">
+                    <div className="flex items-center gap-2 mb-2">
+                      <span
+                        className={`text-[11px] font-mono font-bold uppercase tracking-wider ${project.id === "instagram" ? "text-pink-600" : "text-blue-600"
+                          }`}
+                      >
                         {project.category}
                       </span>
-                      <span className="inline-flex items-center gap-1 text-[11px] w1 text-emerald-600 font-bold">
-                        <ShieldCheck className="w-3.5 h-3.5" />
-                        VERIFIED
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        LIVE PRODUCTION
                       </span>
                     </div>
 
@@ -263,7 +231,10 @@ export default function ClientWork() {
                       {project.title}
                     </h3>
 
-                    <p className="mt-2.5 text-sm font-sans leading-relaxed text-slate-600 font-normal">
+                    <p
+                      suppressHydrationWarning
+                      className="mt-2.5 text-xs sm:text-sm font-jakarta leading-relaxed text-slate-600 font-normal"
+                    >
                       {project.desc}
                     </p>
 
@@ -280,8 +251,8 @@ export default function ClientWork() {
                       {project.id === "mearf"
                         ? "MAURYAERF.COM"
                         : project.id === "instagram"
-                        ? "INSTAGRAM AUTO"
-                        : "ENTERPRISE"}
+                          ? "INSTAGRAM AUTO"
+                          : "ENTERPRISE"}
                     </span>
 
                     <button
@@ -303,58 +274,61 @@ export default function ClientWork() {
         </div>
       </section>
 
-      {/* Split Window Modal: Left Portion (Big Image + Gallery Thumbnails) & Right Portion (Title + About the Project) */}
+      {/* Split Window Modal: Clean Professional Designer Theme (Zero Black Color) */}
       {activeProject && (
         <div
-          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-5 md:p-8 bg-slate-950/85 backdrop-blur-md animate-in fade-in duration-200"
+          className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-5 md:p-8 bg-black/60 backdrop-blur-md animate-in fade-in duration-200"
           onClick={() => setActiveProject(null)}
         >
           <div
-            className="relative w-full max-w-6xl h-[92vh] sm:h-auto sm:max-h-[92vh] bg-white rounded-t-3xl sm:rounded-3xl border border-slate-200 shadow-2xl flex flex-col overflow-hidden text-slate-900 select-text"
+            className="relative w-full max-w-6xl h-[92vh] sm:h-auto sm:max-h-[92vh] bg-white rounded-t-3xl sm:rounded-3xl border border-slate-200 shadow-2xl flex flex-col overflow-hidden text-black select-text"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* Top Modal Navigation Header - Pinned at top */}
-            <div className="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-7 py-3.5 sm:py-4 border-b border-slate-200/90 bg-slate-50/95 backdrop-blur-md shrink-0">
-              <div className="flex items-center gap-2.5 truncate pr-2">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0" />
-                <h3 className="text-base sm:text-lg font-semibold font-heading tracking-tight text-slate-900 truncate">
+            {/* Top Modal Navigation Header */}
+            <div className="sticky top-0 z-30 flex items-center justify-between px-4 sm:px-7 py-3 sm:py-3.5 border-b border-slate-200 bg-slate-50/95 backdrop-blur-md shrink-0">
+              <div className="flex items-center gap-3 truncate pr-2">
+                <span className="relative flex h-2 w-2 shrink-0">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
+                <h3 className="text-sm sm:text-base font-semibold font-jakarta tracking-tight text-slate-900 truncate">
                   {activeProject.title}
                 </h3>
+                <span className="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-[10px] font-jakarta font-medium uppercase tracking-wider bg-slate-100 border border-slate-200 text-slate-600">
+                  {activeProject.category}
+                </span>
               </div>
 
               <button
                 type="button"
                 onClick={() => setActiveProject(null)}
-                className="p-2 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-200/80 transition-colors cursor-pointer shrink-0"
+                className="p-1.5 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-200/70 border border-slate-200 transition-colors cursor-pointer shrink-0"
                 aria-label="Close modal"
               >
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               </button>
             </div>
 
-            {/* Split Window Body: Single combined vertical scroll on mobile (< lg), split layout on desktop (>= lg) */}
+            {/* Split Window Body */}
             <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 overflow-y-auto overscroll-contain">
-              
-              {/* Left Portion: Fixed aspect-ratio image at top on mobile, sticky on desktop */}
-              <div className="lg:col-span-7 flex flex-col justify-between p-4 sm:p-7 bg-[#0b0f19] text-white border-b lg:border-b-0 lg:border-r border-slate-800 lg:sticky lg:top-0 lg:self-start">
+
+              {/* Left Portion: Fixed aspect-ratio image and gallery strip in light theme */}
+              <div className="lg:col-span-7 flex flex-col justify-between p-4 sm:p-7 bg-slate-50/80 border-b lg:border-b-0 lg:border-r border-slate-200 lg:sticky lg:top-0 lg:self-start">
                 <div>
-                  {/* Big Image Frame with fixed aspect ratio */}
-                  <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl bg-black border border-white/10 overflow-hidden shadow-2xl flex items-center justify-center group shrink-0">
+                  {/* Image Frame */}
+                  <div className="relative w-full aspect-[16/10] sm:aspect-[16/9] rounded-2xl bg-white border border-slate-200 p-2 overflow-hidden shadow-sm flex items-center justify-center group shrink-0">
                     <img
                       src={activeProject.gallery[selectedImageIndex]}
                       alt={`${activeProject.title} screenshot ${selectedImageIndex + 1}`}
-                      className="w-full h-full object-contain bg-black/90 transition-all duration-300"
+                      className="w-full h-full object-contain rounded-xl bg-slate-50 transition-all duration-300"
                     />
 
-                    {/* Frame Gradient Overlay Bottom */}
-                    <div className="absolute inset-x-0 bottom-0 h-14 bg-gradient-to-t from-black/80 via-black/30 to-transparent pointer-events-none" />
-
                     {/* Image Counter Badge */}
-                    <div className="absolute bottom-3 left-4 px-3 py-1 rounded-lg bg-black/70 backdrop-blur-md text-[11px] font-mono text-slate-300 border border-white/10">
+                    <div className="absolute bottom-4 left-5 px-2.5 py-1 rounded-md bg-white/95 backdrop-blur-md text-[11px] font-jakarta font-medium text-slate-700 border border-slate-200 shadow-xs">
                       Screenshot {selectedImageIndex + 1} of {activeProject.gallery.length}
                     </div>
 
-                    {/* Left & Right Controls for cycling big frame */}
+                    {/* Left & Right Controls */}
                     {activeProject.gallery.length > 1 && (
                       <>
                         <button
@@ -363,10 +337,10 @@ export default function ClientWork() {
                             e.stopPropagation();
                             prevImage();
                           }}
-                          className="absolute left-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 transition-all opacity-80 hover:opacity-100 hover:scale-105"
+                          className="absolute left-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-slate-700 hover:text-slate-900 flex items-center justify-center border border-slate-200 shadow-sm transition-all hover:scale-105 cursor-pointer"
                           aria-label="Previous image"
                         >
-                          <ChevronLeft className="w-5 h-5" />
+                          <ChevronLeft className="w-4 h-4" />
                         </button>
                         <button
                           type="button"
@@ -374,10 +348,10 @@ export default function ClientWork() {
                             e.stopPropagation();
                             nextImage();
                           }}
-                          className="absolute right-3 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/60 hover:bg-black/90 text-white flex items-center justify-center border border-white/20 transition-all opacity-80 hover:opacity-100 hover:scale-105"
+                          className="absolute right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white text-slate-700 hover:text-slate-900 flex items-center justify-center border border-slate-200 shadow-sm transition-all hover:scale-105 cursor-pointer"
                           aria-label="Next image"
                         >
-                          <ChevronRight className="w-5 h-5" />
+                          <ChevronRight className="w-4 h-4" />
                         </button>
                       </>
                     )}
@@ -385,9 +359,9 @@ export default function ClientWork() {
 
                   {/* Below: Gallery Thumbnails Strip */}
                   <div className="mt-3.5 sm:mt-4">
-                    <div className="text-[11px] font-mono text-slate-400 mb-2 flex items-center justify-between">
-                      <span>Tap thumbnail to switch image:</span>
-                      <span className="text-cyan-400 font-semibold">● {selectedImageIndex + 1}/{activeProject.gallery.length}</span>
+                    <div className="text-[11px] font-jakarta text-slate-500 font-medium mb-2 flex items-center justify-between">
+                      <span>Click thumbnail to view:</span>
+                      <span className="text-slate-700 font-semibold">● {selectedImageIndex + 1}/{activeProject.gallery.length}</span>
                     </div>
 
                     <div className="flex items-center gap-2.5 sm:gap-3 overflow-x-auto pb-2 scrollbar-thin">
@@ -396,11 +370,10 @@ export default function ClientWork() {
                           key={idx}
                           type="button"
                           onClick={() => setSelectedImageIndex(idx)}
-                          className={`relative w-20 sm:w-24 h-14 sm:h-16 rounded-xl overflow-hidden shrink-0 border transition-all duration-150 cursor-pointer ${
-                            selectedImageIndex === idx
-                              ? "border-blue-500 ring-2 ring-blue-500/20 opacity-100"
-                              : "border-slate-800 opacity-60 hover:opacity-90 hover:border-slate-600"
-                          }`}
+                          className={`relative w-20 sm:w-24 h-14 sm:h-16 rounded-xl overflow-hidden shrink-0 border-2 transition-all duration-150 cursor-pointer ${selectedImageIndex === idx
+                              ? "border-blue-600 ring-2 ring-blue-500/20 opacity-100"
+                              : "border-slate-200 opacity-70 hover:opacity-100 hover:border-slate-400"
+                            }`}
                         >
                           <img
                             src={thumb}
@@ -414,78 +387,48 @@ export default function ClientWork() {
                 </div>
               </div>
 
-              {/* Right Portion: Title and About the Project (flows naturally under image in mobile scroll, no trapped sub-scroll) */}
-              <div className="lg:col-span-5 flex flex-col justify-between p-5 sm:p-8 bg-white overflow-visible lg:overflow-y-auto">
+              {/* Right Portion: Executive Architecture & Compact Professional Description */}
+              <div className="lg:col-span-5 flex flex-col justify-between p-5 sm:p-7 bg-white text-slate-900 overflow-visible lg:overflow-y-auto">
                 <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-xs font-medium text-slate-500">
-                      {activeProject.category}
-                    </span>
-                    <span className="text-[10px] font-mono font-medium px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
-                      Live
-                    </span>
-                  </div>
-
-                  <h3 className="text-2xl sm:text-3xl font-semibold font-heading text-slate-900 tracking-tight leading-tight">
+                  <h3 className="text-lg sm:text-xl font-bold font-jakarta text-slate-950 tracking-tight leading-snug">
                     {activeProject.title}
                   </h3>
 
-                  {/* Section Divider */}
-                  <div className="my-5 border-b border-slate-200" />
-
-                  {/* About the Project */}
-                  <div className="bg-slate-50 p-5 rounded-xl border border-slate-200">
-                    <div className="flex items-center gap-2 mb-3 pb-2.5 border-b border-slate-200">
-                      <span className="w-2 h-2 rounded-full bg-blue-600 shrink-0" />
-                      <h4 className="text-xs font-semibold text-slate-900 uppercase tracking-wider">
-                        About this project
-                      </h4>
-                    </div>
-                    <div
-                      className="text-base sm:text-[16px] leading-relaxed"
-                      style={{ color: "#000000", fontWeight: 600 }}
-                    >
-                      {activeProject.detailedAbout}
-                    </div>
-                  </div>
+                  {/* Clean small professional description */}
+                  <p className="mt-2.5 text-xs sm:text-sm font-jakarta font-normal leading-relaxed text-slate-600">
+                    {activeProject.modalDescription}
+                  </p>
 
                   {/* Key Capabilities */}
-                  <div className="mt-5">
-                    <h4
-                      className="text-xs sm:text-sm font-black font-heading uppercase tracking-wider mb-3"
-                      style={{ color: "#000000", fontWeight: 900 }}
-                    >
-                      KEY CAPABILITIES & DELIVERABLES
+                  <div className="mt-6">
+                    <h4 className="text-xs font-jakarta font-semibold uppercase tracking-wider text-slate-500 mb-3">
+                      Production Engineering Deliverables
                     </h4>
                     <ul className="space-y-2.5">
                       {activeProject.features.map((feat, idx) => (
                         <li
                           key={idx}
-                          className="flex items-start gap-2.5 text-xs sm:text-[13px] font-sans"
-                          style={{ color: "#000000", fontWeight: 600 }}
+                          className="flex items-start gap-2.5 text-xs sm:text-[13px] font-jakarta text-slate-800 font-medium leading-relaxed"
                         >
-                          <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
+                          <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
                           <span>{feat}</span>
                         </li>
                       ))}
                     </ul>
                   </div>
 
-                  {/* Technology Architecture with Real SVGs */}
-                  <div className="mt-5">
-                    <h4
-                      className="text-xs sm:text-sm font-black font-heading uppercase tracking-wider mb-2.5"
-                      style={{ color: "#000000", fontWeight: 900 }}
-                    >
-                      CORE TECHNOLOGY STACK
+                  {/* Core Technology Stack */}
+                  <div className="mt-6">
+                    <h4 className="text-xs font-jakarta font-semibold uppercase tracking-wider text-slate-500 mb-2.5">
+                      Core Technology Stack
                     </h4>
                     <div className="flex flex-wrap gap-2">
                       {activeProject.techStack.map((tech, idx) => (
                         <div
                           key={idx}
-                          className="inline-flex items-center gap-2 px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-300 text-xs font-mono font-bold text-slate-900 shadow-2xs hover:bg-white hover:border-blue-500 transition-all group"
+                          className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-slate-100/80 border border-slate-200 text-xs font-jakarta font-medium text-slate-800"
                         >
-                          <div className="w-4 h-4 shrink-0 flex items-center justify-center group-hover:scale-110 transition-transform">
+                          <div className="w-3.5 h-3.5 shrink-0 flex items-center justify-center">
                             {getTechIcon(tech)}
                           </div>
                           <span>{tech}</span>
@@ -496,31 +439,30 @@ export default function ClientWork() {
                 </div>
 
                 {/* Bottom Call to Action Buttons */}
-                <div className="mt-8 pt-5 border-t border-slate-200 flex flex-col sm:flex-row items-center gap-3">
+                <div className="mt-6 pt-4 border-t border-slate-200 flex items-center gap-3">
                   {activeProject.id === "mearf" ? (
                     <a
                       href="https://www.mauryaerf.com/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-heading font-bold text-xs tracking-wider uppercase transition-all shadow-md hover:shadow-lg cursor-pointer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 text-white font-jakarta font-semibold text-xs tracking-wider uppercase transition-all shadow-xs hover:shadow cursor-pointer"
                     >
                       <span>Visit Live Website</span>
-                      <ArrowUpRight className="w-4 h-4" />
+                      <ArrowUpRight className="w-3.5 h-3.5 text-white" />
                     </a>
                   ) : (
                     <a
                       href="/contact"
-                      className="w-full sm:w-auto flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-heading font-bold text-xs tracking-wider uppercase transition-all shadow-md hover:shadow-lg cursor-pointer"
+                      className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl bg-pink-600 hover:bg-pink-700 text-white font-jakarta font-semibold text-xs tracking-wider uppercase transition-all shadow-xs hover:shadow cursor-pointer"
                     >
-                      <span>Get In Touch</span>
-                      <ArrowUpRight className="w-4 h-4" />
+                      <span>Request Custom Pipeline</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-white" />
                     </a>
                   )}
-
                   <button
                     type="button"
                     onClick={() => setActiveProject(null)}
-                    className="w-full sm:w-auto px-5 py-3 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-800 font-heading font-bold text-xs tracking-wider uppercase transition-colors cursor-pointer"
+                    className="px-4 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-jakarta font-semibold text-xs tracking-wider uppercase transition-colors cursor-pointer"
                   >
                     Close
                   </button>
