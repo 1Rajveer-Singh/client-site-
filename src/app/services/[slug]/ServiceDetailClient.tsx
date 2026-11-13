@@ -2,14 +2,175 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { ArrowRight, Check, Layers } from "lucide-react";
-import { FlatProjectRoadmapIcon } from "@/components/icons/SvgRepoCollections";
+import {
+  ArrowRight,
+  Check,
+  Layers,
+  Search,
+  Zap,
+  Database,
+  ShieldCheck,
+  Code2,
+  MessageSquare,
+  LayoutDashboard,
+  Sparkles,
+  Bot,
+  Server,
+  Award,
+} from "lucide-react";
 import { ServiceData } from "./page";
 import { getTechIcon } from "@/components/TechIcons";
 import BookingWindowModal from "@/components/BookingWindowModal";
 import { PixelImage } from "@/registry/magicui/pixel-image";
 import { KineticText } from "@/registry/magicui/kinetic-text";
 import { NumberTicker } from "@/components/ui/number-ticker";
+
+const SERVICE_DISCOUNTS: Record<string, [number, number, number]> = {
+  "web-development": [22, 38, 62],
+  "ai-automation": [25, 42, 65],
+  "cloud-infrastructure": [20, 36, 60],
+  "seo-optimization": [24, 40, 63],
+  "power-bi-telemetry": [27, 45, 64],
+  "mobile-apps": [23, 37, 61],
+};
+
+function getTierDiscount(slug: string, tIdx: number): number {
+  if (SERVICE_DISCOUNTS[slug]) {
+    const list = SERVICE_DISCOUNTS[slug];
+    return list[Math.min(tIdx, list.length - 1)];
+  }
+  let seed = 0;
+  for (let i = 0; i < slug.length; i++) seed = (seed * 31 + slug.charCodeAt(i)) % 1000;
+  if (tIdx === 0) return 20 + (seed % 8); // 20 to 27%
+  if (tIdx === 1) return 35 + (seed % 11); // 35 to 45%
+  return 60 + (seed % 6); // 60 to 65%
+}
+
+function getCutPrice(priceStr: string, discountPercent: number): string {
+  const num = parseInt(priceStr.replace(/[^0-9]/g, ""), 10);
+  if (isNaN(num)) return priceStr;
+  const factor = 1 - discountPercent / 100;
+  const original = Math.round((num / factor) / 10) * 10;
+  const symbol = priceStr.startsWith("$") ? "$" : priceStr.startsWith("₹") ? "₹" : "";
+  const locale = symbol === "₹" ? "en-IN" : "en-US";
+  return `${symbol}${original.toLocaleString(locale)}`;
+}
+
+function getFeatureIcon(featureText: string) {
+  const text = featureText.toLowerCase();
+  if (
+    text.includes("ai") ||
+    text.includes("agent") ||
+    text.includes("llm") ||
+    text.includes("model") ||
+    text.includes("langgraph")
+  ) {
+    return <Bot className="w-3.5 h-3.5 text-purple-600" />;
+  }
+  if (
+    text.includes("seo") ||
+    text.includes("search") ||
+    text.includes("google") ||
+    text.includes("canonical") ||
+    text.includes("ranking") ||
+    text.includes("rag")
+  ) {
+    return <Search className="w-3.5 h-3.5 text-blue-600" />;
+  }
+  if (
+    text.includes("database") ||
+    text.includes("backup") ||
+    text.includes("sql") ||
+    text.includes("redis") ||
+    text.includes("storage") ||
+    text.includes("memory")
+  ) {
+    return <Database className="w-3.5 h-3.5 text-indigo-600" />;
+  }
+  if (
+    text.includes("auth") ||
+    text.includes("rbac") ||
+    text.includes("security") ||
+    text.includes("encryption") ||
+    text.includes("guardrail") ||
+    text.includes("sandbox") ||
+    text.includes("firewall") ||
+    text.includes("ssl")
+  ) {
+    return <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />;
+  }
+  if (
+    text.includes("server") ||
+    text.includes("docker") ||
+    text.includes("linux") ||
+    text.includes("cluster") ||
+    text.includes("proxy") ||
+    text.includes("cloud")
+  ) {
+    return <Server className="w-3.5 h-3.5 text-sky-600" />;
+  }
+  if (
+    text.includes("speed") ||
+    text.includes("vitals") ||
+    text.includes("lighthouse") ||
+    text.includes("fast") ||
+    text.includes("latency") ||
+    text.includes("stream") ||
+    text.includes("animation")
+  ) {
+    return <Zap className="w-3.5 h-3.5 text-amber-500" />;
+  }
+  if (
+    text.includes("whatsapp") ||
+    text.includes("email") ||
+    text.includes("lead") ||
+    text.includes("notification") ||
+    text.includes("omnichannel") ||
+    text.includes("webhook")
+  ) {
+    return <MessageSquare className="w-3.5 h-3.5 text-emerald-600" />;
+  }
+  if (
+    text.includes("next.js") ||
+    text.includes("react") ||
+    text.includes("code") ||
+    text.includes("api") ||
+    text.includes("server actions") ||
+    text.includes("connector")
+  ) {
+    return <Code2 className="w-3.5 h-3.5 text-cyan-600" />;
+  }
+  if (
+    text.includes("crm") ||
+    text.includes("admin") ||
+    text.includes("dashboard") ||
+    text.includes("portal") ||
+    text.includes("workflow") ||
+    text.includes("triage") ||
+    text.includes("cms")
+  ) {
+    return <LayoutDashboard className="w-3.5 h-3.5 text-blue-600" />;
+  }
+  if (
+    text.includes("support") ||
+    text.includes("maintenance") ||
+    text.includes("sla") ||
+    text.includes("checkpoint") ||
+    text.includes("guarantee")
+  ) {
+    return <Award className="w-3.5 h-3.5 text-teal-600" />;
+  }
+  if (
+    text.includes("bespoke") ||
+    text.includes("page") ||
+    text.includes("design") ||
+    text.includes("ui") ||
+    text.includes("discount")
+  ) {
+    return <Sparkles className="w-3.5 h-3.5 text-rose-500" />;
+  }
+  return <Check className="w-3.5 h-3.5 text-emerald-600" />;
+}
 
 interface ServiceDetailClientProps {
   service: ServiceData;
@@ -28,7 +189,7 @@ function MetricValueTicker({
   if (!match) {
     return (
       <span
-        className="text-xl sm:text-2xl font-black font-heading tracking-tight block"
+        className="text-[15px] sm:text-[19px] font-black font-heading tracking-tight block"
         style={{ color }}
       >
         {rawValue}
@@ -43,14 +204,14 @@ function MetricValueTicker({
 
   return (
     <span
-      className="text-xl sm:text-2xl font-black font-heading tracking-tight tabular-nums inline-flex items-baseline"
+      className="text-[15px] sm:text-[19px] font-black font-heading tracking-tight tabular-nums inline-flex items-baseline"
       style={{ color }}
     >
       {prefix && <span className="mr-0.5">{prefix}</span>}
       <NumberTicker
         value={num}
         decimalPlaces={decimals}
-        className="text-xl sm:text-2xl font-black font-heading tracking-tight"
+        className="text-[15px] sm:text-[19px] font-black font-heading tracking-tight"
       />
       {suffix && <span className="ml-0.5">{suffix}</span>}
     </span>
@@ -72,7 +233,7 @@ export default function ServiceDetailClient({
   return (
     <>
       {/* 1. Hero Header - Interactive Kinetic Title with Atmospheric Backdrop */}
-      <section className="relative pt-12 sm:pt-16 lg:pt-20 pb-12 sm:pb-16 lg:pb-20 bg-[#070b16] text-white overflow-hidden border-b border-slate-800">
+      <section className="relative pt-6 sm:pt-8 lg:pt-10 pb-6 sm:pb-8 lg:pb-10 bg-[#070b16] text-white overflow-hidden border-b border-slate-800">
         {/* Subtle Background Pixel Reveal */}
         <div className="absolute inset-0 pointer-events-none select-none overflow-hidden">
           <PixelImage
@@ -87,11 +248,11 @@ export default function ServiceDetailClient({
         </div>
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <div className="flex justify-center max-w-5xl mx-auto">
+          <div className="flex justify-center max-w-5xl mx-auto group">
             <KineticText
               text={service.name}
               as="h1"
-              className="text-3xl sm:text-5xl lg:text-6xl font-black font-heading tracking-tight text-white leading-tight justify-center text-center cursor-default [text-wrap:balance] break-normal"
+              className="font-serif text-2xl sm:text-4xl md:text-[53px] tracking-tight text-white group-hover:text-orange-500 transition-colors leading-tight md:leading-[1.15] justify-center text-center cursor-default block break-normal [text-wrap:balance]"
             />
           </div>
         </div>
@@ -104,7 +265,7 @@ export default function ServiceDetailClient({
             {service.metrics.map((metric, idx) => (
               <div
                 key={idx}
-                className="p-4 rounded-xl border border-slate-200/90 bg-white hover:border-slate-400 hover:shadow-xs transition-all duration-200 flex flex-col justify-between group"
+                className="px-3 sm:px-4 py-[4.5px] sm:py-2 rounded-xl border border-slate-200/90 bg-white hover:border-slate-400 hover:shadow-xs transition-all duration-200 flex flex-col justify-between group"
               >
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] sm:text-[11px] font-mono text-slate-500 uppercase tracking-wider font-semibold">
@@ -112,7 +273,7 @@ export default function ServiceDetailClient({
                   </span>
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 shadow-xs animate-pulse" />
                 </div>
-                <div className="my-1.5">
+                <div className="my-0.5 sm:my-1">
                   <MetricValueTicker
                     rawValue={metric.value}
                     color={service.accentColor}
@@ -154,7 +315,7 @@ export default function ServiceDetailClient({
               return (
                 <div
                   key={idx}
-                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center"
+                  className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center group"
                 >
                   {/* Image Column */}
                   <div
@@ -177,10 +338,10 @@ export default function ServiceDetailClient({
                       isImageLeft ? "order-2" : "order-2 lg:order-1"
                     }`}
                   >
-                    <h3 className="text-2xl sm:text-3xl font-bold font-heading text-slate-950 tracking-tight leading-snug">
+                    <h3 className="font-serif text-[26px] md:text-[32px] leading-[1.15] tracking-[-0.01em] group-hover:text-orange-500 transition-colors text-ink">
                       {cap.title}
                     </h3>
-                    <p className="mt-3 text-sm sm:text-base text-slate-600 font-sans leading-relaxed">
+                    <p className="mt-3 text-ink/85 text-[14px] leading-[1.55]">
                       {cap.description}
                     </p>
 
@@ -232,12 +393,6 @@ export default function ServiceDetailClient({
                         ))}
                       </div>
                     )}
-
-                    {/* Deliverable Pill with Flat Roadmap Icon */}
-                    <div className="mt-4 py-2 px-3 rounded-lg border border-slate-200/90 bg-slate-50/80 flex items-center gap-2 text-xs font-mono text-slate-700 w-fit">
-                      <FlatProjectRoadmapIcon className="w-3.5 h-3.5 text-slate-600 shrink-0" />
-                      <span>{cap.deliverable}</span>
-                    </div>
                   </div>
                 </div>
               );
@@ -383,95 +538,164 @@ export default function ServiceDetailClient({
             >
               {service.pricingTiers && service.pricingTiers.map((tier, tIdx) => {
                 const isFeatured = tier.featured;
+                const modelType = tier.tierId.includes("//")
+                  ? tier.tierId.split("//")[1].trim().replace(/_/g, " ")
+                  : tier.tierId;
+
+                const activePrice = currency === "USD" ? tier.priceUSD : tier.priceINR;
+                const discountPercent = getTierDiscount(service.slug, tIdx);
+                const cutPrice = getCutPrice(activePrice, discountPercent);
+
                 return (
                   <div
                     key={tIdx}
-                    className={`rounded-2xl bg-white p-6 sm:p-7 flex flex-col justify-between transition-all hover:-translate-y-1 ${
+                    className={`rounded-2xl bg-white p-6 sm:p-7 flex flex-col justify-between transition-all duration-300 hover:-translate-y-1.5 relative overflow-hidden group ${
                       isFeatured
-                        ? "border-2 border-slate-900 shadow-sm relative hover:shadow-md"
-                        : "border border-slate-200/90 shadow-xs hover:border-slate-300"
+                        ? "border-2 border-slate-900 shadow-xl ring-2 ring-slate-900/10"
+                        : "border border-slate-200/90 shadow-sm hover:shadow-xl hover:border-slate-300"
                     }`}
                   >
+                    {/* Top Creative Pattern Accent Bar */}
+                    <div
+                      className={`h-1.5 w-full absolute top-0 inset-x-0 ${
+                        isFeatured
+                          ? "bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500"
+                          : discountPercent >= 60
+                          ? "bg-gradient-to-r from-purple-500 via-fuchsia-400 to-indigo-500 opacity-80 group-hover:opacity-100 transition-opacity"
+                          : discountPercent >= 35
+                          ? "bg-gradient-to-r from-amber-500 via-orange-400 to-yellow-500 opacity-80 group-hover:opacity-100 transition-opacity"
+                          : "bg-gradient-to-r from-blue-500 via-cyan-400 to-indigo-500 opacity-70 group-hover:opacity-100 transition-opacity"
+                      }`}
+                    />
+
+                    {/* Subtle Blueprint Radial Grid Watermark on Top-Right Corner */}
+                    <div className="absolute top-0 right-0 w-36 h-36 bg-[radial-gradient(#cbd5e1_1px,transparent_1px)] [background-size:12px_12px] opacity-40 pointer-events-none rounded-tr-2xl [mask-image:radial-gradient(ellipse_at_top_right,white,transparent_70%)]" />
+
                     {tier.badge && (
-                      <div className="absolute -top-3 left-6">
-                        <span className="px-3 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-widest bg-slate-900 text-white shadow-xs uppercase">
+                      <div className="absolute -top-3 right-6 z-10">
+                        <span className="inline-flex items-center gap-1 px-3 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-widest bg-slate-950 text-amber-300 shadow-xs uppercase border border-amber-400/30">
+                          <Sparkles className="w-2.5 h-2.5 text-amber-400" />
                           {tier.badge}
                         </span>
                       </div>
                     )}
 
-                    <div>
-                      <div className={`flex items-center justify-between gap-2 mb-3 ${tier.badge ? "mt-1" : ""}`}>
-                        <span
-                          className={`text-[11px] font-mono font-bold tracking-wider uppercase ${
-                            isFeatured ? "text-slate-900" : "text-slate-500"
-                          }`}
-                        >
-                          {tier.tierId}
-                        </span>
-                        <span className="text-xs font-mono text-slate-500 font-medium">
-                          {tier.timeline}
-                        </span>
-                      </div>
-
-                      <h3 className="text-xl font-bold font-heading text-slate-950 mt-1">
-                        {tier.name}
-                      </h3>
-                      <p className="mt-2 text-xs sm:text-sm text-slate-600 font-sans leading-relaxed">
-                        {tier.description}
-                      </p>
-
-                      <div className="my-5 pb-5 border-b border-slate-100">
-                        <div className="flex items-baseline gap-1.5">
-                          <span className="text-xs font-mono font-bold text-slate-400">Starting from</span>
-                          <span className="text-3xl sm:text-4xl font-extrabold font-mono tracking-tight text-slate-950">
-                            {currency === "USD" ? tier.priceUSD : tier.priceINR}
+                    <div className="flex flex-col flex-1 relative z-10">
+                      {/* 1. First on top of card: The Price with Cut-Price & Tier-Specific Offer Badge */}
+                      <div className="pb-4 border-b border-slate-100">
+                        <div className="flex items-center justify-between gap-2 mb-2">
+                          <span className="text-[10px] font-mono font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
+                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                            Offer Pricing
+                          </span>
+                          <span className="text-xs font-mono text-slate-600 font-semibold px-2 py-0.5 rounded-md bg-slate-100 border border-slate-200/80">
+                            {tier.timeline}
                           </span>
                         </div>
+
+                        {/* Strikethrough Cut-Price & Stepped Discount Pill */}
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs sm:text-sm font-mono text-slate-400 line-through decoration-rose-500 decoration-2">
+                            {cutPrice}
+                          </span>
+                          <span
+                            className={`px-2 py-0.5 rounded-md text-[10px] font-mono font-black tracking-wider shadow-2xs ${
+                              discountPercent >= 60
+                                ? "bg-purple-50 text-purple-700 border border-purple-200/90"
+                                : discountPercent >= 35
+                                ? "bg-amber-50 text-amber-700 border border-amber-200/90"
+                                : "bg-rose-50 text-rose-600 border border-rose-200/80"
+                            }`}
+                          >
+                            {discountPercent}% OFF
+                          </span>
+                        </div>
+
+                        {/* Current Original Offer Price */}
+                        <div className="mt-1 flex items-baseline gap-2">
+                          <span className="text-3xl sm:text-4xl font-black font-mono tracking-tight text-slate-950">
+                            {activePrice}
+                          </span>
+                          <span className="text-xs font-mono text-slate-400 font-medium">
+                            / project
+                          </span>
+                        </div>
+
                         <span className="text-[11px] font-mono text-slate-500 mt-1 block">
                           {tier.priceNote}
                         </span>
-                        <div className="mt-2.5 pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-1 text-[10px] font-mono text-slate-500">
+
+                        <div className="mt-2.5 pt-2 border-t border-slate-100/90 flex flex-wrap items-center justify-between gap-1 text-[10px] font-mono text-slate-500">
                           <span className="flex items-center gap-1.5">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                            Official Agency Invoice (GST)
+                            Official Invoice (GST)
                           </span>
-                          <span>Milestone: 50% Advance · 50% Launch</span>
+                          <span>50% Advance · 50% Launch</span>
                         </div>
                       </div>
 
-                      {/* Features list */}
-                      <div className="space-y-3 text-xs text-slate-700 font-sans">
+                      {/* 2. Then the thing like (static, dynamic, etc.) related to card */}
+                      <div className="pt-4">
+                        <div className="flex items-center gap-2 mb-2">
+                          <span
+                            className={`text-[10px] font-mono font-black uppercase tracking-widest px-2.5 py-0.5 rounded-md border ${
+                              isFeatured
+                                ? "bg-slate-950 text-white border-slate-900 shadow-2xs"
+                                : "bg-blue-50/90 text-blue-700 border-blue-200/80"
+                            }`}
+                          >
+                            {modelType}
+                          </span>
+                          <span className="text-[10px] font-mono text-slate-400 uppercase tracking-wider">
+                            Architecture
+                          </span>
+                        </div>
+
+                        <h3 className="font-serif text-lg sm:text-xl font-bold text-slate-950 leading-snug group-hover:text-blue-600 transition-colors">
+                          {tier.name}
+                        </h3>
+                      </div>
+
+                      {/* 3. Then next line their description */}
+                      <p className="mt-3 text-ink/85 text-[12.5px] leading-[1.55]">
+                        {tier.description}
+                      </p>
+
+                      {/* 4. Then next line the horizontal separator */}
+                      <div className="my-5 border-t border-slate-200/90" />
+
+                      {/* 5. Then their points with the perfect small icons */}
+                      <div className="space-y-3 flex-1">
+                        <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-slate-400 block mb-1">
+                          Scope Deliverables & Inclusions:
+                        </span>
                         {tier.features.map((feat, fIdx) => (
-                          <div key={fIdx} className="flex items-start gap-2.5">
-                            <span
-                              className={`w-4 h-4 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${
-                                isFeatured ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-700"
-                              }`}
-                            >
-                              <Check
-                                className={`w-2.5 h-2.5 ${isFeatured ? "text-white" : "text-slate-700"}`}
-                                strokeWidth={2.5}
-                              />
-                            </span>
+                          <div
+                            key={fIdx}
+                            className="flex items-start gap-2.5 text-xs text-slate-700 font-sans leading-relaxed group/item hover:text-slate-950 transition-colors"
+                          >
+                            <div className="w-5.5 h-5.5 rounded-md bg-slate-50 border border-slate-200/90 flex items-center justify-center shrink-0 mt-0.5 shadow-2xs group-hover/item:border-slate-400 group-hover/item:bg-white transition-all">
+                              {getFeatureIcon(feat)}
+                            </div>
                             <span>{feat}</span>
                           </div>
                         ))}
                       </div>
                     </div>
 
-                    <div className="mt-8 pt-4 border-t border-slate-100">
+                    {/* 6. Then at last the button */}
+                    <div className="mt-7 pt-4 border-t border-slate-100 relative z-10">
                       <button
                         type="button"
                         onClick={() => setBookingModalOpen(true)}
-                        className={`w-full py-2.5 px-4 rounded-xl text-xs font-semibold font-mono transition-colors flex items-center justify-center gap-2 cursor-pointer ${
+                        className={`w-full py-3 px-4 rounded-xl text-xs font-bold font-mono transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer shadow-xs group/btn ${
                           isFeatured
-                            ? "bg-slate-950 hover:bg-slate-800 text-white shadow-xs"
-                            : "bg-white hover:bg-slate-50 text-slate-900 border border-slate-200 shadow-2xs"
+                            ? "bg-slate-950 hover:bg-slate-800 text-white shadow-md hover:shadow-xl hover:-translate-y-0.5"
+                            : "bg-white hover:bg-slate-900 hover:text-white text-slate-900 border border-slate-300 shadow-2xs hover:border-slate-900 hover:-translate-y-0.5"
                         }`}
                       >
                         <span>{tier.ctaText}</span>
-                        <ArrowRight className="w-3.5 h-3.5" />
+                        <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
                       </button>
                     </div>
                   </div>

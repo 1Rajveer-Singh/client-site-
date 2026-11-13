@@ -15,6 +15,7 @@
     --arcade-magenta: #f43f5e;
     --arcade-green: #22c55e;
     --arcade-purple: #a855f7;
+    --color-ink: #0f172a;
   }
 
   body {
@@ -88,6 +89,18 @@ p.text-slate-800, p[class*="text-slate-800"] { color: #1e293b !important; }
 p.text-slate-900, p[class*="text-slate-900"] { color: #0f172a !important; }
 p.text-slate-950, p[class*="text-slate-950"] { color: #020617 !important; }
 p.text-black, p[class*="text-black"] { color: #000000 !important; }
+p.text-ink, p[class*="text-ink"] { color: #0f172a !important; }
+p[class*="text-ink/80"] { color: rgba(15, 23, 42, 0.8) !important; }
+p[class*="text-ink/85"] { color: rgba(15, 23, 42, 0.85) !important; }
+
+/* Ensure text-ink on dark atmospheric hero sections remains visible white, turning orange on hover */
+:is([class*="bg-[#070b16]"], [class*="bg-[#060913]"], [class*="bg-[#0a1026]"], [class*="bg-[#0a0f1d]"], [class*="bg-slate-900"], [class*="bg-slate-950"], [class*="bg-black"]) h1.text-ink {
+  color: #ffffff;
+}
+:is([class*="bg-[#070b16]"], [class*="bg-[#060913]"], [class*="bg-[#0a1026]"], [class*="bg-[#0a0f1d]"], [class*="bg-slate-900"], [class*="bg-slate-950"], [class*="bg-black"]) .group:hover h1.text-ink,
+:is([class*="bg-[#070b16]"], [class*="bg-[#060913]"], [class*="bg-[#0a1026]"], [class*="bg-[#0a0f1d]"], [class*="bg-slate-900"], [class*="bg-slate-950"], [class*="bg-black"]) h1.text-ink:hover {
+  color: #f97316 !important;
+}
 
 /* Default paragraph contrast in dark atmospheric sections when not explicitly colored */
 .hero-section p,
@@ -299,6 +312,10 @@ button svg *,
 
 .font-jakarta {
   font-family: var(--font-jakarta), 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif !important;
+}
+
+.font-serif {
+  font-family: var(--font-serif), 'Playfair Display', Georgia, Cambria, 'Times New Roman', Times, serif !important;
 }
 
 /* Custom Arcade Scrollbar */

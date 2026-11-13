@@ -486,10 +486,10 @@ export default function AboutPage() {
                   <div className="text-2xl font-black font-mono text-purple-600 mb-2">
                     {stg.step}
                   </div>
-                  <h3 className="font-heading font-extrabold text-base text-slate-900 group-hover:text-purple-700 transition-colors">
+                  <h3 className="font-serif text-2xl leading-[1.15] text-slate-900 group-hover:text-purple-700 transition-colors">
                     {stg.title}
                   </h3>
-                  <p className="text-xs font-sans text-slate-600 mt-2 leading-relaxed">
+                  <p className="mt-3 text-ink/80 text-[15px] leading-[1.55]">
                     {stg.desc}
                   </p>
                 </div>

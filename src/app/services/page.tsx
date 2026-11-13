@@ -187,7 +187,7 @@ export default function ServicesPage() {
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight font-heading text-slate-950">
               ARCHITECTURAL <span className="text-blue-600 underline decoration-yellow-400 decoration-wavy">CAPABILITIES</span>
             </h2>
-            <p className="mt-3 text-xs sm:text-sm font-mono leading-relaxed max-w-2xl text-slate-600">
+            <p className="mt-3 text-sm sm:text-base font-sans leading-relaxed max-w-2xl text-slate-600">
               Engineered with deterministic milestones, verifiable SLAs, and sub-second global response times.
             </p>
           </div>
@@ -241,22 +241,22 @@ export default function ServicesPage() {
                     <div className="p-5 flex flex-col justify-between text-slate-800">
                       <div>
                         <span
-                          className="text-[11px] w2 font-bold uppercase tracking-wider block mb-1.5"
+                          className="text-[11px] font-mono font-bold uppercase tracking-wider block mb-1.5"
                           style={{ color: service.themeColor }}
                         >
                           {service.category}
                         </span>
 
-                        <h3 className="text-xl font-bold card-title text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1">
+                        <h3 className="font-serif text-xl md:text-2xl leading-[1.15] tracking-[-0.01em] text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1">
                           {service.title}
                         </h3>
 
-                        <p className="mt-2.5 text-sm font-sans leading-relaxed line-clamp-3 min-h-[56px] text-slate-600 font-normal">
+                        <p className="mt-3 text-ink/80 text-[14px] sm:text-[15px] leading-[1.55] line-clamp-3 min-h-[56px]">
                           {service.desc}
                         </p>
 
                         {/* Deliverables / Specs Pill */}
-                        <div className="mt-4 py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-center w2 text-xs text-slate-700 truncate shadow-xs">
+                        <div className="mt-4 py-2.5 px-3 rounded-xl border border-slate-200/90 bg-slate-50 text-center font-mono text-[11px] sm:text-xs font-semibold text-slate-700 truncate shadow-2xs">
                           {service.deliverable}
                         </div>
 
