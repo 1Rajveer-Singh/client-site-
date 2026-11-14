@@ -21,7 +21,7 @@ export default function Home() {
 
       {/* Neutral Header & Navigation */}
       <Navbar />
-      
+
       {/* Hero Section with CTAs: Get Started & Explore Our Services */}
       <HeroSection />
 

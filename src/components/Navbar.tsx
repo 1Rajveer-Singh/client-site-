@@ -68,50 +68,11 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  // Dynamic header styling according to each individual page
-  const getPageTheme = (path: string) => {
-    if (path.startsWith("/about")) {
-      return {
-        bg: "bg-[#0a1026]/95 border-b border-indigo-500/30",
-        accent: "text-indigo-400",
-      };
-    }
-    if (path.startsWith("/services")) {
-      return {
-        bg: "bg-[#071328]/95 border-b border-blue-500/30",
-        accent: "text-blue-400",
-      };
-    }
-    if (path.startsWith("/plan")) {
-      return {
-        bg: "bg-[#130826]/95 border-b border-purple-500/30",
-        accent: "text-purple-400",
-      };
-    }
-    if (path.startsWith("/work")) {
-      return {
-        bg: "bg-[#041a14]/95 border-b border-emerald-500/30",
-        accent: "text-emerald-400",
-      };
-    }
-    if (path.startsWith("/testimonials")) {
-      return {
-        bg: "bg-[#1c1305]/95 border-b border-amber-500/30",
-        accent: "text-amber-400",
-      };
-    }
-    if (path.startsWith("/contact")) {
-      return {
-        bg: "bg-[#1c0812]/95 border-b border-rose-500/30",
-        accent: "text-rose-400",
-      };
-    }
-    // Default Home ("/")
-    return {
-      bg: "bg-[#050814]/95 border-b border-slate-800",
-      accent: "text-cyan-400",
-    };
-  };
+  // Unified professional flat header — no per-page color tints
+  const getPageTheme = (_path: string) => ({
+    bg: "bg-[#0d1117] border-b border-slate-800",
+    accent: "text-slate-400",
+  });
 
   const pageTheme = getPageTheme(pathname || "/");
 
@@ -182,7 +143,7 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
 
       {/* Sticky Header */}
       <header
-        className={`sticky top-0 z-50 w-full backdrop-blur-xl transition-all duration-300 ${pageTheme.bg}`}
+        className={`sticky top-0 z-50 w-full transition-none ${pageTheme.bg}`}
       >
         <div className="relative w-full px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
 
@@ -240,9 +201,8 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
                     isActive: pathname?.startsWith("/services"),
                     suffix: (
                       <ChevronDown
-                        className={`w-3 h-3 text-slate-400 transition-transform duration-200 ${
-                          servicesDropdownOpen ? "rotate-180 text-cyan-400" : ""
-                        }`}
+                        className={`w-3 h-3 text-slate-400 transition-transform duration-200 ${servicesDropdownOpen ? "rotate-180 text-cyan-400" : ""
+                          }`}
                       />
                     ),
                     onClick: () => {
@@ -382,9 +342,8 @@ export default function Navbar({ onReplayIntro }: NavbarProps) {
                   aria-label="Toggle sub-services"
                 >
                   <ChevronDown
-                    className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${
-                      mobileServicesOpen ? "rotate-180" : ""
-                    }`}
+                    className={`w-4 h-4 text-slate-400 transition-transform duration-200 ${mobileServicesOpen ? "rotate-180" : ""
+                      }`}
                   />
                 </button>
               </div>
