@@ -1172,5 +1172,3 @@ export default function MarbleSprite({
         </div>
     )
 }
-
-export const CobaltSprite = MarbleSprite

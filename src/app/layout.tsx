@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import {
   Outfit,
   Plus_Jakarta_Sans,
-  JetBrains_Mono,
   Playfair_Display,
   Press_Start_2P,
   Open_Sans,
@@ -84,13 +83,6 @@ const jakarta = Plus_Jakarta_Sans({
   weight: ["300", "400", "500", "600", "700"],
 });
 
-const jetbrainsMono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "700"],
-});
-
 export const metadata: Metadata = {
   metadataBase: new URL("https://itprogrammersolution.com"),
   title: {
@@ -170,20 +162,8 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${openSans.variable} ${caveat.variable} ${greatVibes.variable} ${indieFlower.variable} ${specialElite.variable} ${handlee.variable} ${outfit.variable} ${playfair.variable} ${jakarta.variable} ${jetbrainsMono.variable} ${pressStart.variable}`}
+      className={`${openSans.variable} ${caveat.variable} ${greatVibes.variable} ${indieFlower.variable} ${specialElite.variable} ${handlee.variable} ${outfit.variable} ${playfair.variable} ${jakarta.variable} ${pressStart.variable}`}
     >
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Great+Vibes&family=Handlee&family=Indie+Flower&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Pacifico&family=Permanent+Marker&family=Satisfy&family=Special+Elite&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body className="min-h-screen bg-white text-slate-900 antialiased selection:bg-cyan-500/30 selection:text-cyan-900">
         {children}
         <WhatsAppButton />
