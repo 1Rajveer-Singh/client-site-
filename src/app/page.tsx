@@ -11,14 +11,10 @@ import ClientWork from "@/components/ClientWork";
 import ClientTestimonials from "@/components/ClientTestimonials";
 import FinalCTA from "@/components/FinalCTA";
 import Footer from "@/components/Footer";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
 
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-white text-slate-900 overflow-x-clip">
-      {/* Magic UI Physics-Based Smooth Cursor */}
-      <SmoothCursor />
-
       {/* Neutral Header & Navigation */}
       <Navbar />
 

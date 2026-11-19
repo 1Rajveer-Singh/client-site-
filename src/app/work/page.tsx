@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ClientWork from "@/components/ClientWork";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import { ArrowRight, ExternalLink } from "lucide-react";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal";
 import { KineticText } from "@/registry/magicui/kinetic-text";
@@ -19,7 +18,6 @@ export default function WorkPage() {
 
   return (
     <main className="relative min-h-screen bg-white text-slate-900 overflow-x-clip">
-      <SmoothCursor />
       <Navbar />
 
       {/* Work Hero Header with Animated Grid Pixel Reveal Background */}

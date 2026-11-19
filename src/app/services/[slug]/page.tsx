@@ -4,7 +4,6 @@ import type { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import FinalCTA from "@/components/FinalCTA";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import { getTechIcon } from "@/components/TechIcons";
 import ServiceDetailClient from "./ServiceDetailClient";
 
@@ -1198,7 +1197,6 @@ export default async function ServiceDetailPage({
 
   return (
     <main className="relative min-h-screen bg-white text-slate-900 overflow-x-clip">
-      <SmoothCursor />
       <Navbar />
 
       <ServiceDetailClient service={service} allServices={allServices} />

@@ -3,7 +3,6 @@
 import React, { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import {
   Mail,
   Phone,
@@ -85,7 +84,6 @@ ${formData.email}`;
 
   return (
     <main className="relative min-h-screen bg-white text-slate-900 overflow-x-clip">
-      <SmoothCursor />
       <Navbar />
 
       {/* Contact Hero Header with Animated Grid Pixel Reveal Global Network Background */}

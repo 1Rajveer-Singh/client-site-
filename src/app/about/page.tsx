@@ -5,7 +5,6 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ClientWork from "@/components/ClientWork";
 import ClientTestimonials from "@/components/ClientTestimonials";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import LordIcon from "@/components/ui/lord-icon";
 import {
   Globe,
@@ -240,9 +239,6 @@ export default function AboutPage() {
 
   return (
     <main className="relative min-h-screen bg-white text-slate-900 overflow-x-clip">
-      {/* Physics Cursor */}
-      <SmoothCursor />
-
       {/* Adaptive Header */}
       <Navbar />
 

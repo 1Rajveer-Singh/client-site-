@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import PlanOfWork from "@/components/PlanOfWork";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import { Sparkles, CheckCircle2, Shield, ArrowRight } from "lucide-react";
 import { LiquidMetalButton } from "@/components/ui/liquid-metal";
 import { KineticText } from "@/registry/magicui/kinetic-text";
@@ -19,7 +18,6 @@ export default function PlanPage() {
 
   return (
     <main className="relative min-h-screen bg-white text-slate-900 overflow-x-clip">
-      <SmoothCursor />
       <Navbar />
 
       {/* Plan Hero Header with Animated Grid Pixel Reveal Blueprint Background */}

@@ -102,10 +102,13 @@ export function TestimonialsCard({
                         {list.map((item, index) => {
                             const isActive = index === activeIndex;
                             const offset = index - activeIndex;
+                            const cardKey = (item.id !== undefined && item.id !== null && item.id !== "")
+                                ? String(item.id)
+                                : (item.title ? `${item.title}-${index}` : `testimonial-card-${index}`);
 
                             return (
                                 <motion.div
-                                    key={item.id}
+                                    key={cardKey}
                                     className="absolute inset-0 w-full h-full overflow-hidden border-[6px] bg-neutral-200 dark:bg-neutral-800 border-white dark:border-neutral-700 shadow-2xl rounded-lg"
                                     initial={{
                                         x: offset * 15,
@@ -165,7 +168,7 @@ export function TestimonialsCard({
                 <div className="col-start-1 md:col-start-2 md:row-start-1 flex flex-col justify-center min-h-[120px]">
                     <AnimatePresence mode="wait">
                         <motion.div
-                            key={activeItem.id}
+                            key={activeItem ? (activeItem.id || activeItem.title || activeIndex) : "active-card"}
                             initial={{ opacity: 0, y: 25 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -25 }}

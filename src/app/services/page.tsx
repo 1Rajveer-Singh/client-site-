@@ -4,7 +4,6 @@ import React, { useEffect } from "react";
 import Link from "next/link";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import { SmoothCursor } from "@/components/ui/smooth-cursor";
 import {
   Server,
   Code2,
@@ -125,7 +124,6 @@ export default function ServicesPage() {
 
   return (
     <main className="relative min-h-screen bg-white text-slate-900 overflow-x-clip">
-      <SmoothCursor />
       <Navbar />
 
       {/* Services Hero Header with Atmospheric Unsplash Infrastructure Background */}
