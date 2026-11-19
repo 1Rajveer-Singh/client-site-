@@ -1,243 +1,221 @@
 "use client";
 
-import React, { useEffect, useState, useCallback } from "react";
-import { motion } from "motion/react";
-import { ChevronLeft, ChevronRight, Star, CheckCircle2 } from "lucide-react";
+import React, { useState, useMemo } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 export interface TestimonialItem {
-  quote: string;
-  name: string;
-  designation: string;
-  company?: string;
-  src?: string;
-  initials?: string;
-  service?: string;
-  metric?: string;
-  metricLabel?: string;
-  rating?: number;
+    /** Unique identifier for the card */
+    id: string | number;
+    /** Title displayed for the card */
+    title: string;
+    /** Description text for the card */
+    description: string;
+    /** Image URL/path for the card */
+    image: string;
 }
 
-export const AnimatedTestimonials = ({
-  testimonials,
-  autoplay = true,
-  className,
-}: {
-  testimonials: TestimonialItem[];
-  autoplay?: boolean;
-  className?: string;
-}) => {
-  const [active, setActive] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
+export interface TestimonialsCardProps {
+    /** Array of testimonial items to display */
+    items?: TestimonialItem[];
+    testimonials?: TestimonialItem[];
+    /** Additional CSS classes for the container */
+    className?: string;
+    /** Width of the card stack (default: 400) */
+    width?: number;
+    /** Whether to show navigation arrows (default: true) */
+    showNavigation?: boolean;
+    /** Whether to show the counter (default: true) */
+    showCounter?: boolean;
+    /** Whether to enable auto-play (default: false) */
+    autoPlay?: boolean;
+    /** Auto-play interval in ms (default: 3000) */
+    autoPlayInterval?: number;
+}
 
-  const total = testimonials.length;
+export function TestimonialsCard({
+    items,
+    testimonials,
+    className,
+    width = 400,
+    showNavigation = true,
+    showCounter = true,
+    autoPlay = false,
+    autoPlayInterval = 3000,
+}: TestimonialsCardProps) {
+    const list = items || testimonials || [];
+    const [activeIndex, setActiveIndex] = useState(0);
+    const [direction, setDirection] = useState(1);
 
-  const handleNext = useCallback(() => {
-    setActive((prev) => (prev + 1) % total);
-  }, [total]);
+    const activeItem = list[activeIndex];
 
-  const handlePrev = useCallback(() => {
-    setActive((prev) => (prev - 1 + total) % total);
-  }, [total]);
+    // Auto-play effect
+    React.useEffect(() => {
+        if (!autoPlay || list.length <= 1) return;
 
-  // Autoplay moves right-to-left every 5.5s
-  useEffect(() => {
-    if (!autoplay || isPaused) return;
-    const interval = setInterval(handleNext, 5500);
-    return () => clearInterval(interval);
-  }, [autoplay, isPaused, handleNext]);
+        const interval = setInterval(() => {
+            setDirection(1);
+            setActiveIndex((prev) => (prev + 1) % list.length);
+        }, autoPlayInterval);
 
-  // Determine stage position: "center" (front), "left" (behind left), "right" (behind right), or "hidden"
-  const getCardStatus = (index: number) => {
-    if (index === active) return "center";
-    if (index === (active - 1 + total) % total) return "left";
-    if (index === (active + 1) % total) return "right";
-    return "hidden";
-  };
+        return () => clearInterval(interval);
+    }, [autoPlay, autoPlayInterval, list.length]);
 
-  return (
-    <div
-      className={cn("w-full max-w-5xl mx-auto px-2 sm:px-4 py-4 sm:py-6", className)}
-      onMouseEnter={() => setIsPaused(true)}
-      onMouseLeave={() => setIsPaused(false)}
-    >
-      {/* 3D Stage Container */}
-      <div className="relative w-full h-[480px] sm:h-[400px] md:h-[360px] flex items-center justify-center overflow-hidden">
-        {testimonials.map((testimonial, index) => {
-          const status = getCardStatus(index);
+    const handleNext = () => {
+        if (activeIndex < list.length - 1) {
+            setDirection(1);
+            setActiveIndex(activeIndex + 1);
+        }
+    };
 
-          // Position configs
-          let animateProps = {
-            x: "0%",
-            scale: 1,
-            opacity: 1,
-            zIndex: 30,
-            filter: "blur(0px)",
-          };
+    const handlePrev = () => {
+        if (activeIndex > 0) {
+            setDirection(-1);
+            setActiveIndex(activeIndex - 1);
+        }
+    };
 
-          if (status === "left") {
-            animateProps = {
-              x: "-46%",
-              scale: 0.88,
-              opacity: 0.45,
-              zIndex: 10,
-              filter: "blur(1px)",
-            };
-          } else if (status === "right") {
-            animateProps = {
-              x: "46%",
-              scale: 0.88,
-              opacity: 0.45,
-              zIndex: 10,
-              filter: "blur(1px)",
-            };
-          } else if (status === "hidden") {
-            animateProps = {
-              x: index > active ? "90%" : "-90%",
-              scale: 0.72,
-              opacity: 0,
-              zIndex: 0,
-              filter: "blur(3px)",
-            };
-          }
+    // Pre-calculate rotations for visual variety
+    const rotations = useMemo(() => [4, -2, -9, 7], []);
 
-          return (
-            <motion.div
-              key={testimonial.name}
-              initial={false}
-              animate={animateProps}
-              transition={{
-                duration: 0.6,
-                ease: [0.16, 1, 0.3, 1], // Smooth cubic bezier
-              }}
-              onClick={() => {
-                if (status === "left") handlePrev();
-                if (status === "right") handleNext();
-              }}
-              className={cn(
-                "absolute w-[95%] sm:w-[88%] md:w-[760px] max-w-full origin-center select-none",
-                status === "center"
-                  ? "cursor-default"
-                  : status !== "hidden"
-                  ? "cursor-pointer"
-                  : "pointer-events-none"
-              )}
+    if (!list || list.length === 0) {
+        return null;
+    }
+
+    return (
+        <div className={cn("flex items-center justify-center p-8", className)}>
+            <div
+                className="relative grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] md:grid-rows-[auto_auto_auto] gap-x-8 gap-y-2 w-full"
+                style={{ perspective: "1400px", maxWidth: `${width}px` }}
             >
-              {/* New Unslopped Card Design Embedded in Carousel */}
-              <div className="w-full rounded-2xl p-6 sm:p-7 md:p-8 bg-white border border-slate-200/90 shadow-[0_12px_40px_-15px_rgba(0,0,0,0.12)] text-slate-900 relative flex flex-col justify-between">
-                <div>
-                  {/* Top Row: Client Info & Outcome Pill */}
-                  <div className="flex items-start justify-between gap-3 mb-4">
-                    <div className="flex items-center gap-3.5 min-w-0">
-                      <div className="w-12 h-12 sm:w-13 sm:h-13 rounded-full overflow-hidden border border-slate-200 bg-slate-100 shrink-0">
-                        {testimonial.src ? (
-                          <img
-                            src={testimonial.src}
-                            alt={testimonial.name}
-                            className="w-full h-full object-cover"
-                          />
-                        ) : (
-                          <div className="w-full h-full flex items-center justify-center font-mono font-bold text-slate-600">
-                            {testimonial.initials || testimonial.name.slice(0, 2)}
-                          </div>
-                        )}
-                      </div>
-                      <div className="flex flex-col min-w-0">
-                        <div className="flex items-center gap-1.5">
-                          <h3 className="text-base sm:text-lg font-bold font-heading text-slate-950 truncate">
-                            {testimonial.name}
-                          </h3>
-                          <CheckCircle2 className="w-4 h-4 text-blue-600 shrink-0" />
-                        </div>
-                        <span className="text-xs sm:text-[13px] font-sans text-slate-500 truncate mt-0.5">
-                          {testimonial.designation} {testimonial.company ? `· ${testimonial.company}` : ""}
-                        </span>
-                      </div>
+                {/* Counter */}
+                {showCounter && (
+                    <div className="row-start-1 md:col-start-2 md:row-start-1 text-right font-mono text-sm text-neutral-500 dark:text-neutral-400">
+                        {activeIndex + 1} / {list.length}
                     </div>
+                )}
 
-                    {/* Impact Metric Pill */}
-                    {testimonial.metric && (
-                      <div className="shrink-0 text-right">
-                        <span className="px-2.5 sm:px-3 py-1 rounded-md bg-slate-50 border border-slate-200/90 text-[11px] sm:text-xs font-mono font-semibold text-slate-800 block">
-                          {testimonial.metric}
-                        </span>
-                        {testimonial.metricLabel && (
-                          <span className="text-[10px] font-mono text-slate-400 block mt-0.5">
-                            {testimonial.metricLabel}
-                          </span>
-                        )}
-                      </div>
-                    )}
-                  </div>
+                {/* Image Card Stack */}
+                <div className="row-start-2 col-start-1 md:row-start-1 row-span-3 relative w-full aspect-square">
+                    <AnimatePresence custom={direction}>
+                        {list.map((item, index) => {
+                            const isActive = index === activeIndex;
+                            const offset = index - activeIndex;
 
-                  {/* Rating Stars */}
-                  <div className="flex items-center gap-1 mb-3.5">
-                    {[...Array(testimonial.rating || 5)].map((_, i) => (
-                      <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />
-                    ))}
-                  </div>
-
-                  {/* Quote Body */}
-                  <p className="text-sm sm:text-base font-sans text-slate-700 leading-relaxed font-normal">
-                    "{testimonial.quote}"
-                  </p>
+                            return (
+                                <motion.div
+                                    key={item.id}
+                                    className="absolute inset-0 w-full h-full overflow-hidden border-[6px] bg-neutral-200 dark:bg-neutral-800 border-white dark:border-neutral-700 shadow-2xl rounded-lg"
+                                    initial={{
+                                        x: offset * 15,
+                                        y: Math.abs(offset) * 6,
+                                        z: -150 * Math.abs(offset),
+                                        scale: 0.85 - Math.abs(offset) * 0.04,
+                                        rotateZ: rotations[index % 4],
+                                        opacity: isActive ? 1 : 0.5,
+                                        zIndex: 10 - Math.abs(offset),
+                                    }}
+                                    animate={
+                                        isActive
+                                            ? {
+                                                x: [offset * 15, direction === 1 ? -200 : 200, 0],
+                                                y: [Math.abs(offset) * 6, 0, 0],
+                                                z: [-200, 150, 250],
+                                                scale: [0.85, 1.05, 1],
+                                                rotateZ: [rotations[index % 4], -5, 0],
+                                                opacity: 1,
+                                                zIndex: 100,
+                                            }
+                                            : {
+                                                x: offset * 15,
+                                                y: Math.abs(offset) * 6,
+                                                z: -150 * Math.abs(offset),
+                                                rotateZ: rotations[index % 4],
+                                                scale: 0.85 - Math.abs(offset) * 0.04,
+                                                opacity: 0.55,
+                                                zIndex: 10 - Math.abs(offset),
+                                            }
+                                    }
+                                    exit={{
+                                        x: direction === 1 ? -250 : 250,
+                                        z: -260,
+                                        scale: 0.75,
+                                        rotateZ: direction === 1 ? -10 : 10,
+                                        opacity: 0,
+                                    }}
+                                    transition={{
+                                        duration: 0.75,
+                                        ease: [0.22, 1, 0.36, 1],
+                                    }}
+                                >
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        className="w-full h-full object-cover"
+                                        draggable={false}
+                                    />
+                                </motion.div>
+                            );
+                        })}
+                    </AnimatePresence>
                 </div>
 
-                {/* Footer Line with Service Domain */}
-                {testimonial.service && (
-                  <div className="mt-5 pt-3.5 border-t border-slate-100 flex items-center justify-between text-xs font-mono text-slate-500">
-                    <span>Delivered Architecture</span>
-                    <span className="font-semibold text-slate-800">
-                      {testimonial.service}
-                    </span>
-                  </div>
+                {/* Text Area */}
+                <div className="col-start-1 md:col-start-2 md:row-start-1 flex flex-col justify-center min-h-[120px]">
+                    <AnimatePresence mode="wait">
+                        <motion.div
+                            key={activeItem.id}
+                            initial={{ opacity: 0, y: 25 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: -25 }}
+                            transition={{ duration: 0.35 }}
+                        >
+                            <h3 className="text-xl font-bold text-neutral-900 dark:text-white">
+                                {activeItem.title}
+                            </h3>
+                            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2">
+                                {activeItem.description}
+                            </p>
+                        </motion.div>
+                    </AnimatePresence>
+                </div>
+
+                {/* Navigation Controls */}
+                {showNavigation && list.length > 1 && (
+                    <div className="col-start-1 md:col-start-2 md:row-start-3 flex gap-2 m-auto -mt-2 md:mt-4 md:m-0">
+                        <button
+                            disabled={activeIndex === 0}
+                            onClick={handlePrev}
+                            className={cn(
+                                "flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all",
+                                activeIndex === 0
+                                    ? "opacity-50 cursor-not-allowed"
+                                    : "hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105"
+                            )}
+                            aria-label="Previous card"
+                        >
+                            <ArrowLeft className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
+                        </button>
+                        <button
+                            disabled={activeIndex === list.length - 1}
+                            onClick={handleNext}
+                            className={cn(
+                                "flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all",
+                                activeIndex === list.length - 1
+                                    ? "opacity-50 cursor-not-allowed"
+                                    : "hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105"
+                            )}
+                            aria-label="Next card"
+                        >
+                            <ArrowRight className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
+                        </button>
+                    </div>
                 )}
-              </div>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      {/* Interactive Controls & Carousel Indicators */}
-      <div className="mt-6 flex items-center justify-center gap-4">
-        {/* Prev Arrow */}
-        <button
-          type="button"
-          onClick={handlePrev}
-          className="w-10 h-10 rounded-xl bg-white border border-slate-300 hover:border-slate-400 text-slate-800 hover:bg-slate-50 flex items-center justify-center shadow-2xs hover:shadow-xs transition-colors cursor-pointer"
-          aria-label="Previous testimonial"
-        >
-          <ChevronLeft className="w-4 h-4 text-slate-700" />
-        </button>
-
-        {/* Dots Pagination */}
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-100 border border-slate-200">
-          {testimonials.map((_, idx) => (
-            <button
-              key={idx}
-              type="button"
-              onClick={() => setActive(idx)}
-              className={cn(
-                "h-2 rounded-full transition-all duration-300 cursor-pointer",
-                idx === active
-                  ? "w-6 bg-slate-900"
-                  : "w-2 bg-slate-300 hover:bg-slate-400"
-              )}
-              aria-label={`Go to testimonial ${idx + 1}`}
-            />
-          ))}
+            </div>
         </div>
+    );
+}
 
-        {/* Next Arrow */}
-        <button
-          type="button"
-          onClick={handleNext}
-          className="w-10 h-10 rounded-xl bg-white border border-slate-300 hover:border-slate-400 text-slate-800 hover:bg-slate-50 flex items-center justify-center shadow-2xs hover:shadow-xs transition-colors cursor-pointer"
-          aria-label="Next testimonial"
-        >
-          <ChevronRight className="w-4 h-4 text-slate-700" />
-        </button>
-      </div>
-    </div>
-  );
-};
+export const AnimatedTestimonials = TestimonialsCard;
+export default TestimonialsCard;

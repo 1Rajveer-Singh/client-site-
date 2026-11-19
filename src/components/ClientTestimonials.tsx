@@ -3,59 +3,43 @@
 import React from "react";
 import { Star, ShieldCheck } from "lucide-react";
 import {
-  AnimatedTestimonials,
+  TestimonialsCard,
   type TestimonialItem,
 } from "./ui/animated-testimonials";
 
 export default function ClientTestimonials() {
   const testimonials: TestimonialItem[] = [
     {
-      name: "Elena Rostova",
-      designation: "Head of Growth",
-      company: "Instagram Automation Pipeline",
-      service: "Autonomous Lead & DM Pipeline",
-      src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop",
-      rating: 5,
-      quote:
+      id: "elena",
+      title: "Elena Rostova • Head of Growth",
+      description:
         "Rajveer Singh engineered our 24/7 Instagram lead automation and webhook pipeline. Every comment, DM, and story mention is qualified within seconds and synced straight to our CRM. Our lead conversion jumped 4.8x and response latency is practically zero.",
-      metric: "4.8x Leads",
-      metricLabel: "98.4% Open Rate",
+      image:
+        "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=600&auto=format&fit=crop",
     },
     {
-      name: "David Vance",
-      designation: "Chief Product Officer",
-      company: "Automata AI Labs",
-      service: "AI Agent Automation & Infrastructure",
-      src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop",
-      rating: 5,
-      quote:
+      id: "david",
+      title: "David Vance • Chief Product Officer",
+      description:
         "Their autonomous multi-agent swarm revolutionized our tier-1 support and financial routing. It resolves 74% of inquiries end-to-end with sub-40ms response latency, running on dedicated secure cloud instances that never fault.",
-      metric: "74% Auto-Resolved",
-      metricLabel: "Sub-40ms Latency",
+      image:
+        "https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=600&auto=format&fit=crop",
     },
     {
-      name: "Marcus Thorne",
-      designation: "Chief Marketing Officer",
-      company: "BioHealth Global",
-      service: "SEO Optimization & Schema Architecture",
-      src: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop",
-      rating: 5,
-      quote:
+      id: "marcus",
+      title: "Marcus Thorne • Chief Marketing Officer",
+      description:
         "We spent a year trying to break through competitive organic search rankings. The team restructured our JSON-LD schema, fine-tuned our Core Web Vitals to a pure 100 Lighthouse score, and our organic traffic spiked by 420% in 120 days.",
-      metric: "+420% Organic",
-      metricLabel: "#1 SERP Ranking",
+      image:
+        "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=600&auto=format&fit=crop",
     },
     {
-      name: "Sophia Chen",
-      designation: "Founder & CEO",
-      company: "FleetGo Mobility Network",
-      service: "Cross-Platform Mobile App Development",
-      src: "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop",
-      rating: 5,
-      quote:
+      id: "sophia",
+      title: "Sophia Chen • Founder & CEO",
+      description:
         "The cross-platform mobile application they built for our 1.2M drivers is butter-smooth at 120Hz. The offline-first SQLite synchronization is indestructible even in remote zones with zero cell service. Holding a 4.9-star rating is proof of their craftsmanship.",
-      metric: "4.9★ App Rating",
-      metricLabel: "1.2M Active Drivers",
+      image:
+        "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop",
     },
   ];
 
@@ -95,8 +79,8 @@ export default function ClientTestimonials() {
           </div>
         </div>
 
-        {/* 3D Animated Testimonials Carousel with the New Unslopped Card Design */}
-        <AnimatedTestimonials testimonials={testimonials} autoplay={true} />
+        {/* 3D Stacked Testimonials Card */}
+        <TestimonialsCard items={testimonials} autoPlay={true} width={760} />
       </div>
     </section>
   );
