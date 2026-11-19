@@ -181,97 +181,96 @@ export default function ClientWork() {
 
           {/* 2-Column Responsive Grid matching Plan of Work card size */}
           <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-8 items-stretch">
-              {projects.map((project) => (
+            {projects.map((project) => (
+              <div
+                key={project.id}
+                className="rounded-2xl border border-slate-200 bg-white shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group hover:-translate-y-1.5 h-full cursor-pointer"
+                onClick={() => openProjectModal(project)}
+              >
+                {/* Preview Image at Top with PixelImage Grayscale Reveal */}
                 <div
-                  key={project.id}
-                  className="rounded-2xl border border-slate-200 bg-white shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col justify-between group hover:-translate-y-1.5 h-full cursor-pointer"
-                  onClick={() => openProjectModal(project)}
+                  className="relative block w-full h-44 bg-slate-900 overflow-hidden group/img"
+                  title={`Open ${project.title} Showcase`}
                 >
-                  {/* Preview Image at Top with PixelImage Grayscale Reveal */}
-                  <div
-                    className="relative block w-full h-44 bg-slate-900 overflow-hidden group/img"
-                    title={`Open ${project.title} Showcase`}
-                  >
-                    <PixelImage
-                      src={project.image}
-                      customGrid={{ rows: 4, cols: 6 }}
-                      grayscaleAnimation
-                      className="w-full h-full"
-                      imageClassName="object-cover object-top group-hover/img:scale-105 transition-transform duration-700"
-                      alt={project.title}
-                    />
+                  <PixelImage
+                    src={project.image}
+                    customGrid={{ rows: 4, cols: 6 }}
+                    grayscaleAnimation
+                    className="w-full h-full"
+                    imageClassName="object-cover object-top group-hover/img:scale-105 transition-transform duration-700"
+                    alt={project.title}
+                  />
 
-                    {/* Luminous Hover Overlay */}
-                    <div className="absolute inset-0 bg-slate-950/30 group-hover/img:bg-slate-950/10 transition-colors flex items-center justify-center">
-                      <span className="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 px-3.5 py-1.5 rounded-xl bg-black/85 text-white font-heading text-xs font-semibold border border-cyan-400 shadow-xl flex items-center gap-1.5">
-                        <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
-                        VIEW SHOWCASE & ASSETS
-                      </span>
-                    </div>
-
-                    <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+                  {/* Luminous Hover Overlay */}
+                  <div className="absolute inset-0 bg-slate-950/30 group-hover/img:bg-slate-950/10 transition-colors flex items-center justify-center">
+                    <span className="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 px-3.5 py-1.5 rounded-xl bg-black/85 text-white font-heading text-xs font-semibold border border-cyan-400 shadow-xl flex items-center gap-1.5">
+                      <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
+                      VIEW SHOWCASE & ASSETS
+                    </span>
                   </div>
 
-                  {/* Project Details with Refined Modern Typography */}
-                  <div className="p-5 flex flex-col justify-between text-slate-800 flex-1">
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <span
-                          className={`text-[11px] font-mono font-bold uppercase tracking-wider ${
-                            project.id === "instagram" ? "text-pink-600" : "text-blue-600"
+                  <div className="absolute inset-x-0 bottom-0 h-10 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
+                </div>
+
+                {/* Project Details with Refined Modern Typography */}
+                <div className="p-5 flex flex-col justify-between text-slate-800 flex-1">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span
+                        className={`text-[11px] font-mono font-bold uppercase tracking-wider ${project.id === "instagram" ? "text-pink-600" : "text-blue-600"
                           }`}
-                        >
-                          {project.category}
-                        </span>
-                        <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
-                          LIVE PRODUCTION
-                        </span>
-                      </div>
-
-                      <h3 className="text-lg sm:text-xl font-bold font-heading text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
-                        {project.title}
-                      </h3>
-
-                      <p
-                        suppressHydrationWarning
-                        className="mt-2.5 text-xs sm:text-sm font-jakarta leading-relaxed text-slate-600 font-normal"
                       >
-                        {project.desc}
-                      </p>
-
-                      {/* Key Deliverables Pill */}
-                      <div className="mt-4 py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-center w2 text-xs text-slate-700 shadow-xs flex items-center justify-center gap-2 truncate">
-                        <FlatAnalyticsGrowthIcon className="w-4 h-4 shrink-0" />
-                        <span className="truncate font-medium">{project.metric}</span>
-                      </div>
-                    </div>
-
-                    {/* Action Bar */}
-                    <div className="mt-5 pt-4 border-t border-slate-200 flex items-center justify-between">
-                      <span className="text-xs w3 tracking-wider truncate max-w-[160px] text-slate-500 uppercase font-bold">
-                        {project.id === "mearf"
-                          ? "MAURYAERF.COM"
-                          : project.id === "instagram"
-                            ? "INSTAGRAM AUTO"
-                            : "ENTERPRISE"}
+                        {project.category}
                       </span>
-
-                      <button
-                        type="button"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          openProjectModal(project);
-                        }}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold shadow-xs hover:shadow-md bg-slate-900 text-white hover:bg-blue-600 transition-all cursor-pointer group/btn"
-                      >
-                        <span>LAUNCH SITE</span>
-                        <ArrowUpRight className="w-3.5 h-3.5 text-cyan-400 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
-                      </button>
+                      <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
+                        LIVE PRODUCTION
+                      </span>
                     </div>
+
+                    <h3 className="text-lg sm:text-xl font-bold font-heading text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                      {project.title}
+                    </h3>
+
+                    <p
+                      suppressHydrationWarning
+                      className="mt-2.5 text-xs sm:text-sm font-jakarta leading-relaxed text-slate-600 font-normal"
+                    >
+                      {project.desc}
+                    </p>
+
+                    {/* Key Deliverables Pill */}
+                    <div className="mt-4 py-2.5 px-3 rounded-xl border border-slate-200 bg-slate-50 text-center w2 text-xs text-slate-700 shadow-xs flex items-center justify-center gap-2 truncate">
+                      <FlatAnalyticsGrowthIcon className="w-4 h-4 shrink-0" />
+                      <span className="truncate font-medium">{project.metric}</span>
+                    </div>
+                  </div>
+
+                  {/* Action Bar */}
+                  <div className="mt-5 pt-4 border-t border-slate-200 flex items-center justify-between">
+                    <span className="text-xs w3 tracking-wider truncate max-w-[160px] text-slate-500 uppercase font-bold">
+                      {project.id === "mearf"
+                        ? "MAURYAERF.COM"
+                        : project.id === "instagram"
+                          ? "INSTAGRAM AUTO"
+                          : "ENTERPRISE"}
+                    </span>
+
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        openProjectModal(project);
+                      }}
+                      className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold shadow-xs hover:shadow-md bg-slate-900 text-white hover:bg-blue-600 transition-all cursor-pointer group/btn"
+                    >
+                      <span>LAUNCH SITE</span>
+                      <ArrowUpRight className="w-3.5 h-3.5 text-cyan-400 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
+                    </button>
                   </div>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
         </div>
       </section>
 
@@ -372,8 +371,8 @@ export default function ClientWork() {
                           type="button"
                           onClick={() => setSelectedImageIndex(idx)}
                           className={`relative w-20 sm:w-24 h-14 sm:h-16 rounded-xl overflow-hidden shrink-0 border-2 transition-all duration-150 cursor-pointer ${selectedImageIndex === idx
-                              ? "border-blue-600 ring-2 ring-blue-500/20 opacity-100"
-                              : "border-slate-200 opacity-70 hover:opacity-100 hover:border-slate-400"
+                            ? "border-blue-600 ring-2 ring-blue-500/20 opacity-100"
+                            : "border-slate-200 opacity-70 hover:opacity-100 hover:border-slate-400"
                             }`}
                         >
                           <img

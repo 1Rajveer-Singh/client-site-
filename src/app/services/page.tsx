@@ -180,7 +180,7 @@ export default function ServicesPage() {
       {/* Services Grid Section (Matching Plan of Work exact card sizing) */}
       <section className="py-24 bg-white border-b-2 border-slate-200 text-slate-900">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          
+
           <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl sm:text-4xl font-black tracking-tight font-heading text-slate-950">
               ARCHITECTURAL <span className="text-blue-600 underline decoration-yellow-400 decoration-wavy">CAPABILITIES</span>
