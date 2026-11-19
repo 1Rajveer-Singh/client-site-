@@ -126,6 +126,7 @@ export function TestimonialsCard({
                             return (
                                 <motion.div
                                     key={cardKey}
+                                    aria-hidden={!isActive}
                                     className="absolute inset-0 w-full h-full overflow-hidden border-[5px] sm:border-[6px] bg-neutral-200 dark:bg-neutral-800 border-white dark:border-neutral-700 shadow-xl sm:shadow-2xl rounded-2xl"
                                     initial={{
                                         x: offset * 12,
