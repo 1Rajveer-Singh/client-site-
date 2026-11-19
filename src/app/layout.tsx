@@ -1,8 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import {
+  IBM_Plex_Serif,
+  IBM_Plex_Sans,
+  IBM_Plex_Mono,
   Outfit,
   Plus_Jakarta_Sans,
-  Playfair_Display,
   Press_Start_2P,
   Open_Sans,
   Caveat,
@@ -14,6 +16,30 @@ import {
 import CookieConsent from "@/components/CookieConsent";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import "./globals.css";
+
+const ibmPlexSerif = IBM_Plex_Serif({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const ibmPlexSans = IBM_Plex_Sans({
+  variable: "--font-sans",
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
+
+const ibmPlexMono = IBM_Plex_Mono({
+  variable: "--font-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  style: ["normal", "italic"],
+  display: "swap",
+});
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -57,13 +83,6 @@ const handlee = Handlee({
 
 const outfit = Outfit({
   variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600", "700", "800", "900"],
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-serif",
   subsets: ["latin"],
   display: "swap",
   weight: ["400", "500", "600", "700", "800", "900"],
@@ -163,7 +182,7 @@ export default function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${openSans.variable} ${caveat.variable} ${greatVibes.variable} ${indieFlower.variable} ${specialElite.variable} ${handlee.variable} ${outfit.variable} ${playfair.variable} ${jakarta.variable} ${pressStart.variable}`}
+      className={`${ibmPlexSerif.variable} ${ibmPlexSans.variable} ${ibmPlexMono.variable} ${openSans.variable} ${caveat.variable} ${greatVibes.variable} ${indieFlower.variable} ${specialElite.variable} ${handlee.variable} ${outfit.variable} ${jakarta.variable} ${pressStart.variable}`}
     >
       <body className="min-h-screen bg-white text-slate-900 antialiased selection:bg-cyan-500/30 selection:text-cyan-900">
         {children}

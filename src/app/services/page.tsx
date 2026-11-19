@@ -225,29 +225,30 @@ export default function ServicesPage() {
                       <span className="absolute bottom-2 right-3 text-6xl font-black font-heading text-white/20 select-none pointer-events-none group-hover:text-white/35 transition-colors">
                         {service.step}
                       </span>
-
-                      {/* Center Hero Icon */}
-                      <div
-                        className="absolute bottom-3 left-4 z-10 w-12 h-12 rounded-xl flex items-center justify-center shadow-lg border border-white/20 transition-transform duration-300 group-hover:scale-110"
-                        style={{ backgroundColor: service.themeColor }}
-                      >
-                        <Icon className="w-6 h-6 text-white" />
-                      </div>
                     </div>
 
                     {/* Card Content with Refined Modern Typography */}
-                    <div className="p-5 flex flex-col justify-between text-slate-800">
+                    <div className="p-5 flex flex-col justify-between text-slate-800 flex-1">
                       <div>
                         <span
-                          className="text-[11px] font-mono font-bold uppercase tracking-wider block mb-1.5"
+                          className="text-[11px] font-mono font-bold uppercase tracking-wider block mb-2"
                           style={{ color: service.themeColor }}
                         >
                           {service.category}
                         </span>
 
-                        <h3 className="font-serif text-xl md:text-2xl leading-[1.15] tracking-[-0.01em] text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1">
-                          {service.title}
-                        </h3>
+                        {/* Title Row with Logo SVG shifted before title in the same row */}
+                        <div className="flex items-center gap-3">
+                          <div
+                            className="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm shrink-0 border border-slate-200/80 transition-transform duration-300 group-hover:scale-105"
+                            style={{ backgroundColor: service.themeColor }}
+                          >
+                            <Icon className="w-5 h-5 text-white" />
+                          </div>
+                          <h3 className="font-serif text-lg sm:text-xl md:text-2xl leading-[1.15] tracking-[-0.01em] text-slate-900 group-hover:text-blue-600 transition-colors line-clamp-1">
+                            {service.title}
+                          </h3>
+                        </div>
 
                         <p className="mt-3 text-ink/80 text-[14px] sm:text-[15px] leading-[1.55] line-clamp-3 min-h-[56px]">
                           {service.desc}
