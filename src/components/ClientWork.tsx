@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
+import React, { useState, useEffect } from "react";
 import {
   Globe,
   ExternalLink,
@@ -12,8 +11,6 @@ import {
   ChevronLeft,
   ChevronRight,
   CheckCircle2,
-  Layers,
-  LayoutGrid,
 } from "lucide-react";
 import { KineticText } from "@/registry/magicui/kinetic-text";
 import { PixelImage } from "@/registry/magicui/pixel-image";
@@ -37,105 +34,9 @@ interface ProjectItem {
   badge: string;
 }
 
-interface StickyProjectCardItemProps {
-  i: number;
-  project: ProjectItem;
-  progress: MotionValue<number>;
-  range: [number, number];
-  targetScale: number;
-  onOpenModal: (project: ProjectItem) => void;
-}
-
-const StickyProjectCardItem = ({
-  i,
-  project,
-  progress,
-  range,
-  targetScale,
-  onOpenModal,
-}: StickyProjectCardItemProps) => {
-  const container = useRef<HTMLDivElement>(null);
-  const scale = useTransform(progress, range, [1, targetScale]);
-
-  return (
-    <div
-      ref={container}
-      className="sticky top-20 sm:top-28 flex items-center justify-center w-full px-2"
-    >
-      <motion.div
-        style={{
-          scale,
-          top: `calc(${i * 24}px)`,
-        }}
-        className="relative w-full max-w-4xl rounded-3xl bg-white border border-slate-200 shadow-xl hover:shadow-2xl overflow-hidden flex flex-col md:flex-row origin-top transition-shadow cursor-pointer"
-        onClick={() => onOpenModal(project)}
-      >
-        <div className="relative w-full md:w-1/2 h-56 sm:h-72 md:h-96 bg-slate-950 overflow-hidden group/img">
-          <img
-            src={project.image}
-            alt={project.title}
-            className="w-full h-full object-cover object-top transition-transform duration-700 group-hover/img:scale-105"
-          />
-          <div className="absolute top-4 left-4 z-10">
-            <span className="px-3 py-1 rounded-full text-[10px] font-mono font-bold tracking-wider uppercase bg-black/80 text-white backdrop-blur-md border border-white/20">
-              {project.tag}
-            </span>
-          </div>
-          <div className="absolute inset-0 bg-slate-950/20 group-hover/img:bg-slate-950/0 transition-colors flex items-center justify-center">
-            <span className="opacity-0 group-hover/img:opacity-100 transition-opacity duration-300 px-3.5 py-1.5 rounded-xl bg-black/85 text-white font-heading text-xs font-semibold border border-cyan-400 shadow-xl flex items-center gap-1.5">
-              <ExternalLink className="w-3.5 h-3.5 text-cyan-400" />
-              VIEW SHOWCASE & ASSETS
-            </span>
-          </div>
-        </div>
-        <div className="p-6 md:p-8 flex flex-col justify-between text-slate-800 flex-1">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <span
-                className={`text-[11px] font-mono font-bold uppercase tracking-wider ${
-                  project.id === "instagram" ? "text-pink-600" : "text-blue-600"
-                }`}
-              >
-                {project.category}
-              </span>
-              <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded-md bg-emerald-50 text-emerald-700 border border-emerald-200">
-                LIVE PRODUCTION
-              </span>
-            </div>
-            <h3 className="text-xl sm:text-2xl font-bold font-heading text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
-              {project.title}
-            </h3>
-            <p className="mt-2.5 text-xs sm:text-sm font-jakarta leading-relaxed text-slate-600 font-normal">
-              {project.desc}
-            </p>
-            <div className="mt-4 py-2 px-3 rounded-xl border border-slate-200 bg-slate-50 text-xs text-slate-700 shadow-xs flex items-center gap-2 truncate">
-              <FlatAnalyticsGrowthIcon className="w-4 h-4 shrink-0 text-blue-600" />
-              <span className="truncate font-medium">{project.metric}</span>
-            </div>
-          </div>
-          <div className="mt-6 pt-4 border-t border-slate-200 flex items-center justify-between">
-            <span className="text-xs font-mono tracking-wider truncate text-slate-500 uppercase font-bold">
-              {project.id === "mearf" ? "MAURYAERF.COM" : "INSTAGRAM AUTO"}
-            </span>
-            <span className="inline-flex items-center gap-1.5 text-xs font-bold text-blue-600 hover:text-blue-700 uppercase tracking-wider">
-              Explore Case Study →
-            </span>
-          </div>
-        </div>
-      </motion.div>
-    </div>
-  );
-};
-
 export default function ClientWork() {
   const [activeProject, setActiveProject] = useState<ProjectItem | null>(null);
   const [selectedImageIndex, setSelectedImageIndex] = useState<number>(0);
-  const [viewMode, setViewMode] = useState<"stack" | "grid">("stack");
-  const stackContainerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: stackContainerRef,
-    offset: ["start start", "end end"],
-  });
 
   // Close modal on Escape key press
   useEffect(() => {
@@ -276,63 +177,10 @@ export default function ClientWork() {
             <p className="mt-3 text-sm sm:text-base font-sans leading-relaxed max-w-2xl text-slate-600 font-normal">
               Mission-critical digital architectures deployed to live production. Explore our featured enterprise implementations.
             </p>
-
-            {/* Presentation Mode Selector */}
-            <div className="mt-6 flex items-center justify-center">
-              <div className="inline-flex items-center p-1 rounded-xl bg-slate-100 border border-slate-200 shadow-inner">
-                <button
-                  type="button"
-                  onClick={() => setViewMode("stack")}
-                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                    viewMode === "stack"
-                      ? "bg-white text-slate-950 shadow-xs border border-slate-200/80"
-                      : "text-slate-500 hover:text-slate-900"
-                  }`}
-                >
-                  <Layers className="w-3.5 h-3.5 text-blue-600" />
-                  <span>3D STACKING DECK</span>
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setViewMode("grid")}
-                  className={`inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                    viewMode === "grid"
-                      ? "bg-white text-slate-950 shadow-xs border border-slate-200/80"
-                      : "text-slate-500 hover:text-slate-900"
-                  }`}
-                >
-                  <LayoutGrid className="w-3.5 h-3.5 text-slate-600" />
-                  <span>GRID MATRIX</span>
-                </button>
-              </div>
-            </div>
           </div>
 
-          {viewMode === "stack" ? (
-            <div
-              ref={stackContainerRef}
-              className="relative w-full flex flex-col items-center gap-10 sm:gap-14 pb-20 pt-4"
-            >
-              {projects.map((project, i) => {
-                const targetScale = Math.max(
-                  0.88,
-                  1 - (projects.length - i - 1) * 0.06
-                );
-                return (
-                  <StickyProjectCardItem
-                    key={`sticky_${project.id}`}
-                    i={i}
-                    project={project}
-                    progress={scrollYProgress}
-                    range={[i * 0.35, 1]}
-                    targetScale={targetScale}
-                    onOpenModal={openProjectModal}
-                  />
-                );
-              })}
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-8 items-stretch">
+          {/* 2-Column Responsive Grid matching Plan of Work card size */}
+          <div className="grid grid-cols-1 md:grid-cols-2 max-w-5xl mx-auto gap-8 items-stretch">
               {projects.map((project) => (
                 <div
                   key={project.id}
@@ -424,7 +272,6 @@ export default function ClientWork() {
                 </div>
               ))}
             </div>
-          )}
         </div>
       </section>
 

@@ -237,7 +237,7 @@ export default function ServicesPage() {
                           {service.category}
                         </span>
 
-                        {/* Title Row with Logo SVG shifted before title in the same row */}
+                        {/* Title with Icon shifted to card title left side */}
                         <div className="flex items-center gap-3">
                           <div
                             className="w-10 h-10 rounded-xl flex items-center justify-center shadow-sm shrink-0 border border-slate-200/80 transition-transform duration-300 group-hover:scale-105"

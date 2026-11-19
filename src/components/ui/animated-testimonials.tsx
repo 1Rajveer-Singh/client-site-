@@ -103,25 +103,18 @@ export function TestimonialsCard({
 
     return (
         <div
-            className={cn("flex items-center justify-center p-8", className)}
+            className={cn("flex items-center justify-center py-6 px-3 sm:px-6 w-full overflow-hidden", className)}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             onFocus={() => setIsFocused(true)}
             onBlur={() => setIsFocused(false)}
         >
             <div
-                className="relative grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] md:grid-rows-[auto_auto_auto] gap-x-8 gap-y-2 w-full"
-                style={{ perspective: "1400px", maxWidth: `${width}px` }}
+                className="relative flex flex-col md:grid md:grid-cols-2 gap-8 md:gap-12 items-center w-full"
+                style={{ perspective: "1200px", maxWidth: `${width}px` }}
             >
-                {/* Counter (Row 1) */}
-                {showCounter && (
-                    <div className="row-start-1 md:col-start-2 md:row-start-1 text-right font-mono text-sm text-neutral-500 dark:text-neutral-400">
-                        {validIndex + 1} / {list.length}
-                    </div>
-                )}
-
-                {/* Image Card Stack */}
-                <div className="row-start-2 col-start-1 md:row-start-1 row-span-3 relative w-full aspect-square">
+                {/* Image Card Stack (Col 1 on desktop, Top on mobile) */}
+                <div className="relative w-full max-w-[280px] sm:max-w-[340px] md:max-w-none aspect-square mx-auto">
                     <AnimatePresence custom={direction}>
                         {list.map((item, index) => {
                             const isActive = index === validIndex;
@@ -133,12 +126,12 @@ export function TestimonialsCard({
                             return (
                                 <motion.div
                                     key={cardKey}
-                                    className="absolute inset-0 w-full h-full overflow-hidden border-[6px] bg-neutral-200 dark:bg-neutral-800 border-white dark:border-neutral-700 shadow-2xl rounded-lg"
+                                    className="absolute inset-0 w-full h-full overflow-hidden border-[5px] sm:border-[6px] bg-neutral-200 dark:bg-neutral-800 border-white dark:border-neutral-700 shadow-xl sm:shadow-2xl rounded-2xl"
                                     initial={{
-                                        x: offset * 15,
+                                        x: offset * 12,
                                         y: Math.abs(offset) * 6,
-                                        z: -150 * Math.abs(offset),
-                                        scale: 0.85 - Math.abs(offset) * 0.04,
+                                        z: -120 * Math.abs(offset),
+                                        scale: 0.88 - Math.abs(offset) * 0.04,
                                         rotateZ: rotations[index % 4],
                                         opacity: isActive ? 1 : 0.5,
                                         zIndex: 10 - Math.abs(offset),
@@ -146,33 +139,33 @@ export function TestimonialsCard({
                                     animate={
                                         isActive
                                             ? {
-                                                x: [offset * 15, direction === 1 ? -200 : 200, 0],
+                                                x: [offset * 12, direction === 1 ? -120 : 120, 0],
                                                 y: [Math.abs(offset) * 6, 0, 0],
-                                                z: [-200, 150, 250],
-                                                scale: [0.85, 1.05, 1],
-                                                rotateZ: [rotations[index % 4], -5, 0],
+                                                z: [-150, 80, 180],
+                                                scale: [0.88, 1.03, 1],
+                                                rotateZ: [rotations[index % 4], -4, 0],
                                                 opacity: 1,
                                                 zIndex: 100,
                                             }
                                             : {
-                                                x: offset * 15,
+                                                x: offset * 12,
                                                 y: Math.abs(offset) * 6,
-                                                z: -150 * Math.abs(offset),
+                                                z: -120 * Math.abs(offset),
                                                 rotateZ: rotations[index % 4],
-                                                scale: 0.85 - Math.abs(offset) * 0.04,
+                                                scale: 0.88 - Math.abs(offset) * 0.04,
                                                 opacity: 0.55,
                                                 zIndex: 10 - Math.abs(offset),
                                             }
                                     }
                                     exit={{
-                                        x: direction === 1 ? -250 : 250,
-                                        z: -260,
-                                        scale: 0.75,
-                                        rotateZ: direction === 1 ? -10 : 10,
+                                        x: direction === 1 ? -180 : 180,
+                                        z: -200,
+                                        scale: 0.8,
+                                        rotateZ: direction === 1 ? -8 : 8,
                                         opacity: 0,
                                     }}
                                     transition={{
-                                        duration: 0.75,
+                                        duration: 0.65,
                                         ease: [0.22, 1, 0.36, 1],
                                     }}
                                 >
@@ -188,80 +181,90 @@ export function TestimonialsCard({
                     </AnimatePresence>
                 </div>
 
-                {/* Text Area (Row 2 in desktop col 2, preserved min-h-[120px], persistent live region) */}
-                <div
-                    className="col-start-1 md:col-start-2 md:row-start-2 flex flex-col justify-center min-h-[120px]"
-                    aria-live={isManualNav ? "polite" : "off"}
-                    aria-atomic="true"
-                >
-                    <AnimatePresence mode="wait">
-                        <motion.div
-                            key={activeItem ? (activeItem.id || activeItem.title || validIndex) : "active-card"}
-                            initial={{ opacity: 0, y: 25 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -25 }}
-                            transition={{ duration: 0.35 }}
-                        >
-                            <h3 className="text-xl font-bold text-neutral-900 dark:text-white">
-                                {activeItem?.title}
-                            </h3>
-                            <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2">
-                                {activeItem?.description}
-                            </p>
-                        </motion.div>
-                    </AnimatePresence>
-                </div>
+                {/* Content Column (Col 2 on desktop, Bottom on mobile) */}
+                <div className="flex flex-col justify-between w-full h-full gap-4 text-left">
+                    {/* Counter */}
+                    {showCounter && (
+                        <div className="font-mono text-xs sm:text-sm text-neutral-500 dark:text-neutral-400">
+                            {validIndex + 1} / {list.length}
+                        </div>
+                    )}
 
-                {/* Navigation & Autoplay Controls (Row 3 in desktop col 2) */}
-                {list.length > 1 && (
-                    <div className="col-start-1 md:col-start-2 md:row-start-3 flex items-center gap-2 m-auto -mt-2 md:mt-4 md:m-0">
-                        {showNavigation && (
-                            <button
-                                disabled={validIndex === 0}
-                                onClick={handlePrev}
-                                className={cn(
-                                    "flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all",
-                                    validIndex === 0
-                                        ? "opacity-50 cursor-not-allowed"
-                                        : "hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105"
-                                )}
-                                aria-label="Previous card"
+                    {/* Text Area (Row 2 in desktop, persistent live region) */}
+                    <div
+                        className="flex flex-col justify-center min-h-[140px] sm:min-h-[130px] w-full"
+                        aria-live={isManualNav ? "polite" : "off"}
+                        aria-atomic="true"
+                    >
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={activeItem ? (activeItem.id || activeItem.title || validIndex) : "active-card"}
+                                initial={{ opacity: 0, y: 15 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                exit={{ opacity: 0, y: -15 }}
+                                transition={{ duration: 0.3 }}
                             >
-                                <ArrowLeft className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
-                            </button>
-                        )}
-                        {showNavigation && (
-                            <button
-                                disabled={validIndex === list.length - 1}
-                                onClick={handleNext}
-                                className={cn(
-                                    "flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all",
-                                    validIndex === list.length - 1
-                                        ? "opacity-50 cursor-not-allowed"
-                                        : "hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105"
-                                )}
-                                aria-label="Next card"
-                            >
-                                <ArrowRight className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
-                            </button>
-                        )}
-                        {autoPlay && (
-                            <button
-                                type="button"
-                                onClick={() => setIsPaused((prev) => !prev)}
-                                className="flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105"
-                                aria-label={isPaused ? "Resume autoplay" : "Pause autoplay"}
-                                title={isPaused ? "Resume autoplay" : "Pause autoplay"}
-                            >
-                                {isPaused ? (
-                                    <Play className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
-                                ) : (
-                                    <Pause className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
-                                )}
-                            </button>
-                        )}
+                                <h3 className="text-lg sm:text-xl font-bold font-heading text-neutral-900 dark:text-white leading-snug">
+                                    {activeItem?.title}
+                                </h3>
+                                <p className="text-xs sm:text-sm text-neutral-600 dark:text-neutral-400 mt-2.5 leading-relaxed font-sans">
+                                    {activeItem?.description}
+                                </p>
+                            </motion.div>
+                        </AnimatePresence>
                     </div>
-                )}
+
+                    {/* Navigation & Controls */}
+                    {list.length > 1 && (
+                        <div className="flex items-center gap-2 pt-2">
+                            {showNavigation && (
+                                <button
+                                    disabled={validIndex === 0}
+                                    onClick={handlePrev}
+                                    className={cn(
+                                        "flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all",
+                                        validIndex === 0
+                                            ? "opacity-40 cursor-not-allowed"
+                                            : "hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105 active:scale-95"
+                                    )}
+                                    aria-label="Previous card"
+                                >
+                                    <ArrowLeft className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
+                                </button>
+                            )}
+                            {showNavigation && (
+                                <button
+                                    disabled={validIndex === list.length - 1}
+                                    onClick={handleNext}
+                                    className={cn(
+                                        "flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all",
+                                        validIndex === list.length - 1
+                                            ? "opacity-40 cursor-not-allowed"
+                                            : "hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105 active:scale-95"
+                                    )}
+                                    aria-label="Next card"
+                                >
+                                    <ArrowRight className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
+                                </button>
+                            )}
+                            {autoPlay && (
+                                <button
+                                    type="button"
+                                    onClick={() => setIsPaused((prev) => !prev)}
+                                    className="flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105 active:scale-95 ml-1"
+                                    aria-label={isPaused ? "Resume autoplay" : "Pause autoplay"}
+                                    title={isPaused ? "Resume autoplay" : "Pause autoplay"}
+                                >
+                                    {isPaused ? (
+                                        <Play className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
+                                    ) : (
+                                        <Pause className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
+                                    )}
+                                </button>
+                            )}
+                        </div>
+                    )}
+                </div>
             </div>
         </div>
     );

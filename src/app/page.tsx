@@ -6,7 +6,6 @@ import HeroSection from "@/components/HeroSection";
 import CompanyIntro from "@/components/CompanyIntro";
 import ServicesOverview from "@/components/ServicesOverview";
 import WhyChooseUs from "@/components/WhyChooseUs";
-import TechStackScrollShowcase from "@/components/TechStackScrollShowcase";
 import PlanOfWork from "@/components/PlanOfWork";
 import ClientWork from "@/components/ClientWork";
 import ClientTestimonials from "@/components/ClientTestimonials";
@@ -30,9 +29,6 @@ export default function Home() {
 
       {/* Why Choose Us */}
       <WhyChooseUs />
-
-      {/* Tech Stack Scroll Showcase (Skiper31 Convergence Animation) */}
-      <TechStackScrollShowcase />
 
       {/* 6-Stage Plan of Work with Images */}
       <PlanOfWork />
