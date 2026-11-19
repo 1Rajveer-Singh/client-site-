@@ -50,6 +50,7 @@ export function TestimonialsCard({
     const [isPaused, setIsPaused] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
     const [isFocused, setIsFocused] = useState(false);
+    const [isManualNav, setIsManualNav] = useState(false);
 
     // Normalize active index so it remains valid if list length changes
     const validIndex = list.length > 0 ? Math.min(activeIndex, list.length - 1) : 0;
@@ -69,6 +70,7 @@ export function TestimonialsCard({
         }
 
         const interval = setInterval(() => {
+            setIsManualNav(false);
             setDirection(1);
             setActiveIndex((prev) => (prev + 1) % list.length);
         }, autoPlayInterval);
@@ -78,6 +80,7 @@ export function TestimonialsCard({
 
     const handleNext = () => {
         if (validIndex < list.length - 1) {
+            setIsManualNav(true);
             setDirection(1);
             setActiveIndex(validIndex + 1);
         }
@@ -85,6 +88,7 @@ export function TestimonialsCard({
 
     const handlePrev = () => {
         if (validIndex > 0) {
+            setIsManualNav(true);
             setDirection(-1);
             setActiveIndex(validIndex - 1);
         }
@@ -184,8 +188,12 @@ export function TestimonialsCard({
                     </AnimatePresence>
                 </div>
 
-                {/* Text Area (Row 2 in desktop col 2, preserved min-h-[120px]) */}
-                <div className="col-start-1 md:col-start-2 md:row-start-2 flex flex-col justify-center min-h-[120px]">
+                {/* Text Area (Row 2 in desktop col 2, preserved min-h-[120px], persistent live region) */}
+                <div
+                    className="col-start-1 md:col-start-2 md:row-start-2 flex flex-col justify-center min-h-[120px]"
+                    aria-live={isManualNav ? "polite" : "off"}
+                    aria-atomic="true"
+                >
                     <AnimatePresence mode="wait">
                         <motion.div
                             key={activeItem ? (activeItem.id || activeItem.title || validIndex) : "active-card"}
