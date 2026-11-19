@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { cn } from "@/lib/utils";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, Pause, Play } from "lucide-react";
 
 export interface TestimonialItem {
     /** Unique identifier for the card */
@@ -47,12 +47,26 @@ export function TestimonialsCard({
     const list = items || testimonials || [];
     const [activeIndex, setActiveIndex] = useState(0);
     const [direction, setDirection] = useState(1);
+    const [isPaused, setIsPaused] = useState(false);
+    const [isHovered, setIsHovered] = useState(false);
+    const [isFocused, setIsFocused] = useState(false);
 
-    const activeItem = list[activeIndex];
+    // Normalize active index so it remains valid if list length changes
+    const validIndex = list.length > 0 ? Math.min(activeIndex, list.length - 1) : 0;
 
-    // Auto-play effect
-    React.useEffect(() => {
-        if (!autoPlay || list.length <= 1) return;
+    useEffect(() => {
+        if (activeIndex >= list.length && list.length > 0) {
+            setActiveIndex(list.length - 1);
+        }
+    }, [list.length, activeIndex]);
+
+    const activeItem = list[validIndex];
+
+    // Auto-play effect: stops on pause, hover, or keyboard focus, resumes when cleared
+    useEffect(() => {
+        if (!autoPlay || list.length <= 1 || isPaused || isHovered || isFocused) {
+            return;
+        }
 
         const interval = setInterval(() => {
             setDirection(1);
@@ -60,19 +74,19 @@ export function TestimonialsCard({
         }, autoPlayInterval);
 
         return () => clearInterval(interval);
-    }, [autoPlay, autoPlayInterval, list.length]);
+    }, [autoPlay, autoPlayInterval, list.length, isPaused, isHovered, isFocused]);
 
     const handleNext = () => {
-        if (activeIndex < list.length - 1) {
+        if (validIndex < list.length - 1) {
             setDirection(1);
-            setActiveIndex(activeIndex + 1);
+            setActiveIndex(validIndex + 1);
         }
     };
 
     const handlePrev = () => {
-        if (activeIndex > 0) {
+        if (validIndex > 0) {
             setDirection(-1);
-            setActiveIndex(activeIndex - 1);
+            setActiveIndex(validIndex - 1);
         }
     };
 
@@ -84,15 +98,21 @@ export function TestimonialsCard({
     }
 
     return (
-        <div className={cn("flex items-center justify-center p-8", className)}>
+        <div
+            className={cn("flex items-center justify-center p-8", className)}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            onFocus={() => setIsFocused(true)}
+            onBlur={() => setIsFocused(false)}
+        >
             <div
                 className="relative grid grid-cols-[1fr] md:grid-cols-[1fr_1fr] md:grid-rows-[auto_auto_auto] gap-x-8 gap-y-2 w-full"
                 style={{ perspective: "1400px", maxWidth: `${width}px` }}
             >
-                {/* Counter */}
+                {/* Counter (Row 1) */}
                 {showCounter && (
                     <div className="row-start-1 md:col-start-2 md:row-start-1 text-right font-mono text-sm text-neutral-500 dark:text-neutral-400">
-                        {activeIndex + 1} / {list.length}
+                        {validIndex + 1} / {list.length}
                     </div>
                 )}
 
@@ -100,8 +120,8 @@ export function TestimonialsCard({
                 <div className="row-start-2 col-start-1 md:row-start-1 row-span-3 relative w-full aspect-square">
                     <AnimatePresence custom={direction}>
                         {list.map((item, index) => {
-                            const isActive = index === activeIndex;
-                            const offset = index - activeIndex;
+                            const isActive = index === validIndex;
+                            const offset = index - validIndex;
                             const cardKey = (item.id !== undefined && item.id !== null && item.id !== "")
                                 ? String(item.id)
                                 : (item.title ? `${item.title}-${index}` : `testimonial-card-${index}`);
@@ -164,55 +184,74 @@ export function TestimonialsCard({
                     </AnimatePresence>
                 </div>
 
-                {/* Text Area */}
-                <div className="col-start-1 md:col-start-2 md:row-start-1 flex flex-col justify-center min-h-[120px]">
+                {/* Text Area (Row 2 in desktop col 2, preserved min-h-[120px]) */}
+                <div className="col-start-1 md:col-start-2 md:row-start-2 flex flex-col justify-center min-h-[120px]">
                     <AnimatePresence mode="wait">
                         <motion.div
-                            key={activeItem ? (activeItem.id || activeItem.title || activeIndex) : "active-card"}
+                            key={activeItem ? (activeItem.id || activeItem.title || validIndex) : "active-card"}
                             initial={{ opacity: 0, y: 25 }}
                             animate={{ opacity: 1, y: 0 }}
                             exit={{ opacity: 0, y: -25 }}
                             transition={{ duration: 0.35 }}
                         >
                             <h3 className="text-xl font-bold text-neutral-900 dark:text-white">
-                                {activeItem.title}
+                                {activeItem?.title}
                             </h3>
                             <p className="text-sm text-neutral-600 dark:text-neutral-400 mt-2">
-                                {activeItem.description}
+                                {activeItem?.description}
                             </p>
                         </motion.div>
                     </AnimatePresence>
                 </div>
 
-                {/* Navigation Controls */}
-                {showNavigation && list.length > 1 && (
-                    <div className="col-start-1 md:col-start-2 md:row-start-3 flex gap-2 m-auto -mt-2 md:mt-4 md:m-0">
-                        <button
-                            disabled={activeIndex === 0}
-                            onClick={handlePrev}
-                            className={cn(
-                                "flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all",
-                                activeIndex === 0
-                                    ? "opacity-50 cursor-not-allowed"
-                                    : "hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105"
-                            )}
-                            aria-label="Previous card"
-                        >
-                            <ArrowLeft className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
-                        </button>
-                        <button
-                            disabled={activeIndex === list.length - 1}
-                            onClick={handleNext}
-                            className={cn(
-                                "flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all",
-                                activeIndex === list.length - 1
-                                    ? "opacity-50 cursor-not-allowed"
-                                    : "hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105"
-                            )}
-                            aria-label="Next card"
-                        >
-                            <ArrowRight className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
-                        </button>
+                {/* Navigation & Autoplay Controls (Row 3 in desktop col 2) */}
+                {list.length > 1 && (
+                    <div className="col-start-1 md:col-start-2 md:row-start-3 flex items-center gap-2 m-auto -mt-2 md:mt-4 md:m-0">
+                        {showNavigation && (
+                            <button
+                                disabled={validIndex === 0}
+                                onClick={handlePrev}
+                                className={cn(
+                                    "flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all",
+                                    validIndex === 0
+                                        ? "opacity-50 cursor-not-allowed"
+                                        : "hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105"
+                                )}
+                                aria-label="Previous card"
+                            >
+                                <ArrowLeft className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
+                            </button>
+                        )}
+                        {showNavigation && (
+                            <button
+                                disabled={validIndex === list.length - 1}
+                                onClick={handleNext}
+                                className={cn(
+                                    "flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all",
+                                    validIndex === list.length - 1
+                                        ? "opacity-50 cursor-not-allowed"
+                                        : "hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105"
+                                )}
+                                aria-label="Next card"
+                            >
+                                <ArrowRight className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
+                            </button>
+                        )}
+                        {autoPlay && (
+                            <button
+                                type="button"
+                                onClick={() => setIsPaused((prev) => !prev)}
+                                className="flex items-center justify-center w-10 h-10 rounded-full border border-neutral-200 dark:border-neutral-700 bg-white dark:bg-neutral-800 transition-all hover:bg-neutral-100 dark:hover:bg-neutral-700 hover:scale-105"
+                                aria-label={isPaused ? "Resume autoplay" : "Pause autoplay"}
+                                title={isPaused ? "Resume autoplay" : "Pause autoplay"}
+                            >
+                                {isPaused ? (
+                                    <Play className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
+                                ) : (
+                                    <Pause className="w-4 h-4 text-neutral-700 dark:text-neutral-300" />
+                                )}
+                            </button>
+                        )}
                     </div>
                 )}
             </div>

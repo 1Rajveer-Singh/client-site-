@@ -162,6 +162,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${openSans.variable} ${caveat.variable} ${greatVibes.variable} ${indieFlower.variable} ${specialElite.variable} ${handlee.variable} ${outfit.variable} ${playfair.variable} ${jakarta.variable} ${pressStart.variable}`}
     >
       <body className="min-h-screen bg-white text-slate-900 antialiased selection:bg-cyan-500/30 selection:text-cyan-900">
